@@ -1,0 +1,2777 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Katha Bbeen | Handwoven Sarees & Timeless Elegance</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* Ensure reveal-item elements start hidden before GSAP takes over,
+       so there's no flash of fully-visible content before JS runs. */
+    .reveal-item,
+    .reveal-grid-item {
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    /* Preloader elements also start hidden for the intro GSAP timeline */
+    .preloader-content img,
+    .preloader-content p,
+    .preloader-line {
+      opacity: 0;
+    }
+
+    .kb-preloader.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Auto-scrolling testimonial carousel */
+    .testimonial-carousel-wrap,
+    .luxury-testimonial-wrap {
+      overflow: hidden;
+      position: relative;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
+    }
+
+    .testimonial-track,
+    .luxury-testimonial-track {
+      display: flex;
+      width: max-content;
+      gap: 1.75rem;
+      padding: 0.5rem 0 1.5rem;
+    }
+
+    /* -----------------------------------------------------------
+       MOBILE HERO FIX
+       Desktop's hover-to-expand hero cards don't work on touch —
+       below 768px, switch to a full-width swipeable carousel
+       (one card visible at a time, native scroll-snap swipe).
+    ----------------------------------------------------------- */
+    @media (max-width: 767.98px) {
+      .hero-slider-wrap {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 0;
+        height: 480px;
+        scrollbar-width: none;
+        /* Firefox */
+      }
+
+      .hero-slider-wrap::-webkit-scrollbar {
+        display: none;
+        /* Chrome/Safari */
+      }
+
+      .hero-card {
+        flex: 0 0 100%;
+        width: 100%;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+        margin-right: 12px;
+        opacity: 1 !important;
+        /* no dimmed/inactive state on mobile — every card is fully visible when swiped to */
+      }
+
+      .hero-card:last-child {
+        margin-right: 0;
+      }
+
+      .hero-card:hover,
+      .hero-card.active {
+        flex: 0 0 100%;
+        /* prevent desktop's expand-on-hover flex:4 from applying */
+      }
+
+      .hero-card-content {
+        padding: 1.4rem;
+      }
+
+      /* Text is always visible on mobile — no hover to reveal it */
+      .hero-expandable {
+        max-height: none !important;
+        opacity: 1 !important;
+      }
+
+      .hero-swipe-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 1rem;
+      }
+
+      .hero-swipe-dots .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: rgba(201, 164, 92, 0.3);
+        transition: background 0.3s ease, transform 0.3s ease;
+      }
+
+      .hero-swipe-dots .dot.active {
+        background: var(--kb-gold);
+        transform: scale(1.3);
+      }
+    }
+
+    @media (min-width: 768px) {
+      .hero-swipe-dots {
+        display: none;
+        /* dots are a mobile-only affordance */
+      }
+    }
+
+    /* Newsletter input — visible placeholder + gold focus state on dark footer */
+    .kb-newsletter-input::placeholder {
+      color: rgba(255, 255, 255, 0.55);
+      opacity: 1;
+    }
+
+    .kb-newsletter-input:focus {
+      background: transparent;
+      color: #fff;
+      border-color: var(--kb-gold) !important;
+      box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
+      outline: none;
+    }
+
+    /* Autofill (Chrome) can otherwise force a white background + dark text */
+    .kb-newsletter-input:-webkit-autofill,
+    .kb-newsletter-input:-webkit-autofill:hover,
+    .kb-newsletter-input:-webkit-autofill:focus {
+      -webkit-text-fill-color: #fff;
+      -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+      transition: background-color 9999s ease-in-out 0s;
+    }
+  </style>
+  <style>
+  .card-image-box {
+    aspect-ratio: 4 / 5;
+    max-height: 420px;
+  }
+  @media (max-width: 576px) {
+    .card-image-box {
+      aspect-ratio: 3 / 4;
+      max-height: 200px;
+    }
+    .arrival-card .p-3 {
+      padding: 0.6rem !important;
+    }
+    .arrival-card h6 {
+      font-size: 0.78rem !important;
+    }
+    .arrival-card small {
+      font-size: 0.55rem !important;
+    }
+    .arrival-card .fw-bold {
+      font-size: 0.85rem !important;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+  <!-- 1. LUXURY PRELOADER -->
+  <div id="kbPreloader" class="kb-preloader">
+    <div class="preloader-content text-center">
+
+      <a class="d-flex align-items-center justify-content-center" href="#" style="z-index: 1020;">
+        <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+          style="height: 198px; max-width: 460px; object-fit: contain;">
+      </a>
+
+
+      <p class="text-kb-gold-light text-uppercase small" style="letter-spacing: 0.35em; font-size: 0.65rem;">
+        Your Choice Our Promise
+      </p>
+      <div class="preloader-line mt-3">
+        <div class="preloader-progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Announcement Bar -->
+  <aside class="bg-kb-primary-dark text-center py-2 text-white border-bottom border-secondary border-opacity-25"
+    style="font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase;">
+    <i class="bi bi-gem text-kb-gold me-2"></i> Complimentary insured worldwide delivery on festive weaves over ₹15,000
+  </aside>
+
+  <!-- 2. NAVBAR WITH CENTERED LOGO & SLIDING DRAWER -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-glass sticky-top py-4">
+      <div class="container-fluid px-lg-5 position-relative">
+
+        <!-- Left: Hamburger (Mobile) & Nav Menu (Desktop) -->
+        <div class="d-flex align-items-center">
+          <button class="navbar-toggler border-0 shadow-none p-0 d-lg-none" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#navMenu" aria-controls="navMenu" aria-label="Toggle navigation">
+            <i class="bi bi-list fs-1 text-dark"></i>
+          </button>
+
+          <!-- Navigation Drawer -->
+          <div class="offcanvas offcanvas-start" tabindex="-1" id="navMenu" aria-labelledby="navMenuLabel">
+            <div class="offcanvas-header border-bottom py-3 d-lg-none" style="background-color: var(--kb-cream);">
+              <div class="d-flex align-items-center gap-2">
+                <div>
+                  <a class="d-flex align-items-center justify-content-center" href="#" style="z-index: 1020;">
+                    <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+                      style="height: 70px; max-width: 460px; object-fit: contain;">
+                  </a>
+                </div>
+              </div>
+              <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+            </div>
+
+            <div class="offcanvas-body p-4 p-lg-0">
+              <ul class="navbar-nav gap-lg-1 text-uppercase fw-semibold"
+                style="font-size: 0.75rem; letter-spacing: 0.14em;">
+
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="#collections">Collections</a>
+                </li>
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="#bestsellers">Bestsellers</a>
+                </li>
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="#featured">Handlooms</a></li>
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="#new-arrivals">New
+                    Arrivals</a></li>
+
+              </ul>
+
+              <div class="d-lg-none mt-auto pt-4 border-top">
+                <p class="text-uppercase text-muted fw-bold mb-2" style="font-size: 0.65rem; letter-spacing: 0.2em;">
+                  Atelier Assistance</p>
+                <p class="small text-muted mb-2"><i class="bi bi-whatsapp text-success me-2"></i>+91 000000000</p>
+                <p class="small text-muted mb-0"><i class="bi bi-envelope me-2"></i>email@kathabbeen.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center: Mathematically Centered Logo -->
+        <a class="navbar-brand position-absolute start-50 translate-middle-x m-0 p-0 d-flex align-items-center justify-content-center"
+          href="#" style="z-index: 1020;">
+          <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+            style="height: 98px; max-width: 160px; object-fit: contain;">
+        </a>
+
+        <!-- Right: Actions -->
+        <div class="d-flex align-items-center gap-3 ms-auto" style="z-index: 1021;">
+          <button class="btn btn-link text-dark p-0 border-0" aria-label="Search"><i
+              class="bi bi-search fs-5"></i></button>
+          <button class="btn btn-link text-dark p-0 border-0 d-none d-sm-block" aria-label="Wishlist"><i
+              class="bi bi-suit-heart fs-5"></i></button>
+          <button class="btn btn-link text-dark p-0 border-0 position-relative" data-bs-toggle="offcanvas"
+            data-bs-target="#bagOffcanvas" aria-label="Shopping Bag">
+            <i class="bi bi-bag fs-5"></i>
+            <span id="bagCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+              style="background-color: var(--kb-primary) !important; font-size: 0.65rem;">
+              0
+            </span>
+          </button>
+        </div>
+
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 3. HERO SECTION -->
+    <section id="hero" class="hero-wrapper text-white py-5 px-3 px-lg-5">
+      <div class="hero-ambient-glow"></div>
+      <div class="container-fluid max-w-1480">
+        <div class="row align-items-end mb-4 reveal-item">
+          <div class="col-lg-8">
+            <p class="text-kb-gold-light text-uppercase fw-bold mb-2"
+              style="font-size: 0.7rem; letter-spacing: 0.35em;">
+              <i class="bi bi-stars me-1 text-kb-gold"></i> The Festive Edit · 2026
+            </p>
+            <h1 class="font-serif display-3 fw-normal mb-0">
+              An heirloom
+              <em class="fw-light gold-gradient-text">in every fold.</em>
+            </h1>
+          </div>
+          <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+            <p class="text-white-50 small mb-0">
+              <span class="d-none d-md-inline">Five celebratory weaves. Hover or tap any piece to examine weave notes
+                and view detail.</span>
+              <span class="d-md-none">Five celebratory weaves. Swipe to explore each one.</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Expanding Carousel Cards -->
+        <div class="hero-slider-wrap reveal-item delay-1" id="heroCards">
+          <!-- Meher -->
+          <div class="hero-card active" data-index="0">
+            <img src="asset/collection-silk-haKidXNd.jpg"
+              onerror="this.src='https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1200&q=80'"
+              alt="Meher Saree" />
+            <div class="hero-overlay"></div>
+            <div class="hero-card-content">
+              <span class="text-kb-gold-light text-uppercase fw-semibold"
+                style="font-size: 0.62rem; letter-spacing: 0.22em;">The Festive Edit</span>
+              <h2 class="font-serif fs-2 mb-1">Meher</h2>
+              <div class="hero-expandable">
+                <p class="text-white-50 small mb-3">Emerald silk with fine silver-gold selvedge and kadhwa border.</p>
+                <button class="btn btn-sm btn-kb-outline text-kb-gold" onclick="openQuickView(0)">Quick View
+                  &rarr;</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Noor -->
+          <div class="hero-card" data-index="1">
+            <img src="asset/katha-hero-Bf1Rq-sY.jpg"
+              onerror="this.src='https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1200&q=80'"
+              alt="Noor Saree" />
+            <div class="hero-overlay"></div>
+            <div class="hero-card-content">
+              <span class="text-kb-gold-light text-uppercase fw-semibold"
+                style="font-size: 0.62rem; letter-spacing: 0.22em;">The Ivory Edit</span>
+              <h2 class="font-serif fs-2 mb-1">Noor</h2>
+              <div class="hero-expandable">
+                <p class="text-white-50 small mb-3">Undyed raw silk threaded with antique gold kadhwa buti motifs.</p>
+                <button class="btn btn-sm btn-kb-outline text-kb-gold" onclick="openQuickView(1)">Quick View
+                  &rarr;</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sindoor -->
+          <div class="hero-card" data-index="2">
+            <img src="asset/collection-ivory-B6ncnHXl.jpg"
+              onerror="this.src='https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1200&q=80'"
+              alt="Sindoor Saree" />
+            <div class="hero-overlay"></div>
+            <div class="hero-card-content">
+              <span class="text-kb-gold-light text-uppercase fw-semibold"
+                style="font-size: 0.62rem; letter-spacing: 0.22em;">Banarasi Heirlooms</span>
+              <h2 class="font-serif fs-2 mb-1">Sindoor</h2>
+              <div class="hero-expandable">
+                <p class="text-white-50 small mb-3">Celebratory bridal vermilion with dense zari woven pallu.</p>
+                <button class="btn btn-sm btn-kb-outline text-kb-gold" onclick="openQuickView(2)">Quick View
+                  &rarr;</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Aaranya -->
+          <div class="hero-card" data-index="3">
+            <img src="asset/collection-silk-haKidXNd.jpg"
+              onerror="this.src='https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=1200&q=80'"
+              alt="Aaranya Saree" />
+            <div class="hero-overlay"></div>
+            <div class="hero-card-content">
+              <span class="text-kb-gold-light text-uppercase fw-semibold"
+                style="font-size: 0.62rem; letter-spacing: 0.22em;">Emerald Silks</span>
+              <h2 class="font-serif fs-2 mb-1">Aaranya</h2>
+              <div class="hero-expandable">
+                <p class="text-white-50 small mb-3">Pure Varanasi Katan silk in our signature botanical moss tone.</p>
+                <button class="btn btn-sm btn-kb-outline text-kb-gold" onclick="openQuickView(3)">Quick View
+                  &rarr;</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charita -->
+          <div class="hero-card" data-index="4">
+            <img src="https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1200&q=80"
+              alt="Charita Saree" />
+            <div class="hero-overlay"></div>
+            <div class="hero-card-content">
+              <span class="text-kb-gold-light text-uppercase fw-semibold"
+                style="font-size: 0.62rem; letter-spacing: 0.22em;">The Loom Archive</span>
+              <h2 class="font-serif fs-2 mb-1">Charita</h2>
+              <div class="hero-expandable">
+                <p class="text-white-50 small mb-3">Limited courtyard handloom with certified real gold zari motifs.</p>
+                <button class="btn btn-sm btn-kb-outline text-kb-gold" onclick="openQuickView(4)">Quick View
+                  &rarr;</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Swipe dot indicators (mobile only, shown/hidden via CSS) -->
+        <div class="hero-swipe-dots" id="heroSwipeDots"></div>
+      </div>
+    </section>
+
+    <!-- 4. TRUST MARQUEE -->
+    <div class="marquee-container py-3">
+      <div class="marquee-content text-white-50 text-uppercase fw-medium"
+        style="font-size: 0.72rem; letter-spacing: 0.25em;">
+        <span><i class="bi bi-patch-check-fill text-kb-gold me-2"></i> 100% Certified Varanasi Silk Mark</span>
+        <span class="text-kb-gold">◆</span>
+        <span><i class="bi bi-shield-shaded text-kb-gold me-2"></i> Complimentary Worldwide Insured Transit</span>
+        <span class="text-kb-gold">◆</span>
+        <span><i class="bi bi-flower1 text-kb-gold me-2"></i> Real Gilded Silver-Gold Zari Weave</span>
+        <span class="text-kb-gold">◆</span>
+        <span><i class="bi bi-box2-heart text-kb-gold me-2"></i> Handcrafted Royal Heirloom Packaging</span>
+        <span class="text-kb-gold">◆</span>
+        <span><i class="bi bi-patch-check-fill text-kb-gold me-2"></i> 100% Certified Varanasi Silk Mark</span>
+      </div>
+    </div>
+
+    <!-- 5. CURATED COLLECTIONS -->
+    <section id="collections" class="py-5 px-3 px-lg-5">
+      <div class="container-fluid">
+        <div class="text-center mb-5 reveal-item">
+          <p class="text-uppercase text-muted fw-bold" style="font-size: 0.7rem; letter-spacing: 0.3em;">The Ateliers
+          </p>
+          <h2 class="font-serif display-4">Curated by Category</h2>
+          <div class="mx-auto mt-2" style="width: 60px; height: 1.5px; background: var(--kb-gold);"></div>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+          <!-- 1. SAREES -->
+          <div class="col-md-6 col-lg-4 reveal-item delay-1">
+            <div class="collection-banner">
+              <img src="asset/katha-hero-Bf1Rq-sY.jpg"
+                onerror="this.src='https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80'"
+                alt="Handwoven Sarees" />
+              <div class="position-absolute bottom-0 start-0 end-0 p-4 bg-gradient text-white"
+                style="background: linear-gradient(0deg, rgba(7, 23, 17, 0.95) 0%, transparent 100%);">
+                <p class="text-uppercase text-kb-gold-light small mb-1 fw-semibold" style="letter-spacing: 0.2em;">
+                  Category 01</p>
+                <h3 class="font-serif fs-2">Sarees</h3>
+                <p class="small text-white-50">Pure Varanasi Katan, Kadhwa zari heirlooms & raw mulberry weaves.</p>
+                <a href="#featured" class="btn btn-sm btn-kb-outline mt-2">Explore Sarees &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. JEWELLERY -->
+          <div class="col-md-6 col-lg-4 reveal-item delay-2">
+            <div class="collection-banner">
+              <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80"
+                alt="Heritage Jewellery" />
+              <div class="position-absolute bottom-0 start-0 end-0 p-4 bg-gradient text-white"
+                style="background: linear-gradient(0deg, rgba(7, 23, 17, 0.95) 0%, transparent 100%);">
+                <p class="text-uppercase text-kb-gold-light small mb-1 fw-semibold" style="letter-spacing: 0.2em;">
+                  Category 02</p>
+                <h3 class="font-serif fs-2">Jewellery</h3>
+                <p class="small text-white-50">Antique temple gold, uncut Polki chokers & handcrafted Jadau.</p>
+                <a href="#featured" class="btn btn-sm btn-kb-outline mt-2">Explore Jewellery &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. BLOUSES -->
+          <div class="col-md-6 col-lg-4 reveal-item delay-3">
+            <div class="collection-banner">
+              <img
+                src="https://chidiyaa.com/cdn/shop/articles/Why_Loose-Fit_Cotton_Kurtis_Are_Ideal_for_Hot_Weather_1__jpg_8a6d3a42-f1a2-43e4-948d-7258789a5dd8.jpg?v=1776066202&width=800"
+                alt="Couture Blouses" />
+              <div class="position-absolute bottom-0 start-0 end-0 p-4 bg-gradient text-white"
+                style="background: linear-gradient(0deg, rgba(7, 23, 17, 0.95) 0%, transparent 100%);">
+                <p class="text-uppercase text-kb-gold-light small mb-1 fw-semibold" style="letter-spacing: 0.2em;">
+                  Category 03</p>
+                <h3 class="font-serif fs-2">Blouses</h3>
+                <p class="small text-white-50">Intricate Zardozi embroidery, raw silk cutwork & bridal brocades.</p>
+                <a href="#featured" class="btn btn-sm btn-kb-outline mt-2">Explore Blouses &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. BAGS -->
+          <div class="col-md-6 col-lg-4 reveal-item delay-1">
+            <div class="collection-banner">
+              <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80"
+                alt="Handcrafted Bags & Potlis" />
+              <div class="position-absolute bottom-0 start-0 end-0 p-4 bg-gradient text-white"
+                style="background: linear-gradient(0deg, rgba(7, 23, 17, 0.95) 0%, transparent 100%);">
+                <p class="text-uppercase text-kb-gold-light small mb-1 fw-semibold" style="letter-spacing: 0.2em;">
+                  Category 04</p>
+                <h3 class="font-serif fs-2">Bags & Potlis</h3>
+                <p class="small text-white-50">Embroidered velvet potlis, pearl-accented minaudières & clutches.</p>
+                <a href="#featured" class="btn btn-sm btn-kb-outline mt-2">Explore Bags &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. SHOES -->
+          <div class="col-md-6 col-lg-4 reveal-item delay-2">
+            <div class="collection-banner">
+              <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=800&q=80"
+                alt="Handcrafted Footwear" />
+              <div class="position-absolute bottom-0 start-0 end-0 p-4 bg-gradient text-white"
+                style="background: linear-gradient(0deg, rgba(7, 23, 17, 0.95) 0%, transparent 100%);">
+                <p class="text-uppercase text-kb-gold-light small mb-1 fw-semibold" style="letter-spacing: 0.2em;">
+                  Category 05</p>
+                <h3 class="font-serif fs-2">Shoes & Juttis</h3>
+                <p class="small text-white-50">Zari-threaded leather juttis, embellished mojaris & festive heels.</p>
+                <a href="#featured" class="btn btn-sm btn-kb-outline mt-2">Explore Shoes &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 reveal-item delay-1">
+            <div class="collection-banner">
+              <img src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&w=1200&q=80"
+                onerror="this.src='https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80'"
+                alt="Handwoven Sarees" />
+              <div class="position-absolute bottom-0 start-0 end-0 p-4 bg-gradient text-white"
+                style="background: linear-gradient(0deg, rgba(7, 23, 17, 0.95) 0%, transparent 100%);">
+                <p class="text-uppercase text-kb-gold-light small mb-1 fw-semibold" style="letter-spacing: 0.2em;">
+                  Category 01</p>
+                <h3 class="font-serif fs-2">Men's</h3>
+                <p class="small text-white-50">Pure Varanasi Katan, Kadhwa zari heirlooms & raw mulberry weaves.</p>
+                <a href="#featured" class="btn btn-sm btn-kb-outline mt-2">Explore Sarees &rarr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- 6. CRAFTSMANSHIP PILLARS -->
+    <section id="craft" class="position-relative overflow-hidden w-100 border-top border-bottom"
+      style="background-color: #0b2219; border-color: rgba(201, 164, 92, 0.3) !important;">
+      <div class="craft-banner-wrapper position-relative w-100"
+        style="min-height: 620px; height: 55vh; max-height: 600px; overflow: hidden;">
+        <img src="asset/new_banner.jpg" alt="Katha Bbeen Handloom" class="craft-banner-img w-100 h-100"
+          style="object-fit: cover; object-position: center; display: block;" />
+        <!-- Subtle Golden Light Vignette -->
+        <div class="position-absolute top-0 start-0 w-100 h-100 pointer-events-none"
+          style="box-shadow: inset 0 0 80px rgba(11, 34, 25, 0.65); pointer-events: none;">
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. FEATURED SIGNATURE PRODUCTS -->
+    <section id="featured" class="py-5 bg-kb-cream px-3 px-lg-5 border-top border-bottom">
+      <div class="container-fluid">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4 reveal-item">
+          <div>
+            <p class="text-uppercase text-muted fw-bold mb-1" style="font-size: 0.7rem; letter-spacing: 0.3em;">
+              Available Now</p>
+            <h2 class="font-serif display-5 mb-0">Signature Handlooms</h2>
+          </div>
+          <span class="text-muted small mt-2 mt-md-0"><i class="bi bi-award text-kb-gold me-1"></i> Each weave certified
+            by Silk Mark India</span>
+        </div>
+
+        <div class="row g-4" id="productList">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. BRAND STORY -->
+    <section id="story" class="py-5 bg-kb-primary text-white px-3 px-lg-5 position-relative overflow-hidden">
+      <div class="hero-ambient-glow" style="bottom:-150px; left:-150px; top:auto; right:auto;"></div>
+      <div class="container-fluid py-lg-4">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6 reveal-item">
+            <div class="story-frame">
+              <img src="asset/katha-story-CoNfCHWU.jpg"
+                onerror="this.src='https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1000&q=80'"
+                class="w-100 h-100 object-fit-cover" alt="Artisan weaving heritage" />
+            </div>
+          </div>
+          <div class="col-lg-6 ps-lg-5 reveal-item delay-2">
+            <p class="text-kb-gold-light text-uppercase fw-bold" style="font-size: 0.7rem; letter-spacing: 0.3em;">The
+              Katha Bbeen Promise</p>
+            <h2 class="font-serif display-4 mb-3">Woven by hands that remember.</h2>
+            <p class="text-white-50 leading-relaxed mb-4">
+              Founded on the belief that an Indian saree is not merely worn, but inherited. Every Katha Bbeen creation
+              passes through multi-generational weaving families in Varanasi, Murshidabad, and Chanderi. We collaborate
+              directly with master craftsmen to protect endangered warp techniques while honoring modern styling.
+            </p>
+            <blockquote class="font-serif fs-3 text-kb-gold border-start border-2 border-kb-gold ps-3 my-4 fst-italic">
+              &ldquo;Your Choice, Our Promise.&rdquo;
+            </blockquote>
+            <div class="row g-3 pt-2 text-white-50 small">
+              <div class="col-6"><i class="bi bi-patch-check-fill text-kb-gold me-2"></i>100% Handloom Certified</div>
+              <div class="col-6"><i class="bi bi-shield-check text-kb-gold me-2"></i>Fully Insured Delivery</div>
+              <div class="col-6"><i class="bi bi-box-seam-fill text-kb-gold me-2"></i>Heirloom Keepsake Box</div>
+              <div class="col-6"><i class="bi bi-arrow-repeat text-kb-gold me-2"></i>Hassle-Free 7-Day Exchange</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="offers" class="py-5"
+      style="background: linear-gradient(180deg, #071912 0%, #0b2219 100%); color: #f5eedc; border-top: 1px solid rgba(201,164,92,0.25); border-bottom: 1px solid rgba(201,164,92,0.25);">
+      <div class="container py-lg-4">
+        <!-- Section Header -->
+        <div class="text-center mb-5">
+          <div
+            class="d-inline-flex align-items-center gap-2 px-3 py-1 mb-3 rounded-pill bg-dark bg-opacity-75 border border-warning border-opacity-25"
+            style="backdrop-filter: blur(4px);">
+            <i class="bi bi-stars text-warning" style="font-size: 0.8rem;"></i>
+            <span class="text-uppercase" style="font-size: 0.68rem; letter-spacing: 0.28em; color: #dfbf75;">Festive
+              Privileges • Limited Curation</span>
+          </div>
+          <h2 class="font-serif display-5 fw-normal text-white mb-3" style="letter-spacing: 0.03em;">
+            The Grand Royal <span style="color: #dfbf75; font-style: italic;">Atelier Edit</span>
+          </h2>
+          <p class="text-white-50 mx-auto"
+            style="max-width: 650px; font-size: 0.95rem; line-height: 1.7; font-weight: 300;">
+            Special festive pricing on handpicked master-weaver creations. Each heirloom includes complimentary
+            fall-pico, handmade matching potli, and insured express delivery worldwide.
+          </p>
+        </div>
+        <!-- Festive Promo Voucher Banner -->
+        <div class="p-3 p-md-4 mb-5 rounded-2 border shadow-lg"
+          style="background: rgba(13, 40, 30, 0.7); border-color: rgba(201, 164, 92, 0.35) !important; backdrop-filter: blur(8px);">
+          <div class="row align-items-center g-3">
+
+            <!-- Left: Offer Value -->
+            <div class="col-lg-5 text-center text-lg-start">
+              <div class="d-flex align-items-center justify-content-center justify-content-lg-start gap-3">
+                <span class="font-serif display-4 fw-bold" style="color: #e5c983; line-height: 1;">20% OFF</span>
+                <div class="text-start border-start ps-3 border-warning border-opacity-25">
+                  <span class="d-block text-uppercase fw-bold"
+                    style="font-size: 0.8rem; letter-spacing: 0.15em; color: #fff;">Festive Concession</span>
+                  <span class="text-white-50 small" style="font-size: 0.75rem;">On all featured handloom
+                    masterworks</span>
+                </div>
+              </div>
+            </div>
+            <!-- Middle: Coupon Code Box -->
+            <div class="col-lg-4 text-center">
+              <div class="d-inline-flex align-items-center gap-2 p-2 px-3 rounded-1 border"
+                style="background: rgba(0,0,0,0.35); border-color: rgba(201, 164, 92, 0.4) !important;">
+                <span class="text-uppercase text-white-50 small"
+                  style="font-size: 0.7rem; letter-spacing: 0.1em;">CODE:</span>
+                <strong class="text-warning font-monospace fs-5 px-1" style="letter-spacing: 0.15em;"
+                  id="promoCodeText">ROYAL20</strong>
+                <button class="btn btn-sm btn-outline-warning rounded-0 px-2 py-1" style="font-size: 0.7rem;"
+                  onclick="copyPromoCode(this)" title="Copy Code">
+                  <i class="bi bi-clipboard"></i> COPY
+                </button>
+              </div>
+            </div>
+            <!-- Right: Live Scarcity Timer -->
+            <div class="col-lg-3 text-center text-lg-end">
+              <span class="d-block text-uppercase text-white-50 mb-1"
+                style="font-size: 0.65rem; letter-spacing: 0.18em;">Privilege Ends In</span>
+              <div class="d-inline-flex align-items-center gap-2">
+                <div
+                  class="text-center px-2 py-1 bg-dark bg-opacity-75 rounded border border-secondary border-opacity-25">
+                  <span class="fw-bold text-white d-block" id="timerHours"
+                    style="font-size: 1.1rem; line-height: 1;">18</span>
+                  <span class="text-white-50" style="font-size: 0.55rem;">HRS</span>
+                </div>
+                <span class="text-warning fw-bold">:</span>
+                <div
+                  class="text-center px-2 py-1 bg-dark bg-opacity-75 rounded border border-secondary border-opacity-25">
+                  <span class="fw-bold text-white d-block" id="timerMins"
+                    style="font-size: 1.1rem; line-height: 1;">42</span>
+                  <span class="text-white-50" style="font-size: 0.55rem;">MIN</span>
+                </div>
+                <span class="text-warning fw-bold">:</span>
+                <div
+                  class="text-center px-2 py-1 bg-dark bg-opacity-75 rounded border border-secondary border-opacity-25">
+                  <span class="fw-bold text-warning d-block" id="timerSecs"
+                    style="font-size: 1.1rem; line-height: 1;">35</span>
+                  <span class="text-white-50" style="font-size: 0.55rem;">SEC</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Offer Products Grid -->
+        <div class="row g-4">
+          <!-- Item 1 -->
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div
+              class="card h-100 border rounded-1 overflow-hidden shadow-sm d-flex flex-column justify-content-between"
+              style="background-color: #0e2e22; border-color: rgba(201, 164, 92, 0.25) !important;">
+              <div>
+                <!-- Image Frame -->
+                <div class="position-relative overflow-hidden" style="height: 290px;">
+                  <img src="asset/collection-silk-haKidXNd.jpg" onerror="this.src='asset/new_banner.jpg'"
+                    alt="Shikargah Banarasi Silk" class="w-100 h-100 object-fit-cover offer-img"
+                    style="transition: transform 0.6s ease;" />
+                  <!-- Discount Badge -->
+                  <span class="position-absolute top-0 start-0 m-2 badge bg-danger text-uppercase fw-semibold"
+                    style="font-size: 0.65rem; letter-spacing: 0.1em;">20% OFF</span>
+                  <span
+                    class="position-absolute top-0 end-0 m-2 badge bg-dark bg-opacity-75 text-warning border border-warning-subtle"
+                    style="font-size: 0.62rem;">Silk Mark</span>
+                </div>
+                <!-- Card Body -->
+                <div class="p-3">
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="text-uppercase text-white-50"
+                      style="font-size: 0.65rem; letter-spacing: 0.15em;">Varanasi Loom</span>
+                    <span class="text-warning small" style="font-size: 0.72rem;">★★★★★ <span
+                        class="text-white-50">4.9</span></span>
+                  </div>
+                  <h3 class="font-serif fs-5 text-white mb-1 text-truncate" title="Katan Silk Shikargah Saree">Katan
+                    Silk Shikargah Saree</h3>
+                  <p class="text-white-50 small mb-2" style="font-size: 0.75rem;">Pure 24k gold zari hunting motif on
+                    royal crimson drape.</p>
+
+                  <!-- Pricing -->
+                  <div class="d-flex align-items-baseline gap-2 mb-1">
+                    <span class="fs-5 fw-bold font-serif" style="color: #dfbf75;">₹38,800</span>
+                    <span class="text-white-50 text-decoration-line-through small"
+                      style="font-size: 0.8rem;">₹48,500</span>
+                  </div>
+                  <span
+                    class="badge bg-success bg-opacity-25 text-success border border-success border-opacity-25 fw-normal"
+                    style="font-size: 0.65rem;">You Save ₹9,700</span>
+                </div>
+              </div>
+              <!-- Card Actions -->
+              <div class="p-3 pt-0 d-grid gap-2 border-top border-dark border-opacity-25">
+                <button class="btn btn-sm btn-outline-light rounded-0" style="font-size: 0.75rem;"
+                  onclick="if(typeof openQuickViewById === 'function') openQuickViewById(1)">Quick View</button>
+                <button class="btn btn-sm rounded-0 fw-semibold text-dark"
+                  style="background-color: #c9a45c; font-size: 0.75rem;"
+                  onclick="if(typeof addToBag === 'function') addToBag(1)">Add To Bag</button>
+              </div>
+            </div>
+          </div>
+          <!-- Item 2 -->
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div
+              class="card h-100 border rounded-1 overflow-hidden shadow-sm d-flex flex-column justify-content-between"
+              style="background-color: #0e2e22; border-color: rgba(201, 164, 92, 0.25) !important;">
+              <div>
+                <div class="position-relative overflow-hidden" style="height: 290px;">
+                  <img
+                    src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=700&q=80"
+                    onerror="this.src='asset/new_banner.jpg'" alt="Korvai Kanjivaram Silk"
+                    class="w-100 h-100 object-fit-cover offer-img" style="transition: transform 0.6s ease;" />
+                  <span class="position-absolute top-0 start-0 m-2 badge bg-danger text-uppercase fw-semibold"
+                    style="font-size: 0.65rem; letter-spacing: 0.1em;">20% OFF</span>
+                  <span
+                    class="position-absolute top-0 end-0 m-2 badge bg-dark bg-opacity-75 text-warning border border-warning-subtle"
+                    style="font-size: 0.62rem;">Heirloom Edit</span>
+                </div>
+                <div class="p-3">
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="text-uppercase text-white-50"
+                      style="font-size: 0.65rem; letter-spacing: 0.15em;">Kanchipuram</span>
+                    <span class="text-warning small" style="font-size: 0.72rem;">★★★★★ <span
+                        class="text-white-50">5.0</span></span>
+                  </div>
+                  <h3 class="font-serif fs-5 text-white mb-1 text-truncate" title="Korvai Temple Border Kanjivaram">
+                    Korvai Temple Kanjivaram</h3>
+                  <p class="text-white-50 small mb-2" style="font-size: 0.75rem;">Hand-interlocked contrast temple
+                    border in emerald & gold.</p>
+
+                  <div class="d-flex align-items-baseline gap-2 mb-1">
+                    <span class="fs-5 fw-bold font-serif" style="color: #dfbf75;">₹33,600</span>
+                    <span class="text-white-50 text-decoration-line-through small"
+                      style="font-size: 0.8rem;">₹42,000</span>
+                  </div>
+                  <span
+                    class="badge bg-success bg-opacity-25 text-success border border-success border-opacity-25 fw-normal"
+                    style="font-size: 0.65rem;">You Save ₹8,400</span>
+                </div>
+              </div>
+              <div class="p-3 pt-0 d-grid gap-2 border-top border-dark border-opacity-25">
+                <button class="btn btn-sm btn-outline-light rounded-0" style="font-size: 0.75rem;"
+                  onclick="if(typeof openQuickViewById === 'function') openQuickViewById(2)">Quick View</button>
+                <button class="btn btn-sm rounded-0 fw-semibold text-dark"
+                  style="background-color: #c9a45c; font-size: 0.75rem;"
+                  onclick="if(typeof addToBag === 'function') addToBag(2)">Add To Bag</button>
+              </div>
+            </div>
+          </div>
+          <!-- Item 3 -->
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div
+              class="card h-100 border rounded-1 overflow-hidden shadow-sm d-flex flex-column justify-content-between"
+              style="background-color: #0e2e22; border-color: rgba(201, 164, 92, 0.25) !important;">
+              <div>
+                <div class="position-relative overflow-hidden" style="height: 290px;">
+                  <img
+                    src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=700&q=80"
+                    onerror="this.src='asset/new_banner.jpg'" alt="Meenakari Tissue Chanderi"
+                    class="w-100 h-100 object-fit-cover offer-img" style="transition: transform 0.6s ease;" />
+                  <span class="position-absolute top-0 start-0 m-2 badge bg-danger text-uppercase fw-semibold"
+                    style="font-size: 0.65rem; letter-spacing: 0.1em;">20% OFF</span>
+                  <span
+                    class="position-absolute top-0 end-0 m-2 badge bg-dark bg-opacity-75 text-warning border border-warning-subtle"
+                    style="font-size: 0.62rem;">Featherlight</span>
+                </div>
+                <div class="p-3">
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="text-uppercase text-white-50"
+                      style="font-size: 0.65rem; letter-spacing: 0.15em;">Chanderi</span>
+                    <span class="text-warning small" style="font-size: 0.72rem;">★★★★★ <span
+                        class="text-white-50">4.8</span></span>
+                  </div>
+                  <h3 class="font-serif fs-5 text-white mb-1 text-truncate" title="Tissue Silk Meenakari Jaal">Tissue
+                    Silk Meenakari Jaal</h3>
+                  <p class="text-white-50 small mb-2" style="font-size: 0.75rem;">Pastel meenakari florals spun with
+                    gossamer gold tissue.</p>
+
+                  <div class="d-flex align-items-baseline gap-2 mb-1">
+                    <span class="fs-5 fw-bold font-serif" style="color: #dfbf75;">₹23,600</span>
+                    <span class="text-white-50 text-decoration-line-through small"
+                      style="font-size: 0.8rem;">₹29,500</span>
+                  </div>
+                  <span
+                    class="badge bg-success bg-opacity-25 text-success border border-success border-opacity-25 fw-normal"
+                    style="font-size: 0.65rem;">You Save ₹5,900</span>
+                </div>
+              </div>
+              <div class="p-3 pt-0 d-grid gap-2 border-top border-dark border-opacity-25">
+                <button class="btn btn-sm btn-outline-light rounded-0" style="font-size: 0.75rem;"
+                  onclick="if(typeof openQuickViewById === 'function') openQuickViewById(3)">Quick View</button>
+                <button class="btn btn-sm rounded-0 fw-semibold text-dark"
+                  style="background-color: #c9a45c; font-size: 0.75rem;"
+                  onclick="if(typeof addToBag === 'function') addToBag(3)">Add To Bag</button>
+              </div>
+            </div>
+          </div>
+          <!-- Item 4 -->
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div
+              class="card h-100 border rounded-1 overflow-hidden shadow-sm d-flex flex-column justify-content-between"
+              style="background-color: #0e2e22; border-color: rgba(201, 164, 92, 0.25) !important;">
+              <div>
+                <div class="position-relative overflow-hidden" style="height: 290px;">
+                  <img
+                    src="https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=700&q=80"
+                    onerror="this.src='asset/new_banner.jpg'" alt="Paithani Peacock Pallu Saree"
+                    class="w-100 h-100 object-fit-cover offer-img" style="transition: transform 0.6s ease;" />
+                  <span class="position-absolute top-0 start-0 m-2 badge bg-danger text-uppercase fw-semibold"
+                    style="font-size: 0.65rem; letter-spacing: 0.1em;">20% OFF</span>
+                  <span
+                    class="position-absolute top-0 end-0 m-2 badge bg-dark bg-opacity-75 text-warning border border-warning-subtle"
+                    style="font-size: 0.62rem;">Royal Paithani</span>
+                </div>
+                <div class="p-3">
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="text-uppercase text-white-50" style="font-size: 0.65rem; letter-spacing: 0.15em;">Yeola
+                      Loom</span>
+                    <span class="text-warning small" style="font-size: 0.72rem;">★★★★★ <span
+                        class="text-white-50">5.0</span></span>
+                  </div>
+                  <h3 class="font-serif fs-5 text-white mb-1 text-truncate" title="Asawali Border Pure Paithani">Asawali
+                    Pure Paithani</h3>
+                  <p class="text-white-50 small mb-2" style="font-size: 0.75rem;">Intricate Mor-Bangadi peacock tapestry
+                    handwoven in pure zari.</p>
+
+                  <div class="d-flex align-items-baseline gap-2 mb-1">
+                    <span class="fs-5 fw-bold font-serif" style="color: #dfbf75;">₹43,200</span>
+                    <span class="text-white-50 text-decoration-line-through small"
+                      style="font-size: 0.8rem;">₹54,000</span>
+                  </div>
+                  <span
+                    class="badge bg-success bg-opacity-25 text-success border border-success border-opacity-25 fw-normal"
+                    style="font-size: 0.65rem;">You Save ₹10,800</span>
+                </div>
+              </div>
+              <div class="p-3 pt-0 d-grid gap-2 border-top border-dark border-opacity-25">
+                <button class="btn btn-sm btn-outline-light rounded-0" style="font-size: 0.75rem;"
+                  onclick="if(typeof openQuickViewById === 'function') openQuickViewById(4)">Quick View</button>
+                <button class="btn btn-sm rounded-0 fw-semibold text-dark"
+                  style="background-color: #c9a45c; font-size: 0.75rem;"
+                  onclick="if(typeof addToBag === 'function') addToBag(4)">Add To Bag</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Festive Inclusions Bar -->
+        <div class="mt-5 pt-4 border-top border-warning border-opacity-25">
+          <div class="row text-center g-3">
+            <div class="col-6 col-md-3">
+              <div class="d-flex align-items-center justify-content-center gap-2 text-white-50"
+                style="font-size: 0.8rem;">
+                <i class="bi bi-gift text-warning fs-5"></i>
+                <span>Complimentary Silk Potli Bag</span>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="d-flex align-items-center justify-content-center gap-2 text-white-50"
+                style="font-size: 0.8rem;">
+                <i class="bi bi-scissors text-warning fs-5"></i>
+                <span>Free Fall-Pico Finishing</span>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="d-flex align-items-center justify-content-center gap-2 text-white-50"
+                style="font-size: 0.8rem;">
+                <i class="bi bi-airplane text-warning fs-5"></i>
+                <span>Insured Global Express Courier</span>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="d-flex align-items-center justify-content-center gap-2 text-white-50"
+                style="font-size: 0.8rem;">
+                <i class="bi bi-shield-check text-warning fs-5"></i>
+                <span>100% Silk Mark Authenticity</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ================= 10. BESTSELLING HEIRLOOMS SECTION ================= -->
+    <section id="bestsellers" class="bestsellers-section py-5 px-3 px-lg-5 border-top border-bottom">
+      <div class="container-fluid py-lg-4">
+
+        <!-- Section Header -->
+        <div class="text-center mb-5 reveal-item">
+          <div class="mb-2">
+            <span class="bestseller-badge-pill">
+              <i class="bi bi-stars text-kb-gold"></i> Atelier Icons · Timeless Demand
+            </span>
+          </div>
+          <h2 class="font-serif display-4 text-dark mb-2">The Royal Bestsellers</h2>
+          <p class="text-muted mx-auto mb-4" style="max-width: 620px; font-size: 0.95rem;">
+            Coveted by discerning brides and connoisseurs worldwide. Woven from hand-reeled pure mulberry silk filaments
+            and certified real gilded zari on ancestral pit looms.
+          </p>
+
+          <!-- Category Filter Pills -->
+          <div class="d-flex flex-wrap justify-content-center gap-2" id="bestsellerFilters">
+            <button class="btn btn-sm bestseller-filter-btn active" data-filter="all">All Bestsellers</button>
+            <button class="btn btn-sm bestseller-filter-btn" data-filter="bridal">Bridal Kadhwa</button>
+            <button class="btn btn-sm bestseller-filter-btn" data-filter="katan">Pure Katan Silk</button>
+            <button class="btn btn-sm bestseller-filter-btn" data-filter="tissue">Tissue &amp; Organza</button>
+            <button class="btn btn-sm bestseller-filter-btn" data-filter="under25">Under ₹25,000</button>
+          </div>
+        </div>
+
+        <!-- Bestsellers Grid -->
+        <div class="row g-4" id="bestsellersGrid">
+
+          <!-- 1. Meher -->
+          <div class="col-sm-6 col-lg-4 bestseller-item-wrap" data-category="bridal katan">
+            <div class="bestseller-card">
+              <div class="bestseller-thumb-box">
+                <span class="bestseller-ribbon">★ #1 Bestseller</span>
+                <button class="bestseller-wishlist-btn"
+                  onclick="toggleWishlist(1, this, 'Meher Imperial Emerald Saree')" title="Add to Wishlist"
+                  aria-label="Add Meher to Wishlist">
+                  <i class="bi bi-heart"></i>
+                </button>
+                <img src="asset/collection-silk-haKidXNd.jpg"
+                  onerror="this.src='https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80'"
+                  alt="Meher Pure Katan Silk Saree" />
+                <div class="bestseller-overlay-actions">
+                  <button class="btn btn-sm btn-kb-gold w-100 py-2" onclick="addToBag(1)">
+                    <i class="bi bi-bag-plus me-1"></i> Add to Bag
+                  </button>
+                  <button class="btn btn-sm btn-kb-outline w-100 py-2" onclick="openQuickViewById(1)">
+                    <i class="bi bi-eye me-1"></i> Quick View
+                  </button>
+                </div>
+              </div>
+              <div class="bestseller-body">
+                <div>
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <small class="text-uppercase text-muted fw-bold"
+                      style="font-size: 0.65rem; letter-spacing: 0.16em;">Varanasi Katan · Kadhwa Weave</small>
+                    <span class="bestseller-stock-indicator"><i class="bi bi-dot fs-5 text-danger"></i> 2 Warps
+                      Left</span>
+                  </div>
+                  <h3 class="font-serif fs-3 mb-1 text-dark">Meher Imperial Emerald</h3>
+                  <p class="small text-muted mb-2 line-clamp-2">Fine silver-gold selvedge with intricately hand-spun
+                    floral kadhwa jaal and ceremonial pallu.</p>
+                  <div class="d-flex align-items-center gap-1 mb-2 text-warning small">
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <span class="text-muted ms-1 small" style="font-size: 0.72rem;">(148 reviews)</span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-end pt-2 border-top">
+                  <div>
+                    <span class="fw-bold text-dark fs-5">₹21,900</span>
+                    <span class="text-muted text-decoration-line-through small ms-1">₹26,500</span>
+                  </div>
+                  <div class="d-flex gap-1 align-items-center" title="Available Color Weaves">
+                    <span class="color-dot" style="background: #0f3d2e;" title="Imperial Emerald"></span>
+                    <span class="color-dot" style="background: #6a1a24;" title="Crimson Ruby"></span>
+                    <span class="color-dot" style="background: #d4af37;" title="Antique Gold"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Sindoor -->
+          <div class="col-sm-6 col-lg-4 bestseller-item-wrap" data-category="bridal katan">
+            <div class="bestseller-card">
+              <div class="bestseller-thumb-box">
+                <span class="bestseller-ribbon">★ Iconic Bridal</span>
+                <button class="bestseller-wishlist-btn"
+                  onclick="toggleWishlist(3, this, 'Sindoor Royal Bridal Brocade')" title="Add to Wishlist"
+                  aria-label="Add Sindoor to Wishlist">
+                  <i class="bi bi-heart"></i>
+                </button>
+                <img src="asset/collection-ivory-B6ncnHXl.jpg"
+                  onerror="this.src='https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=800&q=80'"
+                  alt="Sindoor Royal Bridal Brocade" />
+                <div class="bestseller-overlay-actions">
+                  <button class="btn btn-sm btn-kb-gold w-100 py-2" onclick="addToBag(3)">
+                    <i class="bi bi-bag-plus me-1"></i> Add to Bag
+                  </button>
+                  <button class="btn btn-sm btn-kb-outline w-100 py-2" onclick="openQuickViewById(3)">
+                    <i class="bi bi-eye me-1"></i> Quick View
+                  </button>
+                </div>
+              </div>
+              <div class="bestseller-body">
+                <div>
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <small class="text-uppercase text-muted fw-bold"
+                      style="font-size: 0.65rem; letter-spacing: 0.16em;">Brocade Loom · Varanasi</small>
+                    <span class="bestseller-stock-indicator"><i class="bi bi-dot fs-5 text-danger"></i> 1 Left</span>
+                  </div>
+                  <h3 class="font-serif fs-3 mb-1 text-dark">Sindoor Royal Bridal Brocade</h3>
+                  <p class="small text-muted mb-2 line-clamp-2">Dense celebratory zari borders, majestic regal shikargah
+                    motifs, and ceremonial heavy bridal drape.</p>
+                  <div class="d-flex align-items-center gap-1 mb-2 text-warning small">
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <span class="text-muted ms-1 small" style="font-size: 0.72rem;">(124 reviews)</span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-end pt-2 border-top">
+                  <div>
+                    <span class="fw-bold text-dark fs-5">₹28,900</span>
+                    <span class="text-muted text-decoration-line-through small ms-1">₹34,000</span>
+                  </div>
+                  <div class="d-flex gap-1 align-items-center">
+                    <span class="color-dot" style="background: #8b0000;" title="Vermilion Sindoor"></span>
+                    <span class="color-dot" style="background: #990033;" title="Rani Magenta"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Noor -->
+          <div class="col-sm-6 col-lg-4 bestseller-item-wrap" data-category="katan under25">
+            <div class="bestseller-card">
+              <div class="bestseller-thumb-box">
+                <span class="bestseller-ribbon">★ Celebrity Choice</span>
+                <button class="bestseller-wishlist-btn" onclick="toggleWishlist(2, this, 'Noor Liquid Ivory Silk')"
+                  title="Add to Wishlist" aria-label="Add Noor to Wishlist">
+                  <i class="bi bi-heart"></i>
+                </button>
+                <img src="asset/katha-hero-Bf1Rq-sY.jpg"
+                  onerror="this.src='https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=800&q=80'"
+                  alt="Noor Handwoven Silk Saree" />
+                <div class="bestseller-overlay-actions">
+                  <button class="btn btn-sm btn-kb-gold w-100 py-2" onclick="addToBag(2)">
+                    <i class="bi bi-bag-plus me-1"></i> Add to Bag
+                  </button>
+                  <button class="btn btn-sm btn-kb-outline w-100 py-2" onclick="openQuickViewById(2)">
+                    <i class="bi bi-eye me-1"></i> Quick View
+                  </button>
+                </div>
+              </div>
+              <div class="bestseller-body">
+                <div>
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <small class="text-uppercase text-muted fw-bold"
+                      style="font-size: 0.65rem; letter-spacing: 0.16em;">Undyed Mulberry · Antique Buti</small>
+                    <span class="bestseller-stock-indicator in-stock"><i class="bi bi-check2-circle me-1"></i> Ready to
+                      Ship</span>
+                  </div>
+                  <h3 class="font-serif fs-3 mb-1 text-dark">Noor Liquid Ivory Silk</h3>
+                  <p class="small text-muted mb-2 line-clamp-2">Quiet radiance crafted from pure natural silk,
+                    illuminated with micro gold kadhwa buti motifs.</p>
+                  <div class="d-flex align-items-center gap-1 mb-2 text-warning small">
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <span class="text-muted ms-1 small" style="font-size: 0.72rem;">(98 reviews)</span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-end pt-2 border-top">
+                  <div>
+                    <span class="fw-bold text-dark fs-5">₹24,500</span>
+                    <span class="text-muted text-decoration-line-through small ms-1">₹29,800</span>
+                  </div>
+                  <div class="d-flex gap-1 align-items-center">
+                    <span class="color-dot" style="background: #f7f5ed;" title="Natural Ivory"></span>
+                    <span class="color-dot" style="background: #eedcb3;" title="Champagne"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Gulab Bari -->
+          <div class="col-sm-6 col-lg-4 bestseller-item-wrap" data-category="tissue">
+            <div class="bestseller-card">
+              <div class="bestseller-thumb-box">
+                <span class="bestseller-ribbon">★ Runway Archive</span>
+                <button class="bestseller-wishlist-btn"
+                  onclick="toggleWishlist(6, this, 'Gulab Bari Gold Sheen Organza')" title="Add to Wishlist"
+                  aria-label="Add Gulab Bari to Wishlist">
+                  <i class="bi bi-heart"></i>
+                </button>
+                <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=800&q=80"
+                  onerror="this.src='asset/katha-hero-Bf1Rq-sY.jpg'" alt="Gulab Bari Tissue Organza" />
+                <div class="bestseller-overlay-actions">
+                  <button class="btn btn-sm btn-kb-gold w-100 py-2" onclick="addToBag(6)">
+                    <i class="bi bi-bag-plus me-1"></i> Add to Bag
+                  </button>
+                  <button class="btn btn-sm btn-kb-outline w-100 py-2" onclick="openQuickViewById(6)">
+                    <i class="bi bi-eye me-1"></i> Quick View
+                  </button>
+                </div>
+              </div>
+              <div class="bestseller-body">
+                <div>
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <small class="text-uppercase text-muted fw-bold"
+                      style="font-size: 0.65rem; letter-spacing: 0.16em;">Real Metal Zari · Chanderi</small>
+                    <span class="bestseller-stock-indicator in-stock"><i class="bi bi-check2-circle me-1"></i> In High
+                      Demand</span>
+                  </div>
+                  <h3 class="font-serif fs-3 mb-1 text-dark">Gulab Bari Gold Sheen</h3>
+                  <p class="small text-muted mb-2 line-clamp-2">Gleaming tissue silk gossamer with French-knot
+                    embroidery and hand-scalloped bullion borders.</p>
+                  <div class="d-flex align-items-center gap-1 mb-2 text-warning small">
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <span class="text-muted ms-1 small" style="font-size: 0.72rem;">(82 reviews)</span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-end pt-2 border-top">
+                  <div>
+                    <span class="fw-bold text-dark fs-5">₹36,200</span>
+                    <span class="text-muted text-decoration-line-through small ms-1">₹41,000</span>
+                  </div>
+                  <div class="d-flex gap-1 align-items-center">
+                    <span class="color-dot" style="background: #e2c079;" title="Gold Sheen"></span>
+                    <span class="color-dot" style="background: #eec9c9;" title="Rose Gold"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Aaranya -->
+          <div class="col-sm-6 col-lg-4 bestseller-item-wrap" data-category="katan under25">
+            <div class="bestseller-card">
+              <div class="bestseller-thumb-box">
+                <span class="bestseller-ribbon">★ Limited Edition</span>
+                <button class="bestseller-wishlist-btn"
+                  onclick="toggleWishlist(4, this, 'Aaranya Botanical Forest Katan')" title="Add to Wishlist"
+                  aria-label="Add Aaranya to Wishlist">
+                  <i class="bi bi-heart"></i>
+                </button>
+                <img src="asset/collection-silk-haKidXNd.jpg"
+                  onerror="this.src='https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=800&q=80'"
+                  alt="Aaranya Katan Silk Saree" />
+                <div class="bestseller-overlay-actions">
+                  <button class="btn btn-sm btn-kb-gold w-100 py-2" onclick="addToBag(4)">
+                    <i class="bi bi-bag-plus me-1"></i> Add to Bag
+                  </button>
+                  <button class="btn btn-sm btn-kb-outline w-100 py-2" onclick="openQuickViewById(4)">
+                    <i class="bi bi-eye me-1"></i> Quick View
+                  </button>
+                </div>
+              </div>
+              <div class="bestseller-body">
+                <div>
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <small class="text-uppercase text-muted fw-bold"
+                      style="font-size: 0.65rem; letter-spacing: 0.16em;">100% Handloom · Varanasi</small>
+                    <span class="bestseller-stock-indicator in-stock"><i class="bi bi-check2-circle me-1"></i> Ready to
+                      Ship</span>
+                  </div>
+                  <h3 class="font-serif fs-3 mb-1 text-dark">Aaranya Botanical Forest</h3>
+                  <p class="small text-muted mb-2 line-clamp-2">Botanical moss green tone with certified silver-gold
+                    selvedge, exceptionally soft and fluid.</p>
+                  <div class="d-flex align-items-center gap-1 mb-2 text-warning small">
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <span class="text-muted ms-1 small" style="font-size: 0.72rem;">(76 reviews)</span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-end pt-2 border-top">
+                  <div>
+                    <span class="fw-bold text-dark fs-5">₹18,900</span>
+                    <span class="text-muted text-decoration-line-through small ms-1">₹22,500</span>
+                  </div>
+                  <div class="d-flex gap-1 align-items-center">
+                    <span class="color-dot" style="background: #254433;" title="Botanical Green"></span>
+                    <span class="color-dot" style="background: #3b5323;" title="Olive Silk"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. Charita -->
+          <div class="col-sm-6 col-lg-4 bestseller-item-wrap" data-category="bridal">
+            <div class="bestseller-card">
+              <div class="bestseller-thumb-box">
+                <span class="bestseller-ribbon">★ Courtyard Archive</span>
+                <button class="bestseller-wishlist-btn"
+                  onclick="toggleWishlist(5, this, 'Charita Courtyard Archive Weave')" title="Add to Wishlist"
+                  aria-label="Add Charita to Wishlist">
+                  <i class="bi bi-heart"></i>
+                </button>
+                <img src="asset/katha-hero-Bf1Rq-sY.jpg"
+                  onerror="this.src='https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80'"
+                  alt="Charita Handloom Saree" />
+                <div class="bestseller-overlay-actions">
+                  <button class="btn btn-sm btn-kb-gold w-100 py-2" onclick="addToBag(5)">
+                    <i class="bi bi-bag-plus me-1"></i> Add to Bag
+                  </button>
+                  <button class="btn btn-sm btn-kb-outline w-100 py-2" onclick="openQuickViewById(5)">
+                    <i class="bi bi-eye me-1"></i> Quick View
+                  </button>
+                </div>
+              </div>
+              <div class="bestseller-body">
+                <div>
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <small class="text-uppercase text-muted fw-bold"
+                      style="font-size: 0.65rem; letter-spacing: 0.16em;">Murshidabad · Certified Zari</small>
+                    <span class="bestseller-stock-indicator"><i class="bi bi-dot fs-5 text-danger"></i> 1 Piece
+                      Left</span>
+                  </div>
+                  <h3 class="font-serif fs-3 mb-1 text-dark">Charita Courtyard Archive</h3>
+                  <p class="small text-muted mb-2 line-clamp-2">Century-old royal court patterns woven with certified
+                    real gold and electroplated silver wire.</p>
+                  <div class="d-flex align-items-center gap-1 mb-2 text-warning small">
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <i class="bi bi-star-fill text-kb-gold"></i>
+                    <span class="text-muted ms-1 small" style="font-size: 0.72rem;">(89 reviews)</span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-end pt-2 border-top">
+                  <div>
+                    <span class="fw-bold text-dark fs-5">₹32,500</span>
+                    <span class="text-muted text-decoration-line-through small ms-1">₹38,000</span>
+                  </div>
+                  <div class="d-flex gap-1 align-items-center">
+                    <span class="color-dot" style="background: #4b1236;" title="Royal Plum"></span>
+                    <span class="color-dot" style="background: #112a20;" title="Deep Jade"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bestseller Trust Guarantee Banner -->
+        <div class="mt-5 p-4 bg-white border border-kb-gold border-opacity-25 rounded-2 reveal-item">
+          <div class="row g-3 text-center align-items-center">
+            <div class="col-md-4 border-end-md">
+              <i class="bi bi-patch-check-fill text-kb-gold fs-4 d-block mb-1"></i>
+              <h6 class="font-serif mb-1">Silk Mark Purity Verified</h6>
+              <p class="small text-muted mb-0">Every warp certified 100% natural mulberry filament.</p>
+            </div>
+            <div class="col-md-4 border-end-md">
+              <i class="bi bi-scissors text-kb-gold fs-4 d-block mb-1"></i>
+              <h6 class="font-serif mb-1">Complimentary Fall &amp; Pico</h6>
+              <p class="small text-muted mb-0">Finished with hand-stitched edging ready for your celebration.</p>
+            </div>
+            <div class="col-md-4">
+              <i class="bi bi-box2-heart text-kb-gold fs-4 d-block mb-1"></i>
+              <h6 class="font-serif mb-1">Imperial Lacquer Keepsake Box</h6>
+              <p class="small text-muted mb-0">Protective muslin storage and heirloom archival fragrance included.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+
+    <!-- ================= 11. LUXURY PATRON VOICES & BRIDAL REVIEWS ================= -->
+    <section id="reviews" class="reviews-section-wrapper py-5 px-3 px-lg-5">
+      <div class="reviews-ambient-glow"></div>
+      <div class="container-fluid py-lg-4 position-relative" style="z-index: 2;">
+
+        <!-- Header -->
+        <div class="text-center mb-5 reveal-item">
+          <span class="d-inline-block text-uppercase px-3 py-1 mb-2 rounded-pill small fw-semibold"
+            style="letter-spacing: 0.22em; font-size: 0.72rem; color: #d4af37; background: rgba(212, 175, 55, 0.12); border: 1px solid rgba(212, 175, 55, 0.35);">
+            ✦ Patron Voices
+          </span>
+          <h2 class="font-serif display-4 text-white mb-2">Adored by Brides Across the World</h2>
+          <p class="text-white-50 mx-auto mb-0" style="max-width: 640px; font-size: 0.95rem;">
+            From royal courtyard weddings in Rajasthan to elegant celebrations in London, Manhattan, and Singapore. Read
+            what brides and collectors cherish about our looms.
+          </p>
+        </div>
+
+        <!-- Social Proof Stats Strip -->
+        <div class="patron-stats-strip reveal-item mb-5">
+          <div class="row g-4 text-center align-items-center">
+            <div class="col-6 col-md-3 stat-divider">
+              <div class="d-flex align-items-center justify-content-center gap-2 mb-1">
+                <span class="font-serif display-5 fw-bold gold-gradient-text">4.98</span>
+                <span class="text-kb-gold fs-5">★★★★★</span>
+              </div>
+              <p class="text-white-50 small text-uppercase mb-0" style="letter-spacing: 0.12em; font-size: 0.7rem;">380+
+                Verified Bride Reviews</p>
+            </div>
+            <div class="col-6 col-md-3 stat-divider">
+              <div class="font-serif display-5 fw-bold text-white mb-1">100%</div>
+              <p class="text-white-50 small text-uppercase mb-0" style="letter-spacing: 0.12em; font-size: 0.7rem;">
+                Certified Varanasi Silk Mark</p>
+            </div>
+            <div class="col-6 col-md-3 stat-divider">
+              <div class="font-serif display-5 fw-bold text-white mb-1">24+</div>
+              <p class="text-white-50 small text-uppercase mb-0" style="letter-spacing: 0.12em; font-size: 0.7rem;">
+                Countries Delivered With Insurance</p>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="font-serif display-5 fw-bold text-white mb-1">0%</div>
+              <p class="text-white-50 small text-uppercase mb-0" style="letter-spacing: 0.12em; font-size: 0.7rem;">
+                Loose Warp Floats (Zero-Snag Finish)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review Controls & Category Filter Header -->
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 mb-4 reveal-item">
+          <!-- Filter Tabs -->
+          <!-- <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-md-start" id="reviewFilters">
+            <button class="btn btn-sm review-filter-btn active" data-filter="all">All Stories (6)</button>
+            <button class="btn btn-sm review-filter-btn" data-filter="bridal">Bridal Trousseau</button>
+            <button class="btn btn-sm review-filter-btn" data-filter="international">International Delivery</button>
+            <button class="btn btn-sm review-filter-btn" data-filter="concierge">Video Concierge</button>
+            <button class="btn btn-sm review-filter-btn" data-filter="quality">Zari Purity</button>
+          </div> -->
+
+          <!-- Carousel Controls -->
+          <div class="d-flex align-items-center gap-2">
+            <button class="review-nav-btn" id="prevReviewBtn" aria-label="Previous Review" title="Previous Review">
+              <i class="bi bi-chevron-left"></i>
+            </button>
+            <button class="review-nav-btn" id="pauseReviewBtn" aria-label="Pause Auto Scroll" title="Pause / Resume">
+              <i class="bi bi-pause-fill" id="pauseIcon"></i>
+            </button>
+            <button class="review-nav-btn" id="nextReviewBtn" aria-label="Next Review" title="Next Review">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Luxury Testimonial Carousel Track -->
+        <div class="luxury-testimonial-wrap reveal-item" id="reviewCarouselWrap">
+          <div class="luxury-testimonial-track" id="testimonialTrack">
+            <!-- Rendered by JavaScript dynamically -->
+          </div>
+        </div>
+
+        <!-- Bottom Patron Note Invitation -->
+        <div class="mt-4 text-center reveal-item">
+          <p class="text-white-50 small mb-2">
+            Are you a Katha Bbeen bride? We invite you to share your milestone photographs.
+          </p>
+          <button class="btn btn-sm btn-kb-outline text-kb-gold-light"
+            onclick="alert('Atelier Patron Guestbook: Thank you! Please send your high-resolution drape photographs to patron@kathabbeen.com to be featured in our Royal Lookbook.');">
+            <i class="bi bi-envelope-heart me-1"></i> Submit Your Weave Reflection &rarr;
+          </button>
+        </div>
+
+      </div>
+    </section>
+  <section id="new-arrivals" class="py-5 px-3 px-lg-5"
+      style="background: linear-gradient(180deg, #787d12 0%, #063026 50%, #4a4d2f 100%);">
+      <div class="container-fluid py-4">
+
+        <div class="text-center mb-5 reveal">
+          <span class="d-inline-block text-uppercase px-3 py-1 mb-2 rounded-pill small fw-semibold"
+            style="letter-spacing: 0.2em; font-size: 0.72rem; color: #d4af37; background: rgba(212, 175, 55, 0.12); border: 1px solid rgba(212, 175, 55, 0.35);">
+            ✦ Just Unveiled · Autumn / Festive 2026
+          </span>
+          <h2 class="display-5 fw-bold text-white mb-2" style="font-family: 'Playfair Display', serif;">
+            The New Arrivals
+          </h2>
+          <p class="text-white-50 mx-auto" style="max-width: 580px; font-size: 0.95rem;">
+            Freshly off the looms of Varanasi, Chanderi, and Kanchipuram. Each masterpiece is hand-woven in limited
+            single-edition batches.
+          </p>
+        </div>
+
+        <div class="row g-2 g-sm-4 justify-content-center" id="arrivalsGrid">
+
+          <!-- Item 1: Emerald Shikargah -->
+          <div class="col-6 col-sm-6 col-md-3 col-lg-3 arrival-card-wrap" data-category="sarees">
+            <div class="arrival-card h-100 rounded-3 overflow-hidden position-relative shadow-sm d-flex flex-column justify-content-between"
+              style="background: #0b2219; border: 1px solid rgba(201, 164, 92, 0.25);">
+
+              <div class="card-image-box position-relative overflow-hidden w-100"
+                style="background-color: #081711;">
+
+                <span class="badge position-absolute top-0 start-0 m-2 z-2"
+                  style="background-color: #c9a45c; color: #0b2219; font-size: 0.6rem; letter-spacing: 0.08em;">NEW IN</span>
+
+                <button class="wishlist-btn position-absolute top-0 end-0 m-2 z-2 btn btn-sm rounded-circle d-flex align-items-center justify-content-center"
+                  style="width: 28px; height: 28px; background: rgba(0,0,0,0.45); color: #fff; border: 1px solid rgba(255,255,255,0.2);"
+                  title="Add to Wishlist">
+                  <i class="bi bi-heart" style="font-size: 0.7rem;"></i>
+                </button>
+
+                <img src="asset/collection-ivory-B6ncnHXl.jpg" class="w-100 h-100 arrival-img"
+                  style="object-fit: cover; object-position: top center; transition: transform 0.5s ease;"
+                  alt="Meenakari Shikargah Pure Silk Saree" onerror="this.src='asset/collection-banarasi.jpg'">
+
+                <div class="quick-actions-bar position-absolute bottom-0 start-0 w-100 p-1 p-sm-2 d-flex gap-2"
+                  style="background: linear-gradient(180deg, transparent 0%, rgba(11,34,25,0.85) 100%);">
+                  <button class="btn btn-sm w-100 py-1 py-sm-2 fw-semibold text-dark rounded-0 d-flex align-items-center justify-content-center gap-1"
+                    style="background-color: #c9a45c; font-size: 0.7rem;"
+                    onclick="openQuickView('Meenakari Shikargah', 48500, 'Handwoven Katan silk with gold & silver zari animal motifs.', 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80')">
+                    <i class="bi bi-eye"></i> Quick View
+                  </button>
+                </div>
+              </div>
+
+              <div class="p-3 text-start bg-emerald-card">
+                <small class="text-uppercase d-block mb-1"
+                  style="font-size: 0.68rem; letter-spacing: 0.12em; color: #dfbf75;">Pure Katan Silk · Varanasi</small>
+                <h6 class="text-white mb-2 text-truncate"
+                  style="font-family: 'Playfair Display', serif; font-size: 1rem;">Meenakari Shikargah Drape</h6>
+                <div class="d-flex flex-wrap align-items-baseline gap-2">
+                  <span class="fw-bold" style="font-size: 1.1rem; color: #dfbf75;">₹48,500</span>
+                  <span class="text-white-50 text-decoration-line-through small" style="font-size: 0.8rem;">₹54,000</span>
+                  <span class="badge bg-danger bg-opacity-25 text-danger border border-danger border-opacity-25 ms-auto"
+                    style="font-size: 0.62rem;">1 Left</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 2: Ivory Tissue Organza -->
+          <div class="col-6 col-sm-6 col-md-3 col-lg-3 arrival-card-wrap" data-category="tissues">
+            <div class="arrival-card h-100 rounded-3 overflow-hidden position-relative shadow-sm d-flex flex-column justify-content-between"
+              style="background: #0b2219; border: 1px solid rgba(201, 164, 92, 0.25);">
+
+              <div class="card-image-box position-relative overflow-hidden w-100"
+                style="background-color: #081711;">
+
+                <span class="badge position-absolute top-0 start-0 m-2 z-2"
+                  style="background-color: #c9a45c; color: #0b2219; font-size: 0.6rem; letter-spacing: 0.08em;">EXCLUSIVE</span>
+
+                <button class="wishlist-btn position-absolute top-0 end-0 m-2 z-2 btn btn-sm rounded-circle d-flex align-items-center justify-content-center"
+                  style="width: 28px; height: 28px; background: rgba(0,0,0,0.45); color: #fff; border: 1px solid rgba(255,255,255,0.2);">
+                  <i class="bi bi-heart" style="font-size: 0.7rem;"></i>
+                </button>
+
+                <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=800&q=80"
+                  class="w-100 h-100 arrival-img"
+                  style="object-fit: cover; object-position: top center; transition: transform 0.5s ease;"
+                  alt="Gulab Bari Tissue Organza" onerror="this.src='asset/katha-hero.jpg'">
+
+                <div class="quick-actions-bar position-absolute bottom-0 start-0 w-100 p-1 p-sm-2 d-flex gap-2"
+                  style="background: linear-gradient(180deg, transparent 0%, rgba(11,34,25,0.85) 100%);">
+                  <button class="btn btn-sm w-100 py-1 py-sm-2 fw-semibold text-dark rounded-0 d-flex align-items-center justify-content-center gap-1"
+                    style="background-color: #c9a45c; font-size: 0.7rem;"
+                    onclick="openQuickView('Gulab Bari Organza', 36200, 'Gleaming real metal tissue silk with delicate French-knot floral jaal.', 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=800&q=80')">
+                    <i class="bi bi-eye"></i> Quick View
+                  </button>
+                </div>
+              </div>
+
+              <div class="p-3 text-start bg-emerald-card">
+                <small class="text-uppercase d-block mb-1"
+                  style="font-size: 0.68rem; letter-spacing: 0.12em; color: #dfbf75;">Tissue Organza · Chanderi</small>
+                <h6 class="text-white mb-2 text-truncate" style="font-family: 'Playfair Display', serif; font-size: 1rem;">Gulab Bari Gold Sheen</h6>
+                <div class="d-flex flex-wrap align-items-baseline gap-2">
+                  <span class="fw-bold" style="font-size: 1.1rem; color: #dfbf75;">₹36,200</span>
+                  <span class="text-white-50 text-decoration-line-through small" style="font-size: 0.8rem;">₹41,000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 3: Jadau Polki Choker -->
+          <div class="col-6 col-sm-6 col-md-3 col-lg-3 arrival-card-wrap" data-category="jewellery">
+            <div class="arrival-card h-100 rounded-3 overflow-hidden position-relative shadow-sm d-flex flex-column justify-content-between"
+              style="background: #0b2219; border: 1px solid rgba(201, 164, 92, 0.25);">
+
+              <div class="card-image-box position-relative overflow-hidden w-100"
+                style="background-color: #081711;">
+
+                <span class="badge position-absolute top-0 start-0 m-2 z-2"
+                  style="background-color: #c9a45c; color: #0b2219; font-size: 0.6rem; letter-spacing: 0.08em;">HANDCRAFTED</span>
+
+                <button class="wishlist-btn position-absolute top-0 end-0 m-2 z-2 btn btn-sm rounded-circle d-flex align-items-center justify-content-center"
+                  style="width: 28px; height: 28px; background: rgba(0,0,0,0.45); color: #fff; border: 1px solid rgba(255,255,255,0.2);">
+                  <i class="bi bi-heart" style="font-size: 0.7rem;"></i>
+                </button>
+
+                <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80"
+                  class="w-100 h-100 arrival-img"
+                  style="object-fit: cover; object-position: top center; transition: transform 0.5s ease;"
+                  alt="Rajgharana Jadau Choker Set">
+
+                <div class="quick-actions-bar position-absolute bottom-0 start-0 w-100 p-1 p-sm-2 d-flex gap-2"
+                  style="background: linear-gradient(180deg, transparent 0%, rgba(11,34,25,0.85) 100%);">
+                  <button class="btn btn-sm w-100 py-1 py-sm-2 fw-semibold text-dark rounded-0 d-flex align-items-center justify-content-center gap-1"
+                    style="background-color: #c9a45c; font-size: 0.7rem;"
+                    onclick="openQuickView('Rajgharana Jadau Choker', 28900, '22K gold foil finish adorned with uncut Polki stones and emerald green beads.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80')">
+                    <i class="bi bi-eye"></i> Quick View
+                  </button>
+                </div>
+              </div>
+
+              <div class="p-3 text-start bg-emerald-card">
+                <small class="text-uppercase d-block mb-1"
+                  style="font-size: 0.68rem; letter-spacing: 0.12em; color: #dfbf75;">Heirloom Jewellery</small>
+                <h6 class="text-white mb-2 text-truncate" style="font-family: 'Playfair Display', serif; font-size: 1rem;">Rajgharana Jadau Choker</h6>
+                <div class="d-flex flex-wrap align-items-baseline gap-2">
+                  <span class="fw-bold" style="font-size: 1.1rem; color: #dfbf75;">₹28,900</span>
+                  <span class="text-white-50 text-decoration-line-through small" style="font-size: 0.8rem;">₹32,500</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 4: Zardozi Velvet Blouse -->
+          <div class="col-6 col-sm-6 col-md-3 col-lg-3 arrival-card-wrap" data-category="blouses">
+            <div class="arrival-card h-100 rounded-3 overflow-hidden position-relative shadow-sm d-flex flex-column justify-content-between"
+              style="background: #0b2219; border: 1px solid rgba(201, 164, 92, 0.25);">
+
+              <div class="card-image-box position-relative overflow-hidden w-100"
+                style="background-color: #081711;">
+
+                <span class="badge position-absolute top-0 start-0 m-2 z-2"
+                  style="background-color: #c9a45c; color: #0b2219; font-size: 0.6rem; letter-spacing: 0.08em;">MADE TO MEASURE</span>
+
+                <button class="wishlist-btn position-absolute top-0 end-0 m-2 z-2 btn btn-sm rounded-circle d-flex align-items-center justify-content-center"
+                  style="width: 28px; height: 28px; background: rgba(0,0,0,0.45); color: #fff; border: 1px solid rgba(255,255,255,0.2);">
+                  <i class="bi bi-heart" style="font-size: 0.7rem;"></i>
+                </button>
+
+                <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=800&q=80"
+                  class="w-100 h-100 arrival-img"
+                  style="object-fit: cover; object-position: top center; transition: transform 0.5s ease;"
+                  alt="Noor Zardozi Bridal Blouse">
+
+                <div class="quick-actions-bar position-absolute bottom-0 start-0 w-100 p-1 p-sm-2 d-flex gap-2"
+                  style="background: linear-gradient(180deg, transparent 0%, rgba(11,34,25,0.85) 100%);">
+                  <button class="btn btn-sm w-100 py-1 py-sm-2 fw-semibold text-dark rounded-0 d-flex align-items-center justify-content-center gap-1"
+                    style="background-color: #c9a45c; font-size: 0.7rem;"
+                    onclick="openQuickView('Noor Zardozi Blouse', 16500, 'Deep jewel velvet handcrafted with authentic Dabka and French wire work.', 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=800&q=80')">
+                    <i class="bi bi-eye"></i> Quick View
+                  </button>
+                </div>
+              </div>
+
+              <div class="p-3 text-start bg-emerald-card">
+                <small class="text-uppercase d-block mb-1"
+                  style="font-size: 0.68rem; letter-spacing: 0.12em; color: #dfbf75;">Couture Blouse</small>
+                <h6 class="text-white mb-2 text-truncate" style="font-family: 'Playfair Display', serif; font-size: 1rem;">Noor Zardozi Bridal Corset</h6>
+                <div class="d-flex flex-wrap align-items-baseline gap-2">
+                  <span class="fw-bold" style="font-size: 1.1rem; color: #dfbf75;">₹16,500</span>
+                  <span class="text-white-50 text-decoration-line-through small" style="font-size: 0.8rem;">₹19,000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 11. FOOTER -->
+  <footer class="bg-kb-primary text-white-50 py-5 px-3 px-lg-5 border-top border-secondary border-opacity-25">
+    <div class="container-fluid">
+      <div class="row g-5">
+        <div class="col-lg-4">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <div class="bg-white rounded-2">
+              <a class="d-flex align-items-center justify-content-center" href="#" style="z-index: 1020;">
+                <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+                  style="height: 50px; max-width: 60px; object-fit: contain;">
+              </a>
+            </div>
+
+          </div>
+          <p class="text-kb-gold-light text-uppercase mb-3" style="font-size: 0.65rem; letter-spacing: 0.28em;">Your
+            Choice Our Promise</p>
+          <p class="small text-white-50 pe-lg-4">
+            Curated handwoven sarees created for weddings, festivities, and heirlooms passed through generations.
+          </p>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h6 class="text-uppercase text-white small mb-3" style="letter-spacing: 0.18em;">Weaves</h6>
+          <ul class="list-unstyled small d-grid gap-2">
+            <li><a href="#" class="text-white-50 text-decoration-none">Banarasi Katan</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Chanderi Silks</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Tussar Handloom</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Organza Zari</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h6 class="text-uppercase text-white small mb-3" style="letter-spacing: 0.18em;">Assistance</h6>
+          <ul class="list-unstyled small d-grid gap-2">
+            <li><a href="#" class="text-white-50 text-decoration-none">Shipping & Duties</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Care & Storage</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Saree Authenticity</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Contact Atelier</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h6 class="text-uppercase text-white small mb-3" style="letter-spacing: 0.18em;">The Katha Gazette</h6>
+          <p class="small text-white-50">Subscribe for early access to private trunk shows and festive weaver release
+            dates.</p>
+
+        </div>
+      </div>
+      <div
+        class="border-top border-secondary border-opacity-25 mt-5 pt-4 d-flex flex-column flex-md-row justify-content-between small text-white-50">
+        <div>&copy; 2026 Katha Bbeen. Handcrafted with reverence in India.</div>
+        <div class="text-white-50 mt-2 mt-md-0" style="font-size: 0.72rem;">
+          Designed &amp; Developed by <a href="https://www.orbitalwebworks.com/"
+            class="text-kb-gold-light text-decoration-none fw-semibold">Orbital Webworks</a>
+        </div>
+        <div class="d-flex gap-3 mt-3 mt-md-0">
+          <a href="#" class="text-white-50 text-decoration-none">Terms</a>
+          <a href="#" class="text-white-50 text-decoration-none">Privacy</a>
+          <a href="#" class="text-white-50 text-decoration-none">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Back to Top Button -->
+  <button id="backToTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Back to Top">
+    <i class="bi bi-arrow-up fs-5"></i>
+  </button>
+
+  <!-- Floating Luxury Toast Notification -->
+  <div id="kbToast" class="kb-toast">
+    <i class="bi bi-patch-check-fill text-kb-gold fs-5"></i>
+    <span id="kbToastMsg">Heirloom added to your private wishlist.</span>
+  </div>
+
+  <!-- Quick View Modal -->
+  <div class="modal fade" id="quickViewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content bg-white overflow-hidden rounded-0">
+        <div class="row g-0">
+          <div class="col-md-6 bg-light">
+            <img id="modalImg" src="" class="w-100 h-100 object-fit-cover" style="min-height: 440px;"
+              alt="Saree Preview" />
+          </div>
+          <div class="col-md-6 p-4 p-lg-5 d-flex flex-column justify-content-between">
+            <div>
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <span id="modalCollection" class="text-uppercase text-muted fw-bold"
+                  style="font-size: 0.65rem; letter-spacing: 0.2em;"></span>
+                <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <h2 id="modalTitle" class="font-serif fs-2 mb-1"></h2>
+              <p id="modalTagline" class="text-muted small fst-italic mb-3"></p>
+              <p id="modalStory" class="small text-secondary mb-4"></p>
+
+              <ul class="list-group list-group-flush small mb-4 border-top border-bottom" id="modalSpecs"></ul>
+            </div>
+
+            <div>
+              <div class="fs-4 font-serif fw-bold mb-1" id="modalPrice"></div>
+              <small class="text-muted d-block mb-3">Inclusive of all taxes · Insured packaging included</small>
+              <button id="modalAddBtn" class="btn btn-kb-gold w-100 py-3" onclick="addCurrentModalToBag()">Add to
+                Bag</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Offcanvas Shopping Bag Drawer -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="bagOffcanvas" aria-labelledby="bagOffcanvasLabel">
+    <div class="offcanvas-header border-bottom py-3">
+      <h5 class="offcanvas-title font-serif fs-3" id="bagOffcanvasLabel">Your Shopping Bag</h5>
+      <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column justify-content-between p-4">
+      <div id="bagItemsList" class="d-grid gap-3"></div>
+
+      <div class="border-top pt-3 mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-uppercase small text-muted" style="letter-spacing: 0.12em;">Subtotal</span>
+          <span class="font-serif fs-4 fw-bold" id="bagSubtotal">₹0</span>
+        </div>
+        <p class="text-muted" style="font-size: 0.75rem;">Worldwide delivery & heirloom keepsake box complimentary.</p>
+        <button class="btn btn-kb-gold w-100 py-3"
+          onclick="alert('Proceeding to encrypted luxury checkout...');">Proceed to Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Interactive Logic -->
+  <script>
+    // Filter logic for New Arrivals
+    document.querySelectorAll('#arrivalFilters .filter-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('#arrivalFilters .filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+
+        const filter = this.getAttribute('data-filter');
+        document.querySelectorAll('.arrival-card-wrap').forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // ---------------------------------------------------------------
+    // PRELOADER INTRO TIMELINE
+    // ---------------------------------------------------------------
+    window.addEventListener("load", () => {
+      const tl = gsap.timeline({
+        defaults: { ease: "power3.out" }
+      });
+
+      tl.fromTo(
+        ".preloader-content img",
+        { opacity: 0, y: -20, scale: 0.9 },
+        { opacity: 1, y: 0, scale: 1, duration: 1 }
+      )
+        .fromTo(
+          ".preloader-content p",
+          { opacity: 0, y: 15 },
+          { opacity: 1, y: 0, duration: 0.8 },
+          "-=0.8"
+        )
+        .fromTo(
+          ".preloader-line",
+          { opacity: 0, scaleX: 0 },
+          { opacity: 1, scaleX: 1, duration: 0.6, transformOrigin: "center" },
+          "-=0.3"
+        )
+        .fromTo(
+          ".preloader-progress",
+          { width: "0%" },
+          { width: "100%", duration: 1.2, ease: "power2.inOut" }
+        )
+        .to(".kb-preloader", {
+          opacity: 0,
+          duration: 0.8,
+          delay: 0.2,
+          onComplete: () => {
+            document.getElementById("kbPreloader").style.display = "none";
+            // Refresh ScrollTrigger once the preloader is gone and layout has settled
+            ScrollTrigger.refresh();
+          }
+        });
+    });
+
+    const products = [
+      {
+        id: 1,
+        name: "Meher",
+        collection: "The Festive Edit",
+        weave: "Pure Silk Zari",
+        price: 21900,
+        image: "asset/collection-silk-haKidXNd.jpg",
+        fallback: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1200&q=80",
+        tagline: "An heirloom in every fold",
+        story: "Woven over eleven weeks in a courtyard loom, Meher carries deep emerald tones lifted by fine silver-gold zari.",
+        badge: "Bestseller",
+        specs: [
+          { label: "Fabric", value: "Pure silk with fine zari" },
+          { label: "Origin", value: "Handloom, Varanasi" },
+          { label: "Length", value: "6.3m with unstitched blouse" },
+          { label: "Care", value: "Dry clean only" }
+        ]
+      },
+      {
+        id: 2,
+        name: "Noor",
+        collection: "The Ivory Edit",
+        weave: "Handwoven Banarasi",
+        price: 24500,
+        image: "asset/katha-hero-Bf1Rq-sY.jpg",
+        fallback: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1200&q=80",
+        tagline: "Quiet radiance, woven in gold",
+        story: "Noor is restraint made luminous — undyed raw ivory silk threaded with antique gold kadhwa buti motifs.",
+        badge: "New",
+        specs: [
+          { label: "Fabric", value: "Undyed mulberry silk" },
+          { label: "Origin", value: "Kadhwa loom, Varanasi" },
+          { label: "Length", value: "6.3m with blouse piece" },
+          { label: "Care", value: "Dry clean only" }
+        ]
+      },
+      {
+        id: 3,
+        name: "Sindoor",
+        collection: "Banarasi Heirlooms",
+        weave: "Pure Banarasi Silk",
+        price: 28900,
+        image: "asset/collection-ivory-B6ncnHXl.jpg",
+        fallback: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1200&q=80",
+        tagline: "Tradition, made celebratory",
+        story: "A bridal weave with dense floral zari borders, a ceremonial heavy pallu, and timeless vermilion radiance.",
+        badge: "Bridal",
+        specs: [
+          { label: "Fabric", value: "Pure Katan Silk" },
+          { label: "Origin", value: "Brocade Loom, Varanasi" },
+          { label: "Length", value: "6.5m with blouse piece" },
+          { label: "Care", value: "Dry clean only" }
+        ]
+      },
+      {
+        id: 4,
+        name: "Aaranya",
+        collection: "Emerald Silks",
+        weave: "Pure Katan Silk",
+        price: 18900,
+        image: "",
+        fallback: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR82gVUV7kz0OzMN6WcsukU1HOjYucWK9QchNjbvHS5Bg&s=10",
+        tagline: "A study in enduring green",
+        story: "Katan silk in rich botanical green, finished with a subtle selvedge that quietly outlasts every passing trend.",
+        specs: [
+          { label: "Fabric", value: "100% Handloom Katan Silk" },
+          { label: "Origin", value: "Varanasi" },
+          { label: "Length", value: "6.3m with blouse piece" },
+          { label: "Care", value: "Dry clean only" }
+        ]
+      },
+      {
+        id: 5,
+        name: "Charita",
+        collection: "The Loom Archive",
+        weave: "Archive Handloom",
+        price: 32500,
+        image: "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1200&q=80",
+        fallback: "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1200&q=80",
+        tagline: "Made by hands that remember",
+        story: "Drawn from a nineteenth-century textile motif from an artisan family's private ancestral collection.",
+        badge: "Limited Edition",
+        specs: [
+          { label: "Fabric", value: "Pure silk with certified real zari" },
+          { label: "Origin", value: "Archive Loom, Murshidabad" },
+          { label: "Length", value: "6.5m with blouse piece" },
+          { label: "Care", value: "Dry clean only" }
+        ]
+      },
+      {
+        id: 6,
+        name: "Gulab Bari",
+        collection: "Tissue & Organza",
+        weave: "Real Metal Zari Tissue",
+        price: 36200,
+        image: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1200&q=80",
+        fallback: "asset/katha-hero-Bf1Rq-sY.jpg",
+        tagline: "Gossamer elegance in metallic gold",
+        story: "Woven on delicate organza warp with pure silver and gold coated metal wires, embellished with subtle French floral knots.",
+        badge: "Runway Archive",
+        specs: [
+          { label: "Fabric", value: "Tissue Organza with Real Zari" },
+          { label: "Origin", value: "Chanderi Handloom Cluster" },
+          { label: "Length", value: "6.3m with running blouse" },
+          { label: "Care", value: "Specialist dry clean only" }
+        ]
+      }
+    ];
+
+    const testimonials = [
+      {
+        id: 1,
+        quote: "My Meher saree felt like wearing liquid gold down the aisle. The zero floats on the reverse side proved the immaculate mastery of the Kadhwa loom.",
+        name: "Dr. Ananya Sharma",
+        place: "Delhi Bride",
+        event: "Destination Wedding · Umaid Bhawan Palace",
+        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
+        initials: "AS",
+        weavePurchased: "Meher Imperial Kadwa Katan (Emerald)",
+        rating: 5,
+        date: "2 weeks ago",
+        helpfulCount: 47,
+        verified: true,
+        category: "bridal"
+      },
+      {
+        id: 2,
+        quote: "The royal keepsake box and the sheer weight of pure Varanasi mulberry silk exceeded every luxury boutique I visited in London or Mumbai.",
+        name: "Meera Patel",
+        place: "Mayfair, London",
+        event: "Gala Reception · The V&A Museum",
+        avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80",
+        initials: "MP",
+        weavePurchased: "Noor Liquid Ivory Silk",
+        rating: 5,
+        date: "1 month ago",
+        helpfulCount: 38,
+        verified: true,
+        category: "international"
+      },
+      {
+        id: 3,
+        quote: "Sindoor was everything I dreamed my wedding saree would be. The heavy ceremonial zari pallu left everyone spellbound. An unforgettable heirloom.",
+        name: "Ritika Sen Banerjee",
+        place: "Kolkata Bride",
+        event: "Wedding Ceremony · Rajbari Bawali",
+        avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80",
+        initials: "RS",
+        weavePurchased: "Sindoor Royal Bridal Brocade",
+        rating: 5,
+        date: "3 weeks ago",
+        helpfulCount: 52,
+        verified: true,
+        category: "bridal"
+      },
+      {
+        id: 4,
+        quote: "Ordered Aaranya for my sister's reception in Singapore. The botanical moss hue retained its radiant luminosity even under high-flash photography.",
+        name: "Priya Nair",
+        place: "Marina Bay, Singapore",
+        event: "Festive Soirée · Fullerton Bay",
+        avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80",
+        initials: "PN",
+        weavePurchased: "Aaranya Botanical Forest Katan",
+        rating: 5,
+        date: "Last month",
+        helpfulCount: 29,
+        verified: true,
+        category: "international"
+      },
+      {
+        id: 5,
+        quote: "Their senior draper consultation via private video call helped me pick the right zari tone for my skin undertone. Unrivaled royal courtesy!",
+        name: "Ishita Kapoor",
+        place: "Downtown Dubai",
+        event: "Bespoke Trousseau Consultation",
+        avatar: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=200&q=80",
+        initials: "IK",
+        weavePurchased: "Gulab Bari Gold Sheen Organza",
+        rating: 5,
+        date: "2 months ago",
+        helpfulCount: 64,
+        verified: true,
+        category: "concierge"
+      },
+      {
+        id: 6,
+        quote: "Charita arrived with the certified silk purity card and wax-sealed note from the master weaver himself. Felt like receiving a priceless museum antique.",
+        name: "Devika Rao",
+        place: "Malabar Hill, Mumbai",
+        event: "Ancestral Anniversary Celebration",
+        avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80",
+        initials: "DR",
+        weavePurchased: "Charita Courtyard Archive Weave",
+        rating: 5,
+        date: "3 weeks ago",
+        helpfulCount: 41,
+        verified: true,
+        category: "quality"
+      }
+    ];
+
+    let currentModalProduct = null;
+    let bag = [1];
+
+    function formatINR(num) {
+      return '₹' + num.toLocaleString('en-IN');
+    }
+
+    function renderProducts() {
+      const list = document.getElementById('productList');
+      list.innerHTML = products.slice(0, 4).map((p, idx) => `
+        <div class="col-sm-6 col-lg-3 reveal-item delay-${idx + 1}">
+  <div class="product-card h-100 d-flex flex-column justify-content-between p-3 bg-white border shadow-sm position-relative">
+    <div>
+      <!-- Thumbnail & Badges -->
+      <div class="product-thumb mb-3 position-relative overflow-hidden rounded-1">
+        <img 
+          src="${p.image}" 
+          onerror="this.src='${p.fallback}'" 
+          alt="${p.name}" 
+          class="w-100 object-fit-cover" 
+          style="height:270px; transition: transform 0.4s ease;"
+        />
+        ${p.badge ? `<span class="position-absolute top-0 start-0 m-2 badge bg-dark text-warning border border-warning-subtle text-uppercase fw-normal" style="font-size:0.65rem; letter-spacing:0.1em;">${p.badge}</span>` : ''}
+        
+        <!-- Wishlist Button -->
+        <button 
+          class="btn btn-sm bg-white bg-opacity-75 rounded-circle position-absolute top-0 end-0 m-2 p-0 d-flex align-items-center justify-content-center shadow-sm" 
+          style="width:32px; height:32px; border:none; z-index:2;" 
+          onclick="event.stopPropagation(); if(typeof toggleWishlist === 'function') toggleWishlist(${p.id}, this, '${p.name}')" 
+          title="Add to Wishlist"
+        >
+          <i class="bi bi-heart text-dark fs-6"></i>
+        </button>
+      </div>
+
+      <!-- Weave & Origin Row -->
+      <div class="d-flex justify-content-between align-items-center mb-1">
+        <p class="text-uppercase text-muted mb-0 fw-semibold" style="font-size:0.65rem; letter-spacing:0.18em;">${p.weave}</p>
+        <span class="text-muted" style="font-size:0.7rem;">
+          <i class="bi bi-geo-alt text-warning me-1"></i>${p.specs ? (p.specs.find(s => s.label === 'Origin')?.value || p.collection) : (p.collection || 'India')}
+        </span>
+      </div>
+
+      <!-- Product Title -->
+      <h4 class="font-serif fs-5 mb-1 text-truncate" title="${p.name}">${p.name}</h4>
+
+      <!-- Tagline / Weave Story snippet -->
+      <p class="text-muted small mb-2" style="font-size:0.75rem; line-height:1.35; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; min-height:2em;">
+        ${p.tagline || (p.story ? p.story.slice(0, 75) + '...' : 'Authentic heritage handloom woven with pure zari.')}
+      </p>
+
+      <!-- Fabric & Certification Badges -->
+      <div class="d-flex flex-wrap gap-1 mb-2">
+        <span class="badge bg-light text-secondary border fw-normal" style="font-size:0.65rem;">
+          <i class="bi bi-patch-check-fill text-warning me-1"></i>${p.specs ? (p.specs.find(s => s.label === 'Fabric')?.value || 'Pure Silk') : 'Pure Silk'}
+        </span>
+        <span class="badge bg-light text-secondary border fw-normal" style="font-size:0.65rem;">
+          <i class="bi bi-shield-check text-success me-1"></i>Silk Mark Certified
+        </span>
+      </div>
+
+      <!-- Rating & Reviews -->
+      <div class="d-flex align-items-center gap-1 mb-2" style="font-size:0.75rem;">
+        <span class="text-warning">★★★★★</span>
+        <span class="text-dark fw-bold" style="font-size:0.72rem;">4.9</span>
+        <span class="text-muted" style="font-size:0.68rem;">(Verified Patron)</span>
+      </div>
+
+      <!-- Price & Delivery Row -->
+      <div class="d-flex align-items-baseline justify-content-between mb-3">
+        <div>
+          <span class="fw-bold fs-5 text-dark font-serif">${formatINR(p.price)}</span>
+          <span class="text-muted text-decoration-line-through ms-2 small" style="font-size:0.78rem;">${formatINR(Math.round(p.price * 1.25))}</span>
+        </div>
+        <span class="text-success fw-medium" style="font-size:0.68rem;">
+          <i class="bi bi-truck me-1"></i>Free Shipping
+        </span>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="d-grid gap-2 pt-2 border-top">
+      <button class="btn btn-sm btn-outline-dark rounded-0 d-flex align-items-center justify-content-center gap-2" onclick="openQuickViewById(${p.id})">
+        <i class="bi bi-eye"></i> Quick View
+      </button>
+      <button class="btn btn-sm btn-kb-gold rounded-0 d-flex align-items-center justify-content-center gap-2" onclick="addToBag(${p.id})">
+        <i class="bi bi-bag-plus"></i> ${bag.includes(p.id) ? 'In Bag' : 'Add to Bag'}
+      </button>
+    </div>
+  </div>
+</div>
+      `).join('');
+
+      initScrollReveals();
+      ScrollTrigger.refresh();
+    }
+
+    // Hero Multi-Card Hover & Click
+    const heroCards = document.querySelectorAll('.hero-card');
+    heroCards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        heroCards.forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+      });
+      card.addEventListener('click', (e) => {
+        if (!e.target.closest('button')) {
+          const index = parseInt(card.getAttribute('data-index'), 10);
+          openQuickView(index);
+        }
+      });
+    });
+
+    // ---------------------------------------------------------------
+    // MOBILE HERO SWIPE DOTS
+    // Builds dot indicators and keeps them synced with which card
+    // is currently centered in the scroll-snap carousel.
+    // ---------------------------------------------------------------
+    function initHeroSwipeDots() {
+      const dotsWrap = document.getElementById('heroSwipeDots');
+      const wrap = document.getElementById('heroCards');
+      if (!dotsWrap || !wrap) return;
+
+      const cards = wrap.querySelectorAll('.hero-card');
+      dotsWrap.innerHTML = Array.from(cards)
+        .map((_, i) => `<span class="dot${i === 0 ? ' active' : ''}" data-index="${i}"></span>`)
+        .join('');
+
+      const dots = dotsWrap.querySelectorAll('.dot');
+
+      // Tapping a dot scrolls the carousel to that card
+      dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+          const idx = parseInt(dot.getAttribute('data-index'), 10);
+          const target = cards[idx];
+          if (target) {
+            wrap.scrollTo({ left: target.offsetLeft - wrap.offsetLeft, behavior: 'smooth' });
+          }
+        });
+      });
+
+      // Update the active dot as the user swipes
+      let scrollTimer;
+      wrap.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+          const center = wrap.scrollLeft + wrap.clientWidth / 2;
+          let closestIdx = 0;
+          let closestDist = Infinity;
+          cards.forEach((card, i) => {
+            const cardCenter = card.offsetLeft + card.clientWidth / 2;
+            const dist = Math.abs(cardCenter - center);
+            if (dist < closestDist) {
+              closestDist = dist;
+              closestIdx = i;
+            }
+          });
+          dots.forEach(d => d.classList.remove('active'));
+          if (dots[closestIdx]) dots[closestIdx].classList.add('active');
+        }, 80);
+      }, { passive: true });
+    }
+
+    // Quick View Modal
+    const quickViewModal = new bootstrap.Modal(document.getElementById('quickViewModal'));
+
+    function openQuickView(index) {
+      const p = products[index];
+      currentModalProduct = p;
+      const modalImg = document.getElementById('modalImg');
+      modalImg.src = p.image;
+      modalImg.onerror = () => { modalImg.src = p.fallback; };
+
+      document.getElementById('modalTitle').textContent = p.name;
+      document.getElementById('modalCollection').textContent = p.collection;
+      document.getElementById('modalTagline').textContent = `"${p.tagline}"`;
+      document.getElementById('modalStory').textContent = p.story;
+      document.getElementById('modalPrice').textContent = formatINR(p.price);
+
+      const specsList = document.getElementById('modalSpecs');
+      specsList.innerHTML = p.specs.map(s => `
+        <li class="list-group-item d-flex justify-content-between px-0 bg-transparent py-2">
+          <span class="text-muted text-uppercase" style="font-size:0.65rem; letter-spacing:0.12em;">${s.label}</span>
+          <span class="fw-medium">${s.value}</span>
+        </li>
+      `).join('');
+
+      const btn = document.getElementById('modalAddBtn');
+      btn.textContent = bag.includes(p.id) ? "In Your Bag" : "Add to Bag";
+      btn.disabled = bag.includes(p.id);
+
+      quickViewModal.show();
+    }
+
+    function openQuickViewById(id) {
+      const idx = products.findIndex(p => p.id === id);
+      if (idx !== -1) openQuickView(idx);
+    }
+
+    function addCurrentModalToBag() {
+      if (currentModalProduct) {
+        addToBag(currentModalProduct.id);
+        const btn = document.getElementById('modalAddBtn');
+        btn.textContent = "In Your Bag";
+        btn.disabled = true;
+      }
+    }
+
+    // Bag Actions
+    function addToBag(id) {
+      if (!bag.includes(id)) {
+        bag.push(id);
+      }
+      updateBagUI();
+      renderProducts();
+      const offcanvas = new bootstrap.Offcanvas(document.getElementById('bagOffcanvas'));
+      offcanvas.show();
+    }
+
+    function removeFromBag(id) {
+      bag = bag.filter(itemId => itemId !== id);
+      updateBagUI();
+      renderProducts();
+    }
+
+    function updateBagUI() {
+      document.getElementById('bagCountBadge').textContent = bag.length;
+      const list = document.getElementById('bagItemsList');
+      const bagProducts = products.filter(p => bag.includes(p.id));
+
+      if (bagProducts.length === 0) {
+        list.innerHTML = `
+          <div class="text-center py-5 text-muted">
+            <i class="bi bi-bag display-4 mb-3 d-block text-kb-gold"></i>
+            <p class="font-serif fs-4 text-dark mb-1">Your bag is empty</p>
+            <p class="small">Choose an authentic handwoven heirloom to begin.</p>
+          </div>
+        `;
+        document.getElementById('bagSubtotal').textContent = '₹0';
+        return;
+      }
+
+      let subtotal = 0;
+      list.innerHTML = bagProducts.map(p => {
+        subtotal += p.price;
+        return `
+          <div class="d-flex gap-3 align-items-center pb-3 border-bottom">
+            <img src="${p.image}" onerror="this.src='${p.fallback}'" class="rounded-0 object-fit-cover" width="70" height="90" alt="${p.name}" />
+            <div class="flex-grow-1">
+              <h6 class="font-serif fs-5 mb-0">${p.name}</h6>
+              <small class="text-muted text-uppercase d-block mb-1" style="font-size:0.65rem;">${p.weave}</small>
+              <span class="fw-semibold">${formatINR(p.price)}</span>
+            </div>
+            <button class="btn btn-sm btn-link text-danger p-0" onclick="removeFromBag(${p.id})" title="Remove"><i class="bi bi-trash fs-5"></i></button>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('bagSubtotal').textContent = formatINR(subtotal);
+    }
+
+    // ---------------------------------------------------------------
+    // SCROLL REVEALS (bidirectional — plays on the way down,
+    // reverses on the way back up, replays going down again)
+    // ---------------------------------------------------------------
+    function initScrollReveals() {
+      // Kill any previously-created reveal triggers so re-renders
+      // (e.g. renderProducts) don't create duplicate ScrollTriggers.
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.vars.id && trigger.vars.id.toString().startsWith('reveal-')) {
+          trigger.kill();
+        }
+      });
+
+      // Group items by their containing .row so siblings stagger together
+      document.querySelectorAll('.row').forEach((row, rowIndex) => {
+        const items = row.querySelectorAll(':scope > [class*="col-"] > .reveal-item, :scope > .reveal-item');
+        if (items.length === 0) return;
+
+        gsap.fromTo(items,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            stagger: 0.12,
+            scrollTrigger: {
+              id: 'reveal-row-' + rowIndex,
+              trigger: row,
+              start: "top 85%",
+              end: "bottom 15%",
+              toggleActions: "play reverse play reverse"
+            }
+          }
+        );
+      });
+
+      // Any reveal-item not inside a .row (standalone sections)
+      const standalone = document.querySelectorAll('.reveal-item:not(.row *)');
+      standalone.forEach((el, i) => {
+        gsap.fromTo(el,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              id: 'reveal-standalone-' + i,
+              trigger: el,
+              start: "top 85%",
+              end: "bottom 15%",
+              toggleActions: "play reverse play reverse"
+            }
+          }
+        );
+      });
+    }
+
+    // ---------------------------------------------------------------
+    // PATRON VOICES — auto-scrolling testimonial carousel
+    // ---------------------------------------------------------------
+    let testimonialTween = null;
+
+    function renderTestimonialCarousel(filter = 'all') {
+      const track = document.getElementById('testimonialTrack');
+      if (!track) return;
+
+      const filtered = filter === 'all'
+        ? testimonials
+        : testimonials.filter(t => t.category === filter);
+
+      if (filtered.length === 0) {
+        track.innerHTML = `<div class="p-4 text-white-50">No patron reflections found under this filter.</div>`;
+        return;
+      }
+
+      const cardHTML = (t) => `
+        <div class="luxury-review-card" data-category="${t.category}">
+          <div>
+            <!-- Patron Header -->
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <img src="${t.avatar}" onerror="this.outerHTML='<div class=\\\'review-avatar-fallback\\\'>${t.initials}</div>'" class="review-patron-avatar" alt="${t.name}" />
+              <div class="flex-grow-1">
+                <div class="d-flex align-items-center gap-2 flex-wrap mb-1">
+                  <h5 class="font-serif fs-5 mb-0 text-white">${t.name}</h5>
+                  <span class="verified-patron-badge"><i class="bi bi-patch-check-fill text-kb-gold"></i> Verified Patron</span>
+                </div>
+                <small class="text-white-50 d-block" style="font-size: 0.72rem;">${t.place} · ${t.event}</small>
+              </div>
+            </div>
+
+            <!-- Star Rating -->
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <div class="text-kb-gold" style="font-size: 1rem; letter-spacing: 0.08em;">★★★★★</div>
+              <span class="badge text-kb-gold-light border border-gold-subtle" style="background: rgba(0,0,0,0.35); font-size: 0.65rem;">Silk Mark Certified</span>
+            </div>
+
+            <!-- Purchased Weave Tag -->
+           
+            <!-- Quote Text -->
+            <div class="review-quote-mark">&ldquo;</div>
+            <p class="review-quote-text mb-0">${t.quote}</p>
+          </div>
+
+          <!-- Card Footer -->
+           
+        </div>
+      `;
+
+      // Duplicate for a seamless infinite loop if there are sufficient cards
+      const html = filtered.map(cardHTML).join('');
+      track.innerHTML = filtered.length >= 3 ? html + html : html;
+
+      initTestimonialAutoScroll();
+    }
+
+    function initTestimonialAutoScroll() {
+      const track = document.getElementById('testimonialTrack');
+      if (!track) return;
+
+      if (testimonialTween) {
+        testimonialTween.kill();
+      }
+
+      // Reset any transform before measuring width
+      gsap.set(track, { x: 0 });
+
+      // Half the total width = width of one full (non-duplicated) set of cards
+      const distance = track.scrollWidth / 2;
+
+      testimonialTween = gsap.to(track, {
+        x: -distance,
+        duration: distance / 35, // majestic luxury glide speed
+        ease: "none",
+        repeat: -1,
+      });
+
+      const wrap = track.closest('.luxury-testimonial-wrap') || track.closest('.testimonial-carousel-wrap');
+      if (wrap) {
+        wrap.addEventListener('mouseenter', () => testimonialTween && testimonialTween.pause());
+        wrap.addEventListener('mouseleave', () => {
+          const pauseIcon = document.getElementById('pauseIcon');
+          if (pauseIcon && pauseIcon.className.includes('pause-fill')) {
+            testimonialTween && testimonialTween.play();
+          }
+        });
+        // Touch devices: pause while a finger is on the carousel
+        wrap.addEventListener('touchstart', () => testimonialTween && testimonialTween.pause(), { passive: true });
+        wrap.addEventListener('touchend', () => {
+          const pauseIcon = document.getElementById('pauseIcon');
+          if (pauseIcon && pauseIcon.className.includes('pause-fill')) {
+            testimonialTween && testimonialTween.play();
+          }
+        });
+      }
+    }
+
+    // Review Controls (Prev, Next, Pause/Play, Filters)
+    function initReviewControls() {
+      const prevBtn = document.getElementById('prevReviewBtn');
+      const nextBtn = document.getElementById('nextReviewBtn');
+      const pauseBtn = document.getElementById('pauseReviewBtn');
+      const pauseIcon = document.getElementById('pauseIcon');
+      const track = document.getElementById('testimonialTrack');
+
+      let isPaused = false;
+
+      if (pauseBtn) {
+        pauseBtn.addEventListener('click', () => {
+          if (!testimonialTween) return;
+          if (isPaused) {
+            testimonialTween.play();
+            isPaused = false;
+            if (pauseIcon) pauseIcon.className = 'bi bi-pause-fill';
+          } else {
+            testimonialTween.pause();
+            isPaused = true;
+            if (pauseIcon) pauseIcon.className = 'bi bi-play-fill';
+          }
+        });
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          if (testimonialTween) testimonialTween.pause();
+          isPaused = true;
+          if (pauseIcon) pauseIcon.className = 'bi bi-play-fill';
+          const currentX = gsap.getProperty(track, "x");
+          gsap.to(track, { x: currentX + 380, duration: 0.45, ease: "power2.out" });
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          if (testimonialTween) testimonialTween.pause();
+          isPaused = true;
+          if (pauseIcon) pauseIcon.className = 'bi bi-play-fill';
+          const currentX = gsap.getProperty(track, "x");
+          gsap.to(track, { x: currentX - 380, duration: 0.45, ease: "power2.out" });
+        });
+      }
+
+      // Review category filter logic
+      const filterBtns = document.querySelectorAll('#reviewFilters .review-filter-btn');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          const filter = this.getAttribute('data-filter');
+          renderTestimonialCarousel(filter);
+        });
+      });
+    }
+
+    // Bestseller Category Filter Logic
+    function initBestsellerFilters() {
+      const filterBtns = document.querySelectorAll('#bestsellerFilters .bestseller-filter-btn');
+      const items = document.querySelectorAll('.bestseller-item-wrap');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          const cat = this.getAttribute('data-filter');
+
+          items.forEach(item => {
+            const itemCats = item.getAttribute('data-category') || '';
+            if (cat === 'all' || itemCats.includes(cat)) {
+              item.style.display = 'block';
+              gsap.fromTo(item, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
+            } else {
+              item.style.display = 'none';
+            }
+          });
+          ScrollTrigger.refresh();
+        });
+      });
+    }
+
+    // Wishlist Toggle with Luxury Floating Toast
+    let wishlist = [];
+    function toggleWishlist(id, btn, name) {
+      const idx = wishlist.indexOf(id);
+      let isAdded = false;
+      if (idx === -1) {
+        wishlist.push(id);
+        isAdded = true;
+        btn.classList.add('active');
+        btn.innerHTML = '<i class="bi bi-heart-fill text-white"></i>';
+      } else {
+        wishlist.splice(idx, 1);
+        isAdded = false;
+        btn.classList.remove('active');
+        btn.innerHTML = '<i class="bi bi-heart"></i>';
+      }
+      showToast(isAdded ? `"${name}" added to your private wishlist.` : `"${name}" removed from wishlist.`);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('kbToast');
+      const toastMsg = document.getElementById('kbToastMsg');
+      if (!toast || !toastMsg) return;
+      toastMsg.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2800);
+    }
+
+    function incrementHelpful(btn, id) {
+      if (btn.classList.contains('clicked')) return;
+      btn.classList.add('clicked');
+      const countSpan = btn.querySelector('span');
+      if (countSpan) {
+        let count = parseInt(countSpan.textContent, 10) || 0;
+        countSpan.textContent = count + 1;
+      }
+      showToast('Thank you for voting this patron reflection helpful.');
+    }
+
+    // Reveal for the lookbook grid tiles below the carousel
+    function initLookbookGridReveal() {
+      const gridItems = document.querySelectorAll('.reveal-grid-item');
+      if (!gridItems.length) return;
+
+      gsap.fromTo(gridItems,
+        { opacity: 0, scale: 0.85 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.6,
+          ease: "power2.out",
+          stagger: 0.08,
+          scrollTrigger: {
+            id: 'reveal-lookbook-grid',
+            trigger: gridItems[0].closest('.row'),
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play reverse play reverse"
+          }
+        }
+      );
+    }
+
+    // Auto-close Drawer on Mobile link tap
+    document.querySelectorAll('#navMenu .nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        const navOffcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('navMenu'));
+        if (navOffcanvas) {
+          navOffcanvas.hide();
+        }
+      });
+    });
+
+    // Floating Back To Top
+    window.addEventListener('scroll', () => {
+      const backBtn = document.getElementById('backToTopBtn');
+      if (window.scrollY > 400) {
+        backBtn.classList.add('show');
+      } else {
+        backBtn.classList.remove('show');
+      }
+    });
+    // One-click Copy Coupon Code
+    function copyPromoCode(btn) {
+      const code = document.getElementById('promoCodeText').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = '<i class="bi bi-check2"></i> COPIED!';
+        btn.classList.replace('btn-outline-warning', 'btn-warning');
+        btn.classList.add('text-dark');
+        setTimeout(() => {
+          btn.innerHTML = originalHTML;
+          btn.classList.replace('btn-warning', 'btn-outline-warning');
+          btn.classList.remove('text-dark');
+        }, 2000);
+      });
+    }
+    // Smooth Live Countdown Timer
+    (function initOfferTimer() {
+      let hours = 18, mins = 42, secs = 35;
+      setInterval(() => {
+        secs--;
+        if (secs < 0) {
+          secs = 59;
+          mins--;
+          if (mins < 0) {
+            mins = 59;
+            hours = hours > 0 ? hours - 1 : 24;
+          }
+        }
+        const hEl = document.getElementById('timerHours');
+        const mEl = document.getElementById('timerMins');
+        const sEl = document.getElementById('timerSecs');
+        if (hEl) hEl.innerText = hours < 10 ? '0' + hours : hours;
+        if (mEl) mEl.innerText = mins < 10 ? '0' + mins : mins;
+        if (sEl) sEl.innerText = secs < 10 ? '0' + secs : secs;
+      }, 1000);
+    })();
+
+    // Preloader Dismiss (backup fade-out class trigger)
+    window.addEventListener('load', () => {
+      const preloader = document.getElementById('kbPreloader');
+      if (preloader) {
+        setTimeout(() => {
+          preloader.classList.add('fade-out');
+        }, 3000);
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderProducts();
+      updateBagUI();
+      initScrollReveals();
+      renderTestimonialCarousel('all');
+      initReviewControls();
+      initBestsellerFilters();
+      initLookbookGridReveal();
+      initHeroSwipeDots();
+    });
+
+    // Recalculate the carousel loop distance if the viewport is resized
+    // (card widths shift at the 767px breakpoint)
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(initTestimonialAutoScroll, 250);
+    });
+
+    // One-click Copy Coupon Code Function
+    function copyOfferCode(code, btn) {
+      navigator.clipboard.writeText(code).then(() => {
+        const originalHtml = btn.innerHTML;
+        btn.innerHTML = '<i class="bi bi-check2 text-success me-1"></i><span class="text-success">Copied!</span>';
+        setTimeout(() => {
+          btn.innerHTML = originalHtml;
+        }, 2200);
+      });
+    }
+
+    // Live Festive Countdown Timer
+    (function startFestiveTimer() {
+      // Set target to 8 days from now
+      const targetTime = new Date().getTime() + (8 * 24 * 60 * 60 * 1000) + (14 * 60 * 60 * 1000);
+
+      function update() {
+        const now = new Date().getTime();
+        const diff = targetTime - now;
+
+        if (diff <= 0) return;
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+        const pad = n => String(n).padStart(2, '0');
+        if (document.getElementById('cdDays')) document.getElementById('cdDays').textContent = pad(days);
+        if (document.getElementById('cdHours')) document.getElementById('cdHours').textContent = pad(hours);
+        if (document.getElementById('cdMins')) document.getElementById('cdMins').textContent = pad(mins);
+        if (document.getElementById('cdSecs')) document.getElementById('cdSecs').textContent = pad(secs);
+      }
+
+      setInterval(update, 1000);
+      update();
+    })();
+
+    // =======================================================
+    // ATELIER FILM CONTROLS & AMBIENT AUDIO SYNTHESIZER
+    // =======================================================
+    let filmAudioCtx = null;
+    let filmDrone1 = null;
+    let filmDrone2 = null;
+    let isFilmAudioPlaying = false;
+
+    function toggleFilmAudio() {
+      const audioText = document.getElementById('audioText');
+      const audioIcon = document.getElementById('audioIcon');
+
+      if (!filmAudioCtx) {
+        filmAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+
+      if (!isFilmAudioPlaying) {
+        if (filmAudioCtx.state === 'suspended') {
+          filmAudioCtx.resume();
+        }
+
+        // Warm C# royal sitar/tanpura harmonic drone
+        filmDrone1 = filmAudioCtx.createOscillator();
+        filmDrone2 = filmAudioCtx.createOscillator();
+        const gainNode = filmAudioCtx.createGain();
+
+        filmDrone1.type = 'triangle';
+        filmDrone1.frequency.setValueAtTime(138.59, filmAudioCtx.currentTime); // C#3 root
+
+        filmDrone2.type = 'sine';
+        filmDrone2.frequency.setValueAtTime(207.65, filmAudioCtx.currentTime); // G#3 perfect fifth
+
+        gainNode.gain.setValueAtTime(0.04, filmAudioCtx.currentTime);
+
+        filmDrone1.connect(gainNode);
+        filmDrone2.connect(gainNode);
+        gainNode.connect(filmAudioCtx.destination);
+
+        filmDrone1.start();
+        filmDrone2.start();
+
+        isFilmAudioPlaying = true;
+        if (audioText) audioText.textContent = "Sound: On";
+        if (audioIcon) audioIcon.className = "bi bi-volume-up-fill text-kb-gold";
+        showToast("Playing royal ambient temple soundscape.");
+      } else {
+        if (filmDrone1) { filmDrone1.stop(); filmDrone1.disconnect(); }
+        if (filmDrone2) { filmDrone2.stop(); filmDrone2.disconnect(); }
+        isFilmAudioPlaying = false;
+        if (audioText) audioText.textContent = "Ambient Sitar";
+        if (audioIcon) audioIcon.className = "bi bi-volume-mute";
+        showToast("Ambient soundscape muted.");
+      }
+    }
+
+    let isFilmPlaying = true;
+    function toggleFilmPlay() {
+      const media = document.getElementById('filmMedia');
+      const playIcon = document.getElementById('playIcon');
+      if (!media) return;
+
+      if (isFilmPlaying) {
+        media.style.animationPlayState = 'paused';
+        isFilmPlaying = false;
+        if (playIcon) playIcon.className = 'bi bi-play-fill';
+      } else {
+        media.style.animationPlayState = 'running';
+        isFilmPlaying = true;
+        if (playIcon) playIcon.className = 'bi bi-pause-fill';
+      }
+    }
+
+
+  </script>
+</body>
+
+</html>
