@@ -35,6 +35,9 @@
     .preloader-line {
       opacity: 0;
     }
+    body {
+  overflow-x: hidden;
+}
 
     .kb-preloader.fade-out {
       opacity: 0;
@@ -64,6 +67,43 @@
        below 768px, switch to a full-width swipeable carousel
        (one card visible at a time, native scroll-snap swipe).
     ----------------------------------------------------------- */
+  #craft {
+  width: 10vw;
+  max-width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.craft-banner-wrapper {
+  height: auto;
+  min-height: 0;
+  max-height: none;
+}
+
+.craft-banner-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+body {
+  overflow-x: hidden;
+}@media (max-width: 768px) {
+  .craft-banner-wrapper {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+  }
+
+  .craft-banner-img {
+    height: auto;
+    object-fit: contain;
+  }
+}
     @media (max-width: 767.98px) {
       .hero-slider-wrap {
         display: flex;
@@ -434,7 +474,7 @@
     </div>
 
     <!-- 5. CURATED COLLECTIONS -->
-    <section id="collections" class="py-5 px-3 px-lg-5">
+<section id="collections" class="py-5 px-3 px-lg-5">
       <div class="container-fluid">
         <div class="text-center mb-5 reveal-item">
           <p class="text-uppercase text-muted fw-bold" style="font-size: 0.7rem; letter-spacing: 0.3em;">The Ateliers
@@ -450,13 +490,13 @@
               <img src="asset/katha-hero-Bf1Rq-sY.jpg"
                 onerror="this.src='https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80'"
                 alt="Handwoven Sarees" />
-              <div class="position-absolute bottom-0 start-0 end-0 p-4 bg-gradient text-white"
-                style="background: linear-gradient(0deg, rgba(7, 23, 17, 0.95) 0%, transparent 100%);">
+              <div class="position-absolute bottom-0 start-0 end-0 p-4 text-white"
+               >
                 <p class="text-uppercase text-kb-gold-light small mb-1 fw-semibold" style="letter-spacing: 0.2em;">
                   Category 01</p>
                 <h3 class="font-serif fs-2">Sarees</h3>
-                <p class="small text-white-50">Pure Varanasi Katan, Kadhwa zari heirlooms & raw mulberry weaves.</p>
-                <a href="#featured" class="btn btn-sm btn-kb-outline mt-2">Explore Sarees &rarr;</a>
+                <p class="small text-white-75">Pure Varanasi Katan, Kadhwa zari heirlooms & raw mulberry weaves.</p>
+                <!-- <a href="#featured" class="btn btn-sm btn-kb-outline mt-2">Explore Sarees &rarr;</a> -->
               </div>
             </div>
           </div>
@@ -466,13 +506,13 @@
             <div class="collection-banner">
               <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80"
                 alt="Heritage Jewellery" />
-              <div class="position-absolute bottom-0 start-0 end-0 p-4 bg-gradient text-white"
-                style="background: linear-gradient(0deg, rgba(7, 23, 17, 0.95) 0%, transparent 100%);">
+              <div class="position-absolute bottom-0 start-0 end-0 p-4 text-white"
+                style="background: linear-gradient(0deg, rgba(6, 20, 14, 0.98) 0%, rgba(6, 20, 14, 0.9) 35%, rgba(6, 20, 14, 0.5) 65%, rgba(6, 20, 14, 0.05) 100%);">
                 <p class="text-uppercase text-kb-gold-light small mb-1 fw-semibold" style="letter-spacing: 0.2em;">
                   Category 02</p>
                 <h3 class="font-serif fs-2">Jewellery</h3>
-                <p class="small text-white-50">Antique temple gold, uncut Polki chokers & handcrafted Jadau.</p>
-                <a href="#featured" class="btn btn-sm btn-kb-outline mt-2">Explore Jewellery &rarr;</a>
+                <p class="small text-white-75">Antique temple gold, uncut Polki chokers & handcrafted Jadau.</p>
+                <!-- <a href="#featured" class="btn btn-sm btn-kb-outline mt-2">Explore Jewellery &rarr;</a> -->
               </div>
             </div>
           </div>
@@ -483,13 +523,13 @@
               <img
                 src="https://chidiyaa.com/cdn/shop/articles/Why_Loose-Fit_Cotton_Kurtis_Are_Ideal_for_Hot_Weather_1__jpg_8a6d3a42-f1a2-43e4-948d-7258789a5dd8.jpg?v=1776066202&width=800"
                 alt="Couture Blouses" />
-              <div class="position-absolute bottom-0 start-0 end-0 p-4 bg-gradient text-white"
-                style="background: linear-gradient(0deg, rgba(7, 23, 17, 0.95) 0%, transparent 100%);">
+              <div class="position-absolute bottom-0 start-0 end-0 p-4 text-white"
+                style="background: linear-gradient(0deg, rgba(6, 20, 14, 0.98) 0%, rgba(6, 20, 14, 0.9) 35%, rgba(6, 20, 14, 0.5) 65%, rgba(6, 20, 14, 0.05) 100%);">
                 <p class="text-uppercase text-kb-gold-light small mb-1 fw-semibold" style="letter-spacing: 0.2em;">
                   Category 03</p>
                 <h3 class="font-serif fs-2">Blouses</h3>
-                <p class="small text-white-50">Intricate Zardozi embroidery, raw silk cutwork & bridal brocades.</p>
-                <a href="#featured" class="btn btn-sm btn-kb-outline mt-2">Explore Blouses &rarr;</a>
+                <p class="small text-white-75">Intricate Zardozi embroidery, raw silk cutwork & bridal brocades.</p>
+                <!-- <a href="#featured" class="btn btn-sm btn-kb-outline mt-2">Explore Blouses &rarr;</a> -->
               </div>
             </div>
           </div>
@@ -499,13 +539,13 @@
             <div class="collection-banner">
               <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80"
                 alt="Handcrafted Bags & Potlis" />
-              <div class="position-absolute bottom-0 start-0 end-0 p-4 bg-gradient text-white"
-                style="background: linear-gradient(0deg, rgba(7, 23, 17, 0.95) 0%, transparent 100%);">
+              <div class="position-absolute bottom-0 start-0 end-0 p-4 text-white"
+                style="background: linear-gradient(0deg, rgba(6, 20, 14, 0.98) 0%, rgba(6, 20, 14, 0.9) 35%, rgba(6, 20, 14, 0.5) 65%, rgba(6, 20, 14, 0.05) 100%);">
                 <p class="text-uppercase text-kb-gold-light small mb-1 fw-semibold" style="letter-spacing: 0.2em;">
                   Category 04</p>
                 <h3 class="font-serif fs-2">Bags & Potlis</h3>
-                <p class="small text-white-50">Embroidered velvet potlis, pearl-accented minaudières & clutches.</p>
-                <a href="#featured" class="btn btn-sm btn-kb-outline mt-2">Explore Bags &rarr;</a>
+                <p class="small text-white-75">Embroidered velvet potlis, pearl-accented minaudières & clutches.</p>
+                <!-- <a href="#featured" class="btn btn-sm btn-kb-outline mt-2">Explore Bags &rarr;</a> -->
               </div>
             </div>
           </div>
@@ -515,29 +555,30 @@
             <div class="collection-banner">
               <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=800&q=80"
                 alt="Handcrafted Footwear" />
-              <div class="position-absolute bottom-0 start-0 end-0 p-4 bg-gradient text-white"
-                style="background: linear-gradient(0deg, rgba(7, 23, 17, 0.95) 0%, transparent 100%);">
+              <div class="position-absolute bottom-0 start-0 end-0 p-4 text-white"
+                style="background: linear-gradient(0deg, rgba(6, 20, 14, 0.98) 0%, rgba(6, 20, 14, 0.9) 35%, rgba(6, 20, 14, 0.5) 65%, rgba(6, 20, 14, 0.05) 100%);">
                 <p class="text-uppercase text-kb-gold-light small mb-1 fw-semibold" style="letter-spacing: 0.2em;">
                   Category 05</p>
                 <h3 class="font-serif fs-2">Shoes & Juttis</h3>
-                <p class="small text-white-50">Zari-threaded leather juttis, embellished mojaris & festive heels.</p>
-                <a href="#featured" class="btn btn-sm btn-kb-outline mt-2">Explore Shoes &rarr;</a>
+                <p class="small text-white-75">Zari-threaded leather juttis, embellished mojaris & festive heels.</p>
+                <!-- <a href="#featured" class="btn btn-sm btn-kb-outline mt-2">Explore Shoes &rarr;</a> -->
               </div>
             </div>
           </div>
 
+          <!-- 6. MEN'S -->
           <div class="col-md-6 col-lg-4 reveal-item delay-1">
             <div class="collection-banner">
               <img src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&w=1200&q=80"
                 onerror="this.src='https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80'"
                 alt="Handwoven Sarees" />
-              <div class="position-absolute bottom-0 start-0 end-0 p-4 bg-gradient text-white"
-                style="background: linear-gradient(0deg, rgba(7, 23, 17, 0.95) 0%, transparent 100%);">
+              <div class="position-absolute bottom-0 start-0 end-0 p-4 text-white"
+                style="background: linear-gradient(0deg, rgba(6, 20, 14, 0.98) 0%, rgba(6, 20, 14, 0.9) 35%, rgba(6, 20, 14, 0.5) 65%, rgba(6, 20, 14, 0.05) 100%);">
                 <p class="text-uppercase text-kb-gold-light small mb-1 fw-semibold" style="letter-spacing: 0.2em;">
                   Category 01</p>
                 <h3 class="font-serif fs-2">Men's</h3>
-                <p class="small text-white-50">Pure Varanasi Katan, Kadhwa zari heirlooms & raw mulberry weaves.</p>
-                <a href="#featured" class="btn btn-sm btn-kb-outline mt-2">Explore Sarees &rarr;</a>
+                <p class="small text-white-75">Pure Varanasi Katan, Kadhwa zari heirlooms & raw mulberry weaves.</p>
+                <!-- <a href="#featured" class="btn btn-sm btn-kb-outline mt-2">Explore Sarees &rarr;</a> -->
               </div>
             </div>
           </div>
@@ -548,18 +589,17 @@
 
 
     <!-- 6. CRAFTSMANSHIP PILLARS -->
-    <section id="craft" class="position-relative overflow-hidden w-100 border-top border-bottom"
-      style="background-color: #0b2219; border-color: rgba(201, 164, 92, 0.3) !important;">
-      <div class="craft-banner-wrapper position-relative w-100"
-        style="min-height: 620px; height: 55vh; max-height: 600px; overflow: hidden;">
-        <img src="asset/new_banner.jpg" alt="Katha Bbeen Handloom" class="craft-banner-img w-100 h-100"
-          style="object-fit: cover; object-position: center; display: block;" />
-        <!-- Subtle Golden Light Vignette -->
-        <div class="position-absolute top-0 start-0 w-100 h-100 pointer-events-none"
-          style="box-shadow: inset 0 0 80px rgba(11, 34, 25, 0.65); pointer-events: none;">
-        </div>
-      </div>
-    </section>
+<section id="craft" class="position-relative overflow-hidden w-100 border-top border-bottom"
+  style="background-color: #0b2219; border-color: rgba(201, 164, 92, 0.3) !important;">
+  <div class="craft-banner-wrapper position-relative w-100">
+    <img src="asset/newwww.png" alt="Katha Bbeen Handloom" class="craft-banner-img w-100 h-100"
+      style="object-fit: cover; object-position: center; display: block;" />
+    <!-- Subtle Golden Light Vignette -->
+    <div class="position-absolute top-0 start-0 w-100 h-100 pointer-events-none"
+      style="box-shadow: inset 0 0 80px rgba(11, 34, 25, 0.65);">
+    </div>
+  </div>
+</section>
 
     <!-- 7. FEATURED SIGNATURE PRODUCTS -->
     <section id="featured" class="py-5 bg-kb-cream px-3 px-lg-5 border-top border-bottom">
