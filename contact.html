@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact & Atelier Concierge | Katha Bbeen</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --kb-primary: #06382c;
+      --kb-primary-dark: #031c15;
+      --kb-gold: #d4af37;
+      --kb-gold-light: #f3e5ab;
+      --kb-cream: #faf7f2;
+      --kb-sand: #f2ede4;
+      --kb-charcoal: #1f2924;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--kb-charcoal);
+      background-color: var(--kb-cream);
+      overflow-x: hidden;
+    }
+
+    .font-serif {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* Navbar styling matching index.html */
+    .navbar-glass {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+      transition: all 0.3s ease;
+    }
+
+    .nav-link {
+      display: block;
+    padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+    font-size: var(--bs-nav-link-font-size);
+    font-weight: var(--bs-nav-link-font-weight);
+    color: var(--bs-nav-link-color);
+    text-decoration: none;
+    background: 0 0;
+    border: 0;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--kb-gold) !important;
+    }
+
+    .btn-kb-gold {
+      background: linear-gradient(135deg, #e6ca65, var(--kb-gold), #b28e28);
+      color: #031c15;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-kb-gold:hover {
+      background: #ffffff;
+      color: #031c15;
+      box-shadow: 0 4px 18px rgba(212, 175, 55, 0.35);
+    }
+
+    /* Contact Hero Banner */
+    .contact-hero {
+      background: radial-gradient(circle at 50% 30%, #084335 0%, var(--kb-primary-dark) 85%);
+      color: #fff;
+      padding: 5rem 1rem 4rem;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+      position: relative;
+    }
+
+    .contact-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--kb-gold), transparent);
+    }
+
+    /* Cards & Form containers */
+    .contact-card {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-top: 3px solid var(--kb-gold);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+    }
+
+    .contact-icon-circle {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(212, 175, 55, 0.12);
+      color: var(--kb-gold);
+      font-size: 1.4rem;
+      border: 1px solid rgba(212, 175, 55, 0.25);
+    }
+
+    /* Form Inputs */
+    .form-control-luxury, .form-select-luxury {
+      background: #fff;
+      border: 1px solid #d9d2c5;
+      border-radius: 4px;
+      padding: 0.85rem 1rem;
+      font-size: 0.95rem;
+      color: var(--kb-charcoal);
+      transition: all 0.25s ease;
+    }
+
+    .form-control-luxury:focus, .form-select-luxury:focus {
+      background: #fff;
+      border-color: var(--kb-gold);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+      outline: none;
+    }
+
+    /* Accordion FAQ */
+    .accordion-item {
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: #fff;
+      margin-bottom: 0.75rem;
+      border-radius: 6px !important;
+      overflow: hidden;
+    }
+
+    .accordion-button {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--kb-primary);
+      background: #fff;
+      padding: 1.25rem 1.5rem;
+    }
+
+    .accordion-button:not(.collapsed) {
+      color: var(--kb-primary);
+      background: rgba(212, 175, 55, 0.08);
+      box-shadow: none;
+    }
+
+    .accordion-button:focus {
+      box-shadow: none;
+      border-color: transparent;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 1. LUXURY PRELOADER -->
+  <div id="kbPreloader" class="kb-preloader">
+    <div class="preloader-content text-center">
+
+      <a class="d-flex align-items-center justify-content-center" href="#" style="z-index: 1020;">
+        <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+          style="height: 198px; max-width: 460px; object-fit: contain;">
+      </a>
+
+
+      <p class="text-kb-gold-light text-uppercase small" style="letter-spacing: 0.35em; font-size: 0.65rem;">
+        Your Choice Our Promise
+      </p>
+      <div class="preloader-line mt-3">
+        <div class="preloader-progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Announcement Bar -->
+  <aside class="bg-kb-primary-dark text-center py-2 text-white border-bottom border-secondary border-opacity-25"
+    style="font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase;background-color: green;">
+    <i class="bi bi-gem text-kb-gold me-2"></i> Complimentary insured worldwide delivery on festive weaves over ₹15,000
+  </aside>
+
+  <!-- 2. NAVBAR WITH CENTERED LOGO & SLIDING DRAWER -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-glass sticky-top py-4">
+      <div class="container-fluid px-lg-5 position-relative">
+
+        <!-- Left: Hamburger (Mobile) & Nav Menu (Desktop) -->
+        <div class="d-flex align-items-center">
+          <button class="navbar-toggler border-0 shadow-none p-0 d-lg-none" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#navMenu" aria-controls="navMenu" aria-label="Toggle navigation">
+            <i class="bi bi-list fs-1 text-dark"></i>
+          </button>
+
+          <!-- Navigation Drawer -->
+          <div class="offcanvas offcanvas-start" tabindex="-1" id="navMenu" aria-labelledby="navMenuLabel">
+            <div class="offcanvas-header border-bottom py-3 d-lg-none" style="background-color: var(--kb-cream);">
+              <div class="d-flex align-items-center gap-2">
+                <div>
+                  <a class="d-flex align-items-center justify-content-center" href="#" style="z-index: 1020;">
+                    <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+                      style="height: 70px; max-width: 460px; object-fit: contain;">
+                  </a>
+                </div>
+              </div>
+              <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+            </div>
+
+            <div class="offcanvas-body p-4 p-lg-0">
+              <ul class="navbar-nav gap-lg-1 text-uppercase fw-semibold" style="font-size: 0.75rem; letter-spacing: 0.14em;">
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="index.html">Home</a></li>
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="category.html">Catregory</a></li>
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="about.html">About Us</a></li>
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="contact.html">Contact Us</a></li>
+              </ul>
+
+              <div class="d-lg-none mt-auto pt-4 border-top">
+                <p class="text-uppercase text-muted fw-bold mb-2" style="font-size: 0.65rem; letter-spacing: 0.2em;">
+                  Atelier Assistance</p>
+                <p class="small text-muted mb-2"><i class="bi bi-whatsapp text-success me-2"></i>+91 000000000</p>
+                <p class="small text-muted mb-0"><i class="bi bi-envelope me-2"></i>email@kathabbeen.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center: Mathematically Centered Logo -->
+        <a class="navbar-brand position-absolute start-50 translate-middle-x m-0 p-0 d-flex align-items-center justify-content-center"
+          href="#" style="z-index: 1020;">
+          <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+            style="height: 98px; max-width: 160px; object-fit: contain;">
+        </a>
+
+        <!-- Right: Actions -->
+        <div class="d-flex align-items-center gap-3 ms-auto" style="z-index: 1021;">
+          <button class="btn btn-link text-dark p-0 border-0" aria-label="Search"><i
+              class="bi bi-search fs-5"></i></button>
+          <button class="btn btn-link text-dark p-0 border-0 d-none d-sm-block" aria-label="Wishlist"><i
+              class="bi bi-suit-heart fs-5"></i></button>
+          <button class="btn btn-link text-dark p-0 border-0 position-relative" data-bs-toggle="offcanvas"
+            data-bs-target="#bagOffcanvas" aria-label="Shopping Bag">
+            <i class="bi bi-bag fs-5"></i>
+            <span id="bagCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+              style="background-color: var(--kb-primary) !important; font-size: 0.65rem;">
+              0
+            </span>
+          </button>
+        </div>
+
+      </div>
+    </nav>
+  </header>
+
+  <!-- ================= HERO BANNER ================= -->
+  <section class="contact-hero text-center">
+    <div class="container py-4">
+      <span class="d-inline-block text-uppercase px-3 py-1 mb-2 rounded-pill small fw-semibold" 
+            style="letter-spacing: 0.22em; font-size: 0.72rem; color: #d4af37; background: rgba(212, 175, 55, 0.12); border: 1px solid rgba(212, 175, 55, 0.35);">
+        ✦ Atelier Assistance & Private Consultations
+      </span>
+      <h1 class="display-4 font-serif text-white mb-3">We Are Here For You</h1>
+      <p class="text-white-50 mx-auto" style="max-width: 620px; font-size: 1.05rem;">
+        Whether curating a wedding trousseau, inquiring about bespoke zari weaves, or tracking your heirloom drape, our master concierge team awaits your call.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= 3 KEY CONCIERGE CHANNELS ================= -->
+  <section class="py-5 px-3 px-lg-5">
+    <div class="container-fluid">
+      <div class="row g-4 justify-content-center">
+
+        <!-- Card 1: Concierge & Phone -->
+        <div class="col-md-6 col-lg-4">
+          <div class="contact-card h-100 p-4 p-xl-5 rounded-3 text-center">
+            <div class="contact-icon-circle mx-auto mb-4">
+              <i class="bi bi-chat-heart"></i>
+            </div>
+            <h3 class="font-serif h4 mb-2">Private Client Concierge</h3>
+            <p class="text-muted small mb-4">
+              Real-time drape inquiries, fabric swatches, and high-definition video consultations.
+            </p>
+            <div class="d-flex flex-column gap-2 small">
+              <a href="https://wa.me/919830012345" target="_blank" class="text-decoration-none text-dark fw-bold hover-gold">
+                <i class="bi bi-whatsapp text-success me-2"></i>+91 98300 12345
+              </a>
+              <a href="mailto:concierge@kathabbeen.com" class="text-decoration-none text-dark fw-bold hover-gold">
+                <i class="bi bi-envelope text-warning me-2"></i>concierge@kathabbeen.com
+              </a>
+              <span class="text-muted mt-2">Available Mon - Sat · 10:00 AM - 8:00 PM IST</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Flagship Atelier -->
+        <div class="col-md-6 col-lg-4">
+          <div class="contact-card h-100 p-4 p-xl-5 rounded-3 text-center">
+            <div class="contact-icon-circle mx-auto mb-4">
+              <i class="bi bi-geo-alt"></i>
+            </div>
+            <h3 class="font-serif h4 mb-2">Heritage Atelier & Salons</h3>
+            <p class="text-muted small mb-4">
+              Experience the touch of authentic Katan silk and real silver zari at our private viewing suites.
+            </p>
+            <div class="small text-muted">
+              <p class="fw-bold text-dark mb-1">Katha Bbeen Flagship Suite</p>
+              <p class="mb-2">14A, Southern Avenue, Lake Terraces<br>Kolkata, West Bengal 700029, India</p>
+              <span class="badge bg-light text-dark border">By Appointment Only</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Virtual Drapery Video Call -->
+        <div class="col-md-6 col-lg-4">
+          <div class="contact-card h-100 p-4 p-xl-5 rounded-3 text-center">
+            <div class="contact-icon-circle mx-auto mb-4">
+              <i class="bi bi-camera-video"></i>
+            </div>
+            <h3 class="font-serif h4 mb-2">Virtual Loom Consultations</h3>
+            <p class="text-muted small mb-4">
+              Overseas or interstate bride? Schedule a 1-on-1 Zoom or FaceTime call with our master textile draper.
+            </p>
+            <div class="small">
+              <p class="text-muted mb-3">Inspect borders, fall, fabric weight, and reverse zari finishing in daylight resolution.</p>
+              <a href="#inquiryFormSection" class="btn btn-outline-dark btn-sm rounded-pill px-4">
+                Schedule Video Session
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INQUIRY & APPOINTMENT FORM + MAP SECTION ================= -->
+  <section id="inquiryFormSection" class="py-5 px-3 px-lg-5" style="background: #f4efe6;">
+    <div class="container-fluid">
+      <div class="row g-5 align-items-stretch">
+
+        <!-- Form Column -->
+        <div class="col-lg-7">
+          <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm border border-light h-100">
+            <div class="mb-4">
+              <span class="text-uppercase text-muted fw-bold small" style="letter-spacing: 0.25em;">Bespoke Inquiries</span>
+              <h2 class="font-serif display-6 mb-2 mt-1" style="color: var(--kb-primary);">Send an Atelier Request</h2>
+              <p class="text-muted small">
+                Fill in your details below and a senior bridal concierge will get in touch with you within 4 business hours.
+              </p>
+            </div>
+
+            <form id="contactForm" onsubmit="handleContactSubmit(event)">
+              <div class="row g-3">
+                
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.08em;">Your Name *</label>
+                  <input type="text" class="form-control form-control-luxury" placeholder="e.g. Sristhi Saha" required>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.08em;">Phone / WhatsApp *</label>
+                  <input type="tel" class="form-control form-control-luxury" placeholder="+91 98300 00000" required>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.08em;">Email Address *</label>
+                  <input type="email" class="form-control form-control-luxury" placeholder="name@example.com" required>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.08em;">Inquiry Nature</label>
+                  <select class="form-select form-select-luxury">
+                    <option selected>Bridal Trousseau Consultation</option>
+                    <option>Virtual Video Viewing Appointment</option>
+                    <option>Bespoke Blouse Tailoring Inquiry</option>
+                    <option>Existing Order & Worldwide Delivery</option>
+                    <option>Press, Media & Collaborations</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.08em;">Preferred Date (Optional)</label>
+                  <input type="date" class="form-control form-control-luxury">
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.08em;">Preferred Time Slot</label>
+                  <select class="form-select form-select-luxury">
+                    <option>Morning (11:00 AM - 1:00 PM IST)</option>
+                    <option>Afternoon (2:00 PM - 5:00 PM IST)</option>
+                    <option>Evening (5:00 PM - 8:00 PM IST)</option>
+                  </select>
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.08em;">Message or Saree Preferences</label>
+                  <textarea class="form-control form-control-luxury" rows="4" placeholder="Tell us about the occasion, colour preferences (e.g. Emerald, Crimson, Ivory Tissue), or questions..."></textarea>
+                </div>
+
+                <div class="col-12 mt-4">
+                  <button type="submit" class="btn btn-kb-gold py-3 px-5 text-uppercase fw-bold w-100 w-md-auto rounded-pill">
+                    <i class="bi bi-send me-2"></i>Send Request to Concierge
+                  </button>
+                </div>
+
+              </div>
+            </form>
+
+            <div id="formSuccessMessage" class="alert alert-success mt-4 d-none" role="alert">
+              <i class="bi bi-check-circle-fill me-2"></i> Thank you! Your request has been received. Our senior concierge will connect via WhatsApp/email shortly.
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Visiting Info & Map Card Column -->
+        <div class="col-lg-5">
+          <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm border border-light h-100 d-flex flex-column justify-content-between">
+            <div>
+              <span class="text-uppercase text-muted fw-bold small" style="letter-spacing: 0.25em;">Visit In Person</span>
+              <h2 class="font-serif h3 mb-3 mt-1" style="color: var(--kb-primary);">The Private Salon Experience</h2>
+              <p class="text-muted small mb-4">
+                Enjoy personalized bridal tea, drape trials, and custom border pairings alongside your family in our private heritage salon.
+              </p>
+
+              <!-- Atelier Features List -->
+              <div class="d-flex flex-column gap-3 mb-4">
+                <div class="d-flex align-items-start gap-3">
+                  <i class="bi bi-shield-check text-warning fs-5"></i>
+                  <div>
+                    <h6 class="mb-0 fw-semibold">Silk Mark Testing In-House</h6>
+                    <small class="text-muted">Direct verification of silk purity and zari gold grade.</small>
+                  </div>
+                </div>
+                <div class="d-flex align-items-start gap-3">
+                  <i class="bi bi-scissors text-warning fs-5"></i>
+                  <div>
+                    <h6 class="mb-0 fw-semibold">Master Tailor & Fall-Pico Services</h6>
+                    <small class="text-muted">Same-day edging, hand-braided tassels, and blouse measurements.</small>
+                  </div>
+                </div>
+                <div class="d-flex align-items-start gap-3">
+                  <i class="bi bi-box2-heart text-warning fs-5"></i>
+                  <div>
+                    <h6 class="mb-0 fw-semibold">Handcrafted Trousseau Boxes</h6>
+                    <small class="text-muted">Museum-grade acid-free heirloom storage packaging for every piece.</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stylized Map Placeholder / Direction Link -->
+            <div class="rounded-3 overflow-hidden position-relative border" style="height: 180px; background: url('https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80') center/cover;">
+              <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column align-items-center justify-content-center" style="background: rgba(6, 56, 44, 0.75);">
+                <i class="bi bi-pin-map text-warning fs-2 mb-1"></i>
+                <span class="text-white fw-bold">Lake Terraces, Kolkata</span>
+                <a href="https://maps.google.com" target="_blank" class="btn btn-sm btn-outline-light rounded-pill mt-2 px-3">
+                  View on Google Maps <i class="bi bi-box-arrow-up-right ms-1"></i>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CLIENT FAQ ACCORDION ================= -->
+  <section class="py-5 px-3 px-lg-5">
+    <div class="container-fluid py-4" style="max-width: 900px;">
+      <div class="text-center mb-5">
+        <span class="text-uppercase text-muted fw-bold small" style="letter-spacing: 0.25em;">Assistance & Policies</span>
+        <h2 class="font-serif display-5 mb-2 mt-1" style="color: var(--kb-primary);">Frequently Inquired</h2>
+        <div class="mx-auto mt-2" style="width: 50px; height: 1.5px; background: var(--kb-gold);"></div>
+      </div>
+
+      <div class="accordion" id="contactFaqAccordion">
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faqOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              How does the virtual video drape consultation work?
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="faqOne" data-bs-parent="#contactFaqAccordion">
+            <div class="accordion-body text-muted small">
+              Our draper joins you via WhatsApp Video, Zoom, or FaceTime in natural studio lighting. You can examine pallu zari details, see the drape fall on a mannequin, compare two shades side-by-side, and discuss custom blouse pairing options in real time.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faqTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Do you offer international shipping and insured transit?
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="faqTwo" data-bs-parent="#contactFaqAccordion">
+            <div class="accordion-body text-muted small">
+              Yes, we deliver worldwide across the USA, UK, UAE, Canada, Australia, and Singapore via insured DHL Express / FedEx air couriers. Transit usually takes 4 to 7 business days from dispatch.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faqThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              Are all sarees Silk Mark Certified?
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="faqThree" data-bs-parent="#contactFaqAccordion">
+            <div class="accordion-body text-muted small">
+              Every pure silk drape from Katha Bbeen carries an official Silk Mark Organization of India tag with a unique verification code, guaranteeing 100% natural silk threads.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faqFour">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+              Can I customize the blouse stitching or add hand-tied tassels?
+            </button>
+          </h2>
+          <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="faqFour" data-bs-parent="#contactFaqAccordion">
+            <div class="accordion-body text-muted small">
+              Complimentary hand-rolled pico and fall stitching are provided on request. For bespoke designer blouse stitching, you can share measurements with our master tailor during checkout or over WhatsApp.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-kb-primary text-white-50 py-5 px-3 px-lg-5 border-top border-secondary border-opacity-25">
+    <div class="container-fluid">
+      <div class="row g-5">
+        <div class="col-lg-4">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <div class="bg-white rounded-2">
+              <a class="d-flex align-items-center justify-content-center" href="#" style="z-index: 1020;">
+                <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+                  style="height: 50px; max-width: 60px; object-fit: contain;">
+              </a>
+            </div>
+
+          </div>
+          <p class="text-kb-gold-light text-uppercase mb-3" style="font-size: 0.65rem; letter-spacing: 0.28em;">Your
+            Choice Our Promise</p>
+          <p class="small text-white-50 pe-lg-4">
+            Curated handwoven sarees created for weddings, festivities, and heirlooms passed through generations.
+          </p>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h6 class="text-uppercase text-white small mb-3" style="letter-spacing: 0.18em;">Weaves</h6>
+          <ul class="list-unstyled small d-grid gap-2">
+            <li><a href="#" class="text-white-50 text-decoration-none">Banarasi Katan</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Chanderi Silks</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Tussar Handloom</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Organza Zari</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h6 class="text-uppercase text-white small mb-3" style="letter-spacing: 0.18em;">Assistance</h6>
+          <ul class="list-unstyled small d-grid gap-2">
+            <li><a href="#" class="text-white-50 text-decoration-none">Shipping & Duties</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Care & Storage</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Saree Authenticity</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Contact Atelier</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h6 class="text-uppercase text-white small mb-3" style="letter-spacing: 0.18em;">The Katha Gazette</h6>
+          <p class="small text-white-50">Subscribe for early access to private trunk shows and festive weaver release
+            dates.</p>
+
+        </div>
+      </div>
+      <div
+        class="border-top border-secondary border-opacity-25 mt-5 pt-4 d-flex flex-column flex-md-row justify-content-between small text-white-50">
+        <div>&copy; 2026 Katha Bbeen. Handcrafted with reverence in India.</div>
+        <div class="text-white-50 mt-2 mt-md-0" style="font-size: 0.72rem;">
+          Designed &amp; Developed by <a href="https://www.orbitalwebworks.com/"
+            class="text-kb-gold-light text-decoration-none fw-semibold">Orbital Webworks</a>
+        </div>
+        <div class="d-flex gap-3 mt-3 mt-md-0">
+          <a href="#" class="text-white-50 text-decoration-none">Terms</a>
+          <a href="#" class="text-white-50 text-decoration-none">Privacy</a>
+          <a href="#" class="text-white-50 text-decoration-none">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Interactive Form Feedback Script -->
+  <script>
+     window.addEventListener("load", () => {
+      const tl = gsap.timeline({
+        defaults: { ease: "power3.out" }
+      });
+
+      tl.fromTo(
+        ".preloader-content img",
+        { opacity: 0, y: -20, scale: 0.9 },
+        { opacity: 1, y: 0, scale: 1, duration: 1 }
+      )
+        .fromTo(
+          ".preloader-content p",
+          { opacity: 0, y: 15 },
+          { opacity: 1, y: 0, duration: 0.8 },
+          "-=0.8"
+        )
+        .fromTo(
+          ".preloader-line",
+          { opacity: 0, scaleX: 0 },
+          { opacity: 1, scaleX: 1, duration: 0.6, transformOrigin: "center" },
+          "-=0.3"
+        )
+        .fromTo(
+          ".preloader-progress",
+          { width: "0%" },
+          { width: "100%", duration: 1.2, ease: "power2.inOut" }
+        )
+        .to(".kb-preloader", {
+          opacity: 0,
+          duration: 0.8,
+          delay: 0.2,
+          onComplete: () => {
+            document.getElementById("kbPreloader").style.display = "none";
+            // Refresh ScrollTrigger once the preloader is gone and layout has settled
+            ScrollTrigger.refresh();
+          }
+        });
+    });
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const form = document.getElementById('contactForm');
+      const successMsg = document.getElementById('formSuccessMessage');
+      
+      // Simulate submission feedback
+      form.classList.add('d-none');
+      successMsg.classList.remove('d-none');
+    }
+  </script>
+
+</body>
+</html>

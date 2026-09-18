@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Atelier Directory | Katha Bbeen Handlooms</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    :root {
+      --kb-primary: #0b2219;
+      --kb-primary-dark: #06140e;
+      --kb-gold: #c9a45c;
+      --kb-gold-light: #e5cb8f;
+      --kb-cream: #f7f4ee;
+      --kb-sand: #ede7da;
+      --kb-crimson: #9e1b2f;
+      --kb-text-muted: #6b7c73;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--kb-cream);
+      color: #1a2922;
+      overflow-x: hidden;
+    }
+
+    .font-serif {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #f3de9f 0%, #c9a45c 50%, #99732e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+
+    /* Animations state */
+    .reveal-item {
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    /* Navbar styling */
+    .navbar-glass {
+      background: rgba(247, 244, 238, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(11, 34, 25, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    /* Hero Section */
+    .hero-wrapper {
+      position: relative;
+      height: 480px;
+      background-color: #06140e;
+    }
+    @media (max-width: 768px) {
+      .hero-wrapper {
+        height: 380px;
+      }
+    }
+
+    .cat-breadcrumb {
+      display: flex;
+      align-items: center;
+    }
+    .cat-breadcrumb a {
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .cat-breadcrumb a:hover {
+      color: var(--kb-gold-light);
+    }
+    .cat-breadcrumb .sep {
+      color: rgba(255, 255, 255, 0.3);
+      margin: 0 0.5rem;
+    }
+
+    /* Filter Pills */
+    .category-filter-bar {
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 0.5rem;
+    }
+    .category-filter-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cat-filter-btn {
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 0.55rem 1.4rem;
+      border-radius: 40px;
+      border: 1px solid rgba(11, 34, 25, 0.15);
+      background-color: #ffffff;
+      color: var(--kb-primary);
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+    .cat-filter-btn:hover {
+      border-color: var(--kb-gold);
+      background-color: #fcfaf6;
+    }
+    .cat-filter-btn.active {
+      background-color: var(--kb-primary);
+      color: #ffffff;
+      border-color: var(--kb-primary);
+      box-shadow: 0 4px 14px rgba(11, 34, 25, 0.15);
+    }
+
+    /* Category Cards */
+    .cat-card {
+      border: 1px solid rgba(201, 164, 92, 0.22);
+      background: #0b2219;
+      border-radius: 8px;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .cat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 32px rgba(11, 34, 25, 0.15);
+    }
+    .cat-card .card-image-box {
+      aspect-ratio: 3 / 4;
+      max-height: 350px;
+      position: relative;
+      overflow: hidden;
+      background-color: #06140e;
+    }
+    .cat-card .arrival-img {
+      transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .cat-card:hover .arrival-img {
+      transform: scale(1.08);
+    }
+    .cat-card .quick-actions-bar {
+      transform: translateY(100%);
+      opacity: 0;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
+    .cat-card:hover .quick-actions-bar {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Trust Pillar Card */
+    .trust-pillar {
+      border: 1px solid rgba(201, 164, 92, 0.2);
+      background: #ffffff;
+      border-radius: 6px;
+      padding: 1.5rem 1rem;
+      transition: transform 0.25s ease;
+    }
+    .trust-pillar:hover {
+      transform: translateY(-3px);
+    }
+
+    /* Toast Notification */
+    .kb-toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #0b2219;
+      color: #fff;
+      padding: 0.9rem 1.4rem;
+      border-radius: 4px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      border-left: 4px solid #c9a45c;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      z-index: 3000;
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+    .kb-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    #backToTopBtn {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #0b2219;
+      color: #c9a45c;
+      border: 1px solid rgba(201, 164, 92, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      z-index: 1050;
+    }
+    #backToTopBtn.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  </style>
+    <style>
+    /* Ensure reveal-item elements start hidden before GSAP takes over,
+       so there's no flash of fully-visible content before JS runs. */
+    .reveal-item,
+    .reveal-grid-item {
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    .testimonial-carousel-wrap,
+    .luxury-testimonial-wrap {
+      overflow: hidden;
+      position: relative;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
+    }
+
+    .testimonial-track,
+    .luxury-testimonial-track {
+      display: flex;
+      width: max-content;
+      gap: 1.75rem;
+      padding: 0.5rem 0 1.5rem;
+    }
+
+    /* -------------------------------------------------------------
+   PRELOADER STYLES (MODIFIED: added overlay, line & text styles)
+------------------------------------------------------------- */
+.kb-preloader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at center, #858988 0%, #2a463b 100%);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s ease;
+}
+
+.preloader-content img,
+.preloader-content p,
+.preloader-line {
+  opacity: 0;
+}
+
+.preloader-line {
+  width: 190px;
+  height: 2px;
+  background: rgba(201, 164, 92, 0.2);
+  margin: 1rem auto 0;
+  overflow: hidden;
+  border-radius: 2px;
+  position: relative;
+}
+
+.preloader-progress {
+  width: 0%;
+  height: 100%;
+  background: #c9a45c;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.text-kb-gold-light {
+  color: #e5cb8f !important;
+}
+
+.kb-preloader.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+    /* -----------------------------------------------------------
+       MOBILE HERO FIX
+       Desktop's hover-to-expand hero cards don't work on touch —
+       below 768px, switch to a full-width swipeable carousel
+       (one card visible at a time, native scroll-snap swipe).
+    ----------------------------------------------------------- */
+  #craft {
+  width: 10vw;
+  max-width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.craft-banner-wrapper {
+  height: auto;
+  min-height: 0;
+  max-height: none;
+}
+
+.craft-banner-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+body {
+  overflow-x: hidden;
+}@media (max-width: 768px) {
+  .craft-banner-wrapper {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+  }
+
+  .craft-banner-img {
+    height: auto;
+    object-fit: contain;
+  }
+}
+    @media (max-width: 767.98px) {
+      .hero-slider-wrap {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 0;
+        height: 480px;
+        scrollbar-width: none;
+        /* Firefox */
+      }
+
+      .hero-slider-wrap::-webkit-scrollbar {
+        display: none;
+        /* Chrome/Safari */
+      }
+
+      .hero-card {
+        flex: 0 0 100%;
+        width: 100%;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+        margin-right: 12px;
+        opacity: 1 !important;
+        /* no dimmed/inactive state on mobile — every card is fully visible when swiped to */
+      }
+
+      .hero-card:last-child {
+        margin-right: 0;
+      }
+
+      .hero-card:hover,
+      .hero-card.active {
+        flex: 0 0 100%;
+        /* prevent desktop's expand-on-hover flex:4 from applying */
+      }
+
+      .hero-card-content {
+        padding: 1.4rem;
+      }
+
+      /* Text is always visible on mobile — no hover to reveal it */
+      .hero-expandable {
+        max-height: none !important;
+        opacity: 1 !important;
+      }
+
+      .hero-swipe-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 1rem;
+      }
+
+      .hero-swipe-dots .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: rgba(201, 164, 92, 0.3);
+        transition: background 0.3s ease, transform 0.3s ease;
+      }
+
+      .hero-swipe-dots .dot.active {
+        background: var(--kb-gold);
+        transform: scale(1.3);
+      }
+    }
+
+    @media (min-width: 768px) {
+      .hero-swipe-dots {
+        display: none;
+        /* dots are a mobile-only affordance */
+      }
+    }
+
+    /* Newsletter input — visible placeholder + gold focus state on dark footer */
+    .kb-newsletter-input::placeholder {
+      color: rgba(255, 255, 255, 0.55);
+      opacity: 1;
+    }
+
+    .kb-newsletter-input:focus {
+      background: transparent;
+      color: #fff;
+      border-color: var(--kb-gold) !important;
+      box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
+      outline: none;
+    }
+
+    /* Autofill (Chrome) can otherwise force a white background + dark text */
+    .kb-newsletter-input:-webkit-autofill,
+    .kb-newsletter-input:-webkit-autofill:hover,
+    .kb-newsletter-input:-webkit-autofill:focus {
+      -webkit-text-fill-color: #fff;
+      -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+      transition: background-color 9999s ease-in-out 0s;
+    }
+  </style>
+  <style>
+  .card-image-box {
+    aspect-ratio: 4 / 5;
+    max-height: 420px;
+  }
+  @media (max-width: 576px) {
+    .card-image-box {
+      aspect-ratio: 3 / 4;
+      max-height: 200px;
+    }
+    .arrival-card .p-3 {
+      padding: 0.6rem !important;
+    }
+    .arrival-card h6 {
+      font-size: 0.78rem !important;
+    }
+    .arrival-card small {
+      font-size: 0.55rem !important;
+    }
+    .arrival-card .fw-bold {
+      font-size: 0.85rem !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- 1. LUXURY PRELOADER -->
+  <div id="kbPreloader" class="kb-preloader">
+    <div class="preloader-content text-center">
+
+      <a class="d-flex align-items-center justify-content-center" href="#" style="z-index: 1020;">
+        <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+          style="height: 198px; max-width: 460px; object-fit: contain;">
+      </a>
+
+
+      <p class="text-kb-gold-light text-uppercase small" style="letter-spacing: 0.35em; font-size: 0.65rem;">
+        Your Choice Our Promise
+      </p>
+      <div class="preloader-line mt-3">
+        <div class="preloader-progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Announcement Bar -->
+    <aside class="bg-kb-primary-dark text-center py-2 text-white border-bottom border-secondary border-opacity-25"
+    style="font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase;">
+    <i class="bi bi-gem text-kb-gold me-2"></i> Complimentary insured worldwide delivery on festive weaves over ₹15,000
+  </aside>
+
+  <!-- 2. NAVBAR WITH CENTERED LOGO & SLIDING DRAWER -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-glass sticky-top py-4">
+      <div class="container-fluid px-lg-5 position-relative">
+
+        <!-- Left: Hamburger (Mobile) & Nav Menu (Desktop) -->
+        <div class="d-flex align-items-center">
+          <button class="navbar-toggler border-0 shadow-none p-0 d-lg-none" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#navMenu" aria-controls="navMenu" aria-label="Toggle navigation">
+            <i class="bi bi-list fs-1 text-dark"></i>
+          </button>
+
+          <!-- Navigation Drawer -->
+          <div class="offcanvas offcanvas-start" tabindex="-1" id="navMenu" aria-labelledby="navMenuLabel">
+            <div class="offcanvas-header border-bottom py-3 d-lg-none" style="background-color: var(--kb-cream);">
+              <div class="d-flex align-items-center gap-2">
+                <div>
+                  <a class="d-flex align-items-center justify-content-center" href="#" style="z-index: 1020;">
+                    <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+                      style="height: 70px; max-width: 460px; object-fit: contain;">
+                  </a>
+                </div>
+              </div>
+              <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+            </div>
+
+            <div class="offcanvas-body p-4 p-lg-0">
+              <ul class="navbar-nav gap-lg-1 text-uppercase fw-semibold" style="font-size: 0.75rem; letter-spacing: 0.14em;">
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="home.html">Home</a></li>
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="category.html">Catregory</a></li>
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="about.html">About Us</a></li>
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="contact.html">Contact Us</a></li>
+              </ul>
+
+              <div class="d-lg-none mt-auto pt-4 border-top">
+                <p class="text-uppercase text-muted fw-bold mb-2" style="font-size: 0.65rem; letter-spacing: 0.2em;">
+                  Atelier Assistance</p>
+                <p class="small text-muted mb-2"><i class="bi bi-whatsapp text-success me-2"></i>+91 000000000</p>
+                <p class="small text-muted mb-0"><i class="bi bi-envelope me-2"></i>email@kathabbeen.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center: Mathematically Centered Logo -->
+        <a class="navbar-brand position-absolute start-50 translate-middle-x m-0 p-0 d-flex align-items-center justify-content-center"
+          href="#" style="z-index: 1020;">
+          <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+            style="height: 98px; max-width: 160px; object-fit: contain;">
+        </a>
+
+        <!-- Right: Actions -->
+        <div class="d-flex align-items-center gap-3 ms-auto" style="z-index: 1021;">
+          <button class="btn btn-link text-dark p-0 border-0" aria-label="Search"><i
+              class="bi bi-search fs-5"></i></button>
+          <button class="btn btn-link text-dark p-0 border-0 d-none d-sm-block" aria-label="Wishlist"><i
+              class="bi bi-suit-heart fs-5"></i></button>
+          <button class="btn btn-link text-dark p-0 border-0 position-relative" data-bs-toggle="offcanvas"
+            data-bs-target="#bagOffcanvas" aria-label="Shopping Bag">
+            <i class="bi bi-bag fs-5"></i>
+            <span id="bagCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+              style="background-color: var(--kb-primary) !important; font-size: 0.65rem;">
+              0
+            </span>
+          </button>
+        </div>
+
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- PAGE HERO -->
+    <section id="pageHero" class="hero-wrapper text-white px-3 px-lg-5 overflow-hidden d-flex align-items-center">
+      <img src="https://www.manyavar.com/on/demandware.static/-/Library-Sites-ManyavarSharedLibrary/default/dwe6547122/Ace_Your_Saree_Banner_D.jpg"
+        onerror="this.src='https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=80'"
+        alt="Katha Bbeen Atelier Directory"
+        class="position-absolute top-0 start-0 w-100 h-100"
+        style="object-fit: cover; object-position: center 25%; z-index: 0;" />
+
+        <div class="position-absolute top-0 start-0 w-100 h-100" style="z-index: 1;
+        background: linear-gradient(0deg, rgba(6, 20, 14, 0.96) 0%, rgba(6, 20, 14, 0.78) 45%, rgba(6, 20, 14, 0.45) 75%, rgba(6, 20, 14, 0.3) 100%);">
+      </div>
+
+      <div class="container-fluid max-w-1480 position-relative" style="z-index: 20;">
+        <nav class="cat-breadcrumb mb-2 reveal-item" style="font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;">
+          <a href="index.html">Home</a><span class="sep">/</span><span class="text-warning">Atelier Directory</span>
+        </nav>
+
+        <div class="reveal-item">
+          <p class="text-uppercase fw-bold mb-1" style="font-size: 0.7rem; letter-spacing: 0.35em; color: #c9a45c;">
+            <i class="bi bi-stars me-1"></i> The Heirloom Directory
+          </p>
+          <h1 class="font-serif display-4 fw-normal mb-2">
+            Shop by <em class="fw-light gold-gradient-text">category.</em>
+          </h1>
+          <p class="text-white-50 small pe-lg-5" style="max-width: 580px; line-height: 1.6;">
+            Every handloom saree, tailored blouse, and ceremonial accessory curated by craft guild. Select an atelier section below to explore the archive.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST PILLARS BAR -->
+    <section class="py-3 border-bottom bg-white">
+      <div class="container-fluid px-3 px-lg-5">
+        <div class="row g-3 text-center">
+          <div class="col-6 col-md-3">
+            <div class="trust-pillar">
+              <i class="bi bi-patch-check-fill fs-4 text-warning mb-1"></i>
+              <h6 class="text-uppercase mb-0 small fw-bold" style="letter-spacing: 0.08em;">Silk Mark Certified</h6>
+              <span class="text-muted" style="font-size: 0.68rem;">100% natural pure silks</span>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="trust-pillar">
+              <i class="bi bi-scissors fs-4 text-warning mb-1"></i>
+              <h6 class="text-uppercase mb-0 small fw-bold" style="letter-spacing: 0.08em;">Bespoke Blouse Finishing</h6>
+              <span class="text-muted" style="font-size: 0.68rem;">Tailored fall, pico &amp; tassels</span>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="trust-pillar">
+              <i class="bi bi-globe2 fs-4 text-warning mb-1"></i>
+              <h6 class="text-uppercase mb-0 small fw-bold" style="letter-spacing: 0.08em;">Insured Global Courier</h6>
+              <span class="text-muted" style="font-size: 0.68rem;">Delivering to 45+ countries</span>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="trust-pillar">
+              <i class="bi bi-camera-video fs-4 text-warning mb-1"></i>
+              <h6 class="text-uppercase mb-0 small fw-bold" style="letter-spacing: 0.08em;">Live Video Consultation</h6>
+              <span class="text-muted" style="font-size: 0.68rem;">Inspect weaves via WhatsApp</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORY DIRECTORY GRID -->
+    <section id="categoryDirectory" class="py-5 px-3 px-lg-5" style="background: var(--kb-cream);">
+      <div class="container-fluid">
+
+        <!-- Category Filter Pills Bar -->
+        <div class="d-flex justify-content-center mb-4">
+          <div class="category-filter-bar d-flex gap-2" id="categoryFilters">
+            <button class="cat-filter-btn active" data-filter="all">All Ateliers (8)</button>
+            <button class="cat-filter-btn" data-filter="women">Women (5)</button>
+            <button class="cat-filter-btn" data-filter="men">Men (3)</button>
+            <button class="cat-filter-btn" data-filter="kids">Kids (1)</button>
+            <button class="cat-filter-btn" data-filter="accessories">Accessories (4)</button>
+          </div>
+        </div>
+
+        <!-- Rendered by JS -->
+        <div class="row g-3 g-sm-4" id="categoryGrid"></div>
+      </div>
+    </section>
+
+    <!-- FREQUENTLY ASKED QUESTIONS -->
+    <section id="faq" class="py-5" style="background-color: #f3e6ce;">
+      <div class="container py-4" style="max-width: 900px;">
+        <div class="text-center mb-5">
+          <span class="text-uppercase text-muted small fw-bold" style="letter-spacing: 0.25em;">Inquiries &amp; Care</span>
+          <h2 class="font-serif display-5 mt-1">Frequently Asked Questions</h2>
+          <div class="mx-auto" style="width: 60px; height: 2px; background: #c9a45c;"></div>
+        </div>
+
+        <div class="accordion accordion-flush" id="atelierFaq">
+          <div class="accordion-item bg-transparent border-bottom">
+            <h2 class="accordion-header" id="faqOne">
+              <button class="accordion-button collapsed bg-transparent font-serif fs-5 text-dark shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                How do I authenticate the purity of Katha Bbeen silk &amp; zari?
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#atelierFaq">
+              <div class="accordion-body small text-muted">
+                Every single saree ships with an authorized Silk Mark India certification tag containing a unique verifiable QR code. Our zari uses pure electroplated silver thread over silk core yarn, never synthetic plastic metallic film.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item bg-transparent border-bottom">
+            <h2 class="accordion-header" id="faqTwo">
+              <button class="accordion-button collapsed bg-transparent font-serif fs-5 text-dark shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                Are fall, pico finishing and blouse piece stitching provided?
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#atelierFaq">
+              <div class="accordion-body small text-muted">
+                Yes. High-grade cotton fall and edge pico are complimentary. All sarees include an unstitched 0.8m matching pure silk blouse piece. If you need custom tailored boutique blouse stitching, please connect with our concierge after placing your order.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item bg-transparent border-bottom">
+            <h2 class="accordion-header" id="faqThree">
+              <button class="accordion-button collapsed bg-transparent font-serif fs-5 text-dark shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                What are your domestic and international delivery times?
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#atelierFaq">
+              <div class="accordion-body small text-muted">
+                Domestic orders across India are delivered within 3–5 business days via insured express couriers. International shipments to USA, UK, UAE, Canada, Singapore, and Australia arrive within 5–8 business days with zero customs hassle.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item bg-transparent border-bottom">
+            <h2 class="accordion-header" id="faqFour">
+              <button class="accordion-button collapsed bg-transparent font-serif fs-5 text-dark shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                How should heirloom handwoven sarees be stored and preserved?
+              </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#atelierFaq">
+              <div class="accordion-body small text-muted">
+                Always store your handloom in the complimentary unbleached cotton mulmul bag provided. Refold along alternate crease lines every 4-6 months and keep away from naphthalene balls or moisture. Only dry clean when necessary.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ATELIER CONCIERGE BANNER -->
+    <section id="atelierHelp" class="py-5 text-white" style="background: linear-gradient(135deg, #0b2219 0%, #17382d 100%);">
+      <div class="container py-3">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-8">
+            <span class="text-uppercase small fw-bold text-warning" style="letter-spacing: 0.2em;">Bridal &amp; Festive Trousseau</span>
+            <h2 class="font-serif display-6 mt-1 mb-2">Can't decide on the right weave or border?</h2>
+            <p class="text-white-50 small mb-0" style="max-width: 600px;">
+              Our handloom curators offer live one-on-one video appointments to drape the saree, show the pallu luster under sunlight, and coordinate matching blouse silhouettes.
+            </p>
+          </div>
+          <div class="col-lg-4 text-lg-end">
+            <a href="https://wa.me/919876543210?text=Hello%20Katha%20Bbeen%2C%20I%20would%20like%20assistance%20with%20selecting%20a%20handloom%20saree" 
+              target="_blank" class="btn btn-warning rounded-0 px-4 py-2 fw-bold text-dark text-uppercase" 
+              style="background-color: #c9a45c; border-color: #c9a45c; font-size: 0.78rem; letter-spacing: 0.1em;">
+              <i class="bi bi-whatsapp me-2"></i> Chat with Curators
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-kb-primary text-white-50 py-5 px-3 px-lg-5 border-top border-secondary border-opacity-25">
+    <div class="container-fluid">
+      <div class="row g-5">
+        <div class="col-lg-4">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <div class="bg-white rounded-2">
+              <a class="d-flex align-items-center justify-content-center" href="#" style="z-index: 1020;">
+                <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+                  style="height: 50px; max-width: 60px; object-fit: contain;">
+              </a>
+            </div>
+
+          </div>
+          <p class="text-kb-gold-light text-uppercase mb-3" style="font-size: 0.65rem; letter-spacing: 0.28em;">Your
+            Choice Our Promise</p>
+          <p class="small text-white-50 pe-lg-4">
+            Curated handwoven sarees created for weddings, festivities, and heirlooms passed through generations.
+          </p>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h6 class="text-uppercase text-white small mb-3" style="letter-spacing: 0.18em;">Weaves</h6>
+          <ul class="list-unstyled small d-grid gap-2">
+            <li><a href="#" class="text-white-50 text-decoration-none">Banarasi Katan</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Chanderi Silks</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Tussar Handloom</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Organza Zari</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h6 class="text-uppercase text-white small mb-3" style="letter-spacing: 0.18em;">Assistance</h6>
+          <ul class="list-unstyled small d-grid gap-2">
+            <li><a href="#" class="text-white-50 text-decoration-none">Shipping & Duties</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Care & Storage</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Saree Authenticity</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Contact Atelier</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h6 class="text-uppercase text-white small mb-3" style="letter-spacing: 0.18em;">The Katha Gazette</h6>
+          <p class="small text-white-50">Subscribe for early access to private trunk shows and festive weaver release
+            dates.</p>
+
+        </div>
+      </div>
+      <div
+        class="border-top border-secondary border-opacity-25 mt-5 pt-4 d-flex flex-column flex-md-row justify-content-between small text-white-50">
+        <div>&copy; 2026 Katha Bbeen. Handcrafted with reverence in India.</div>
+        <div class="text-white-50 mt-2 mt-md-0" style="font-size: 0.72rem;">
+          Designed &amp; Developed by <a href="https://www.orbitalwebworks.com/"
+            class="text-kb-gold-light text-decoration-none fw-semibold">Orbital Webworks</a>
+        </div>
+        <div class="d-flex gap-3 mt-3 mt-md-0">
+          <a href="#" class="text-white-50 text-decoration-none">Terms</a>
+          <a href="#" class="text-white-50 text-decoration-none">Privacy</a>
+          <a href="#" class="text-white-50 text-decoration-none">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Back to Top Button -->
+  <button id="backToTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Back to Top">
+    <i class="bi bi-arrow-up fs-5"></i>
+  </button>
+
+  <!-- Luxury Toast Notification -->
+  <div id="kbToast" class="kb-toast">
+    <i class="bi bi-patch-check-fill text-warning fs-5"></i>
+    <span id="kbToastMsg">Heirloom added to your private wishlist.</span>
+  </div>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Page Logic -->
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    /* -------------------------------------------------------------
+       PRELOADER CONTROLLER (MODIFIED: with dismissal function & safety fallback)
+    ------------------------------------------------------------- */
+    function dismissPreloader() {
+      const preloader = document.getElementById("kbPreloader");
+      if (!preloader || preloader.style.display === "none") return;
+
+      gsap.to(preloader, {
+        opacity: 0,
+        duration: 0.7,
+        ease: "power2.out",
+        onComplete: () => {
+          preloader.style.display = "none";
+          if (typeof ScrollTrigger !== "undefined") ScrollTrigger.refresh();
+        }
+      });
+    }
+
+    window.addEventListener("load", () => {
+      const tl = gsap.timeline({
+        defaults: { ease: "power3.out" }
+      });
+
+      tl.fromTo(
+        ".preloader-content img",
+        { opacity: 0, y: -20, scale: 0.9 },
+        { opacity: 1, y: 0, scale: 1, duration: 1 }
+      )
+      .fromTo(
+        ".preloader-content p",
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.8 },
+        "-=0.8"
+      )
+      .fromTo(
+        ".preloader-line",
+        { opacity: 0, scaleX: 0 },
+        { opacity: 1, scaleX: 1, duration: 0.6, transformOrigin: "center" },
+        "-=0.3"
+      )
+      .fromTo(
+        ".preloader-progress",
+        { width: "0%" },
+        { width: "100%", duration: 1.2, ease: "power2.inOut" }
+      )
+      .to("#kbPreloader", {
+  opacity: 0,
+  duration: 0.6,
+  delay: 0.2,
+  onComplete: () => {
+    const preloader = document.getElementById("kbPreloader");
+    if (preloader) preloader.style.display = "none";
+    if (typeof ScrollTrigger !== "undefined") ScrollTrigger.refresh();
+  }
+});
+    });
+
+    // Fallback timer: dismisses after 3 seconds even if external images lag
+    setTimeout(dismissPreloader, 3000);
+
+    /* -------------------------------------------------------------
+       CATEGORY DIRECTORY DATA
+    ------------------------------------------------------------- */
+    const categories = [
+      {
+        slug: "sarees",
+        name: "Sarees",
+        group: ["women"],
+        groupLabel: "Women",
+        count: "42 Weaves",
+        badge: "MOST LOVED",
+        tagline: "Pure Varanasi Katan, Kadhwa zari heirlooms & raw mulberry weaves.",
+        image: "asset/katha-hero-Bf1Rq-sY.jpg",
+        fallback: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=80"
+      },
+      {
+        slug: "jewellery",
+        name: "Jewellery",
+        group: ["women", "accessories"],
+        groupLabel: "Women · Accessories",
+        count: "27 Pieces",
+        badge: "HANDCRAFTED",
+        tagline: "Antique temple gold, uncut Polki chokers & handcrafted Jadau.",
+        image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=80",
+        fallback: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=80"
+      },
+      {
+        slug: "blouses",
+        name: "Blouses",
+        group: ["women"],
+        groupLabel: "Women",
+        count: "31 Styles",
+        badge: "MADE TO MEASURE",
+        tagline: "Intricate Zardozi embroidery, raw silk cutwork & bridal brocades.",
+        image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=900&q=80",
+        fallback: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=900&q=80"
+      },
+      {
+        slug: "bags-potlis",
+        name: "Bags & Potlis",
+        group: ["women", "accessories"],
+        groupLabel: "Women · Accessories",
+        count: "16 Pieces",
+        badge: "NEW IN",
+        tagline: "Embroidered velvet potlis, pearl-accented minaudières & clutches.",
+        image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=80",
+        fallback: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=80"
+      },
+      {
+        slug: "shoes-juttis",
+        name: "Shoes & Juttis",
+        group: ["men", "women", "accessories"],
+        groupLabel: "Unisex · Accessories",
+        count: "19 Pairs",
+        badge: "HANDMADE",
+        tagline: "Zari-threaded leather juttis, embellished mojaris & festive heels.",
+        image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=900&q=80",
+        fallback: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=900&q=80"
+      },
+      {
+        slug: "mens-ethnic",
+        name: "Men's Kurtas & Sherwanis",
+        group: ["men"],
+        groupLabel: "Men",
+        count: "24 Styles",
+        badge: "FESTIVE EDIT",
+        tagline: "Handloom kurtas, bandhgalas and sherwanis in silk and raw cotton.",
+        image: "https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&w=900&q=80",
+        fallback: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=80"
+      },
+      {
+        slug: "kids-ethnic",
+        name: "Kids Ethnic Wear",
+        group: ["kids"],
+        groupLabel: "Kids",
+        count: "12 Styles",
+        badge: "NEW IN",
+        tagline: "Miniature handloom sets and festive occasion wear for little ones.",
+        image: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=900&q=80",
+        fallback: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=900&q=80"
+      },
+      {
+        slug: "mens-footwear",
+        name: "Mojaris & Loafers",
+        group: ["men", "accessories"],
+        groupLabel: "Men · Accessories",
+        count: "14 Pairs",
+        badge: "HANDCRAFTED",
+        tagline: "Hand-stitched leather mojaris and festive loafers for the groom's party.",
+        image: "https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&w=900&q=80",
+        fallback: "https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&w=900&q=80"
+      }
+    ];
+
+    function renderCategoryGrid(filter = 'all') {
+      const grid = document.getElementById('categoryGrid');
+      if (!grid) return;
+
+      const filtered = filter === 'all'
+        ? categories
+        : categories.filter(c => c.group.includes(filter));
+
+      grid.innerHTML = filtered.map((c, idx) => `
+        <div class="col-6 col-sm-6 col-md-4 col-lg-3 category-item-wrap">
+          <div class="cat-card h-100 overflow-hidden position-relative d-flex flex-column justify-content-between">
+            <div class="card-image-box position-relative w-100">
+              <span class="badge position-absolute top-0 start-0 m-2 z-2"
+                style="background-color: #c9a45c; color: #0b2219; font-size: 0.6rem; letter-spacing: 0.08em; font-weight: 700;">${c.badge}</span>
+              <span class="badge position-absolute top-0 end-0 m-2 z-2 bg-dark bg-opacity-75 text-warning border border-warning-subtle"
+                style="font-size: 0.6rem;">${c.count}</span>
+
+              <img src="${c.image}" onerror="this.src='${c.fallback}'" class="w-100 h-100 arrival-img"
+                style="object-fit: cover; object-position: top center;" alt="${c.name}">
+
+              <div class="quick-actions-bar position-absolute bottom-0 start-0 w-100 p-2 d-flex gap-2"
+                style="background: linear-gradient(180deg, transparent 0%, rgba(11,34,25,0.92) 100%);">
+                <a href="product-listing.html"
+                  class="btn btn-sm w-100 py-2 fw-semibold text-dark rounded-0 d-flex align-items-center justify-content-center gap-1"
+                  style="background-color: #c9a45c; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;">
+                  Explore Category<i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="p-3 text-start" style="background: #0b2219;">
+              <small class="text-uppercase d-block mb-1" style="font-size: 0.65rem; letter-spacing: 0.12em; color: #dfbf75;">${c.groupLabel}</small>
+              <h6 class="font-serif text-white mb-1" style="font-size: 1.05rem;">${c.name}</h6>
+              <p class="small text-white-50 mb-0" style="font-size: 0.75rem; line-height: 1.35; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${c.tagline}</p>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      initScrollReveals();
+      if (typeof ScrollTrigger !== "undefined") ScrollTrigger.refresh();
+    }
+
+    function initCategoryFilters() {
+      const filterBtns = document.querySelectorAll('#categoryFilters .cat-filter-btn');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          renderCategoryGrid(this.getAttribute('data-filter'));
+        });
+      });
+    }
+
+    function initScrollReveals() {
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.vars.id && trigger.vars.id.toString().startsWith('reveal-')) {
+          trigger.kill();
+        }
+      });
+
+      document.querySelectorAll('.row').forEach((row, rowIndex) => {
+        const items = row.querySelectorAll(':scope > [class*="col-"]');
+        if (items.length === 0) return;
+
+        gsap.fromTo(items,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out",
+            stagger: 0.08,
+            scrollTrigger: {
+              id: 'reveal-row-' + rowIndex,
+              trigger: row,
+              start: "top 85%",
+              toggleActions: "play none none none"
+            }
+          }
+        );
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('kbToast');
+      const toastMsg = document.getElementById('kbToastMsg');
+      if (!toast || !toastMsg) return;
+      toastMsg.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2800);
+    }
+
+    // Floating Back To Top
+    window.addEventListener('scroll', () => {
+      const backBtn = document.getElementById('backToTopBtn');
+      if (window.scrollY > 400) {
+        backBtn.classList.add('show');
+      } else {
+        backBtn.classList.remove('show');
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCategoryGrid('all');
+      initCategoryFilters();
+      initScrollReveals();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Our Heritage & Loom Artistry | Katha Bbeen</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --kb-primary: #06382c;
+      --kb-primary-dark: #031c15;
+      --kb-gold: #d4af37;
+      --kb-gold-light: #f3e5ab;
+      --kb-cream: #faf7f2;
+      --kb-sand: #f2ede4;
+      --kb-charcoal: #1f2924;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--kb-charcoal);
+      background-color: var(--kb-cream);
+      overflow-x: hidden;
+    }
+
+    .font-serif {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* Navbar styling matching index.html */
+    .navbar-glass {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+      transition: all 0.3s ease;
+    }
+
+    .nav-link {
+       display: block;
+    padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+    font-size: var(--bs-nav-link-font-size);
+    font-weight: var(--bs-nav-link-font-weight);
+    color: var(--bs-nav-link-color);
+    text-decoration: none;
+    background: 0 0;
+    border: 0;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--kb-gold) !important;
+    }
+
+    .btn-kb-gold {
+      background: linear-gradient(135deg, #e6ca65, var(--kb-gold), #b28e28);
+      color: #031c15;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-kb-gold:hover {
+      background: #ffffff;
+      color: #031c15;
+      box-shadow: 0 4px 18px rgba(212, 175, 55, 0.35);
+    }
+
+    /* About Hero Banner */
+    .about-hero {
+      background: radial-gradient(circle at 50% 30%, #084335 0%, var(--kb-primary-dark) 85%);
+      color: #fff;
+      padding: 6rem 1rem 5rem;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+      position: relative;
+    }
+
+    .about-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--kb-gold), transparent);
+    }
+
+    /* Editorial Image Frames */
+    .editorial-frame {
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      padding: 10px;
+      background: #fff;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+    }
+
+    .editorial-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Craft Pillar Card */
+    .pillar-card {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-top: 3px solid var(--kb-gold);
+      padding: 2.25rem 2rem;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.03);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .pillar-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+      border-top-color: #b28e28;
+    }
+
+    .pillar-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      color: rgba(212, 175, 55, 0.4);
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    /* Timeline Process Steps */
+    .process-step {
+      position: relative;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .process-step-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--kb-primary);
+      color: var(--kb-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="kbPreloader" class="kb-preloader">
+    <div class="preloader-content text-center">
+
+      <a class="d-flex align-items-center justify-content-center" href="#" style="z-index: 1020;">
+        <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+          style="height: 198px; max-width: 460px; object-fit: contain;">
+      </a>
+
+
+      <p class="text-kb-gold-light text-uppercase small" style="letter-spacing: 0.35em; font-size: 0.65rem;">
+        Your Choice Our Promise
+      </p>
+      <div class="preloader-line mt-3">
+        <div class="preloader-progress"></div>
+      </div>
+    </div>
+  </div>
+ <!-- Announcement Bar -->
+  <aside class="bg-kb-primary-dark text-center py-2 text-white border-bottom border-secondary border-opacity-25"
+    style="font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase;">
+    <i class="bi bi-gem text-kb-gold me-2"></i> Complimentary insured worldwide delivery on festive weaves over ₹15,000
+  </aside>
+
+  <!-- 2. NAVBAR WITH CENTERED LOGO & SLIDING DRAWER -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-glass sticky-top py-4">
+      <div class="container-fluid px-lg-5 position-relative">
+
+        <!-- Left: Hamburger (Mobile) & Nav Menu (Desktop) -->
+        <div class="d-flex align-items-center">
+          <button class="navbar-toggler border-0 shadow-none p-0 d-lg-none" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#navMenu" aria-controls="navMenu" aria-label="Toggle navigation">
+            <i class="bi bi-list fs-1 text-dark"></i>
+          </button>
+
+          <!-- Navigation Drawer -->
+          <div class="offcanvas offcanvas-start" tabindex="-1" id="navMenu" aria-labelledby="navMenuLabel">
+            <div class="offcanvas-header border-bottom py-3 d-lg-none" style="background-color: var(--kb-cream);">
+              <div class="d-flex align-items-center gap-2">
+                <div>
+                  <a class="d-flex align-items-center justify-content-center" href="#" style="z-index: 1020;">
+                    <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+                      style="height: 70px; max-width: 460px; object-fit: contain;">
+                  </a>
+                </div>
+              </div>
+              <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+            </div>
+
+            <div class="offcanvas-body p-4 p-lg-0">
+             <ul class="navbar-nav gap-lg-1 text-uppercase fw-semibold" style="font-size: 0.75rem; letter-spacing: 0.14em;">
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="index.html">Home</a></li>
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="category.html">Catregory</a></li>
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="about.html">About Us</a></li>
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="contact.html">Contact Us</a></li>
+              </ul>
+
+              <div class="d-lg-none mt-auto pt-4 border-top">
+                <p class="text-uppercase text-muted fw-bold mb-2" style="font-size: 0.65rem; letter-spacing: 0.2em;">
+                  Atelier Assistance</p>
+                <p class="small text-muted mb-2"><i class="bi bi-whatsapp text-success me-2"></i>+91 000000000</p>
+                <p class="small text-muted mb-0"><i class="bi bi-envelope me-2"></i>email@kathabbeen.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center: Mathematically Centered Logo -->
+        <a class="navbar-brand position-absolute start-50 translate-middle-x m-0 p-0 d-flex align-items-center justify-content-center"
+          href="#" style="z-index: 1020;">
+          <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+            style="height: 98px; max-width: 160px; object-fit: contain;">
+        </a>
+
+        <!-- Right: Actions -->
+        <div class="d-flex align-items-center gap-3 ms-auto" style="z-index: 1021;">
+          <button class="btn btn-link text-dark p-0 border-0" aria-label="Search"><i
+              class="bi bi-search fs-5"></i></button>
+          <button class="btn btn-link text-dark p-0 border-0 d-none d-sm-block" aria-label="Wishlist"><i
+              class="bi bi-suit-heart fs-5"></i></button>
+          <button class="btn btn-link text-dark p-0 border-0 position-relative" data-bs-toggle="offcanvas"
+            data-bs-target="#bagOffcanvas" aria-label="Shopping Bag">
+            <i class="bi bi-bag fs-5"></i>
+            <span id="bagCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+              style="background-color: var(--kb-primary) !important; font-size: 0.65rem;">
+              0
+            </span>
+          </button>
+        </div>
+
+      </div>
+    </nav>
+  </header>
+
+
+  <!-- ================= HERO BANNER ================= -->
+  <section class="about-hero text-center">
+    <div class="container py-4">
+      <span class="d-inline-block text-uppercase px-3 py-1 mb-3 rounded-pill small fw-semibold" 
+            style="letter-spacing: 0.25em; font-size: 0.72rem; color: #d4af37; background: rgba(212, 175, 55, 0.12); border: 1px solid rgba(212, 175, 55, 0.35);">
+        ✦ The Katha Bbeen Chronicle · Est. Handloom Heritage
+      </span>
+      <h1 class="display-3 font-serif text-white mb-3">Woven in Time, Cherished Forever</h1>
+      <p class="text-white-50 mx-auto" style="max-width: 680px; font-size: 1.1rem; line-height: 1.7;">
+        “Your Choice, Our Promise.” We honor the centuries-old alchemy of pure mulberry silk, tested silver-gold zari, and the sacred rhythm of the weaver’s shuttle.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= STORY & ORIGINS SECTION ================= -->
+  <section class="py-5 px-3 px-lg-5">
+    <div class="container-fluid py-4">
+      <div class="row g-5 align-items-center">
+
+        <div class="col-lg-6">
+          <div class="editorial-frame">
+            <img src="asset/katha-story.jpg" alt="Artisan weaving at traditional wooden handloom" 
+                 onerror="this.src='https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1000&q=80'">
+          </div>
+        </div>
+
+        <div class="col-lg-6 ps-lg-5">
+          <span class="text-uppercase text-muted fw-bold small" style="letter-spacing: 0.28em;">The Genesis</span>
+          <h2 class="font-serif display-5 mb-4 mt-2" style="color: var(--kb-primary);">
+            A Reverence for the Sacred Drape
+          </h2>
+          <p class="text-muted leading-relaxed" style="font-size: 1.02rem; line-height: 1.8;">
+            Katha Bbeen began with a quiet conviction: that a true Indian saree is not seasonal fast fashion, but living art and an emotional heirloom. When a bride drapes a Katha Bbeen saree, she wraps herself in weeks of quiet dedication, ancestral poetry, and motifs that have graced royal courts since the Mughal and Chola eras.
+          </p>
+          <p class="text-muted leading-relaxed" style="font-size: 1.02rem; line-height: 1.8;">
+            By bypassing power-loom synthetics and industrial mass production, we work directly with master weaver cooperatives in Varanasi, Kanchipuram, Chanderi, and Paithan—empowering artisan families with fair dignity while bringing untarnished purity to your wardrobe.
+          </p>
+
+          <div class="d-flex align-items-center gap-4 pt-3 mt-4 border-top">
+            <div>
+              <h4 class="font-serif display-6 fw-bold mb-0 text-dark">300+</h4>
+              <small class="text-muted text-uppercase" style="letter-spacing: 0.1em; font-size: 0.72rem;">Artisan Looms</small>
+            </div>
+            <div class="vr" style="height: 40px;"></div>
+            <div>
+              <h4 class="font-serif display-6 fw-bold mb-0 text-dark">100%</h4>
+              <small class="text-muted text-uppercase" style="letter-spacing: 0.1em; font-size: 0.72rem;">Silk Mark Pure</small>
+            </div>
+            <div class="vr" style="height: 40px;"></div>
+            <div>
+              <h4 class="font-serif display-6 fw-bold mb-0 text-dark">18+</h4>
+              <small class="text-muted text-uppercase" style="letter-spacing: 0.1em; font-size: 0.72rem;">Countries Shipped</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= THE 4 CRAFTSMANSHIP PILLARS ================= -->
+  <section class="py-5 px-3 px-lg-5" style="background: var(--kb-sand);">
+    <div class="container-fluid py-4">
+      
+      <div class="text-center mb-5">
+        <span class="text-uppercase text-muted fw-bold small" style="letter-spacing: 0.28em;">Integrity In Every Thread</span>
+        <h2 class="font-serif display-5 mb-2 mt-1" style="color: var(--kb-primary);">Our Four Guarantees</h2>
+        <div class="mx-auto mt-2" style="width: 50px; height: 1.5px; background: var(--kb-gold);"></div>
+      </div>
+
+      <div class="row g-4">
+        
+        <div class="col-md-6 col-lg-3">
+          <div class="pillar-card h-100">
+            <span class="pillar-number">01</span>
+            <h4 class="font-serif h5 mt-3 mb-2" style="color: var(--kb-primary);">Silk Mark Certification</h4>
+            <p class="text-muted small mb-0">
+              Zero polyester, zero nylon fillers. Every silk saree is independently tested and authenticated by the Silk Mark Organization of India.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="pillar-card h-100">
+            <span class="pillar-number">02</span>
+            <h4 class="font-serif h5 mt-3 mb-2" style="color: var(--kb-primary);">Tested Tarnish-Free Zari</h4>
+            <p class="text-muted small mb-0">
+              We exclusively commission high-grade electroplated silver and gold zari threads that preserve their lustrous gleam for decades without blackening.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="pillar-card h-100">
+            <span class="pillar-number">03</span>
+            <h4 class="font-serif h5 mt-3 mb-2" style="color: var(--kb-primary);">The Kadhwa Technique</h4>
+            <p class="text-muted small mb-0">
+              Each floral bootie and hunting shikargah motif is individually hand-locked on the loom so the reverse side has no loose floating threads.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="pillar-card h-100">
+            <span class="pillar-number">04</span>
+            <h4 class="font-serif h5 mt-3 mb-2" style="color: var(--kb-primary);">Direct Loom Guild</h4>
+            <p class="text-muted small mb-0">
+              No middle-tier agents. Fair living wages and steady year-round commissions sustain our 5th-generation artisan families with pride.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= THE WEAVING ODYSSEY (STEP-BY-STEP) ================= -->
+  <section class="py-5 px-3 px-lg-5">
+    <div class="container-fluid py-4">
+      
+      <div class="text-center mb-5">
+        <span class="text-uppercase text-muted fw-bold small" style="letter-spacing: 0.28em;">Slow Handcraft</span>
+        <h2 class="font-serif display-5 mb-2 mt-1" style="color: var(--kb-primary);">How An Heirloom Is Born</h2>
+        <p class="text-muted mx-auto" style="max-width: 550px; font-size: 0.95rem;">
+          From raw cocoon silk to the final auspicious bridal fold, every drape requires between 14 to 60 days of uninterrupted concentration.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        
+        <div class="col-md-6 col-lg-3">
+          <div class="process-step h-100">
+            <div class="process-step-badge">1</div>
+            <h5 class="font-serif" style="color: var(--kb-primary);">Reeling & Degumming</h5>
+            <p class="text-muted small mb-0">
+              High-denier Mulberry yarn is purified in herbal river water baths and hand-twisted to produce strong, supple warp (Tana) strands.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="process-step h-100">
+            <div class="process-step-badge">2</div>
+            <h5 class="font-serif" style="color: var(--kb-primary);">The Naksha Card Code</h5>
+            <p class="text-muted small mb-0">
+              Master draftsmen draw intricate jaals on graph parchment, hand-piercing punch cards that orchestrate the loom's jacquard system.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="process-step h-100">
+            <div class="process-step-badge">3</div>
+            <h5 class="font-serif" style="color: var(--kb-primary);">Loom Warp Setting</h5>
+            <p class="text-muted small mb-0">
+              Over 10,000 warp strands are threaded by hand through reed eyelets in an exact sequence taking three full days before weaving begins.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="process-step h-100">
+            <div class="process-step-badge">4</div>
+            <h5 class="font-serif" style="color: var(--kb-primary);">Handloom Weave & Polishing</h5>
+            <p class="text-muted small mb-0">
+              With shuttle flying across weft, the saree advances 2 to 4 inches per day, culminating in steam kalai finishing and silk mark sealing.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= THE FOUNDER'S NOTE & CONCIERGE BANNER ================= -->
+  <section class="py-5 px-3 px-lg-5" style="background: radial-gradient(circle at 50% 50%, #06382c 0%, #031c15 100%);">
+    <div class="container py-4 text-center text-white" style="max-width: 800px;">
+      <i class="bi bi-quote display-3 text-warning opacity-50 mb-2 d-inline-block"></i>
+      <h3 class="font-serif display-6 mb-4 fw-normal" style="line-height: 1.6; font-style: italic;">
+        “When you buy a saree from Katha Bbeen, you don't merely own six yards of fabric; you preserve an Indian heritage that took five hundred years to perfect.”
+      </h3>
+      <p class="text-gold-light text-uppercase mb-1 fw-bold" style="letter-spacing: 0.2em; font-size: 0.85rem;">The Atelier Guild & Curators</p>
+      <span class="text-white-50 small">Katha Bbeen Handlooms · Kolkata & Varanasi</span>
+
+      <div class="mt-5">
+        <a href="category.html" class="btn btn-kb-gold rounded-pill px-4 py-3 text-uppercase fw-semibold me-2 mb-2">
+          Explore Our Collections <i class="bi bi-arrow-right ms-1"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-kb-primary text-white-50 py-5 px-3 px-lg-5 border-top border-secondary border-opacity-25">
+    <div class="container-fluid">
+      <div class="row g-5">
+        <div class="col-lg-4">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <div class="bg-white rounded-2">
+              <a class="d-flex align-items-center justify-content-center" href="#" style="z-index: 1020;">
+                <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+                  style="height: 50px; max-width: 60px; object-fit: contain;">
+              </a>
+            </div>
+
+          </div>
+          <p class="text-kb-gold-light text-uppercase mb-3" style="font-size: 0.65rem; letter-spacing: 0.28em;">Your
+            Choice Our Promise</p>
+          <p class="small text-white-50 pe-lg-4">
+            Curated handwoven sarees created for weddings, festivities, and heirlooms passed through generations.
+          </p>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h6 class="text-uppercase text-white small mb-3" style="letter-spacing: 0.18em;">Weaves</h6>
+          <ul class="list-unstyled small d-grid gap-2">
+            <li><a href="#" class="text-white-50 text-decoration-none">Banarasi Katan</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Chanderi Silks</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Tussar Handloom</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Organza Zari</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h6 class="text-uppercase text-white small mb-3" style="letter-spacing: 0.18em;">Assistance</h6>
+          <ul class="list-unstyled small d-grid gap-2">
+            <li><a href="#" class="text-white-50 text-decoration-none">Shipping & Duties</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Care & Storage</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Saree Authenticity</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Contact Atelier</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h6 class="text-uppercase text-white small mb-3" style="letter-spacing: 0.18em;">The Katha Gazette</h6>
+          <p class="small text-white-50">Subscribe for early access to private trunk shows and festive weaver release
+            dates.</p>
+
+        </div>
+      </div>
+      <div
+        class="border-top border-secondary border-opacity-25 mt-5 pt-4 d-flex flex-column flex-md-row justify-content-between small text-white-50">
+        <div>&copy; 2026 Katha Bbeen. Handcrafted with reverence in India.</div>
+        <div class="text-white-50 mt-2 mt-md-0" style="font-size: 0.72rem;">
+          Designed &amp; Developed by <a href="https://www.orbitalwebworks.com/"
+            class="text-kb-gold-light text-decoration-none fw-semibold">Orbital Webworks</a>
+        </div>
+        <div class="d-flex gap-3 mt-3 mt-md-0">
+          <a href="#" class="text-white-50 text-decoration-none">Terms</a>
+          <a href="#" class="text-white-50 text-decoration-none">Privacy</a>
+          <a href="#" class="text-white-50 text-decoration-none">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+     window.addEventListener("load", () => {
+      const tl = gsap.timeline({
+        defaults: { ease: "power3.out" }
+      });
+
+      tl.fromTo(
+        ".preloader-content img",
+        { opacity: 0, y: -20, scale: 0.9 },
+        { opacity: 1, y: 0, scale: 1, duration: 1 }
+      )
+        .fromTo(
+          ".preloader-content p",
+          { opacity: 0, y: 15 },
+          { opacity: 1, y: 0, duration: 0.8 },
+          "-=0.8"
+        )
+        .fromTo(
+          ".preloader-line",
+          { opacity: 0, scaleX: 0 },
+          { opacity: 1, scaleX: 1, duration: 0.6, transformOrigin: "center" },
+          "-=0.3"
+        )
+        .fromTo(
+          ".preloader-progress",
+          { width: "0%" },
+          { width: "100%", duration: 1.2, ease: "power2.inOut" }
+        )
+        .to(".kb-preloader", {
+          opacity: 0,
+          duration: 0.8,
+          delay: 0.2,
+          onComplete: () => {
+            document.getElementById("kbPreloader").style.display = "none";
+            // Refresh ScrollTrigger once the preloader is gone and layout has settled
+            ScrollTrigger.refresh();
+          }
+        });
+    });
+  </script>
+</body>
+</html>

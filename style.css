@@ -11,6 +11,16 @@
       --kb-border: #f0e2c7;
       --kb-text-muted: #6e7771;
       --kb-glow: rgba(201, 164, 92, 0.4);
+       --kb-primary: #0f2e22;        /* Deep Royal Emerald */
+      --kb-primary-dark: #091c14;   /* Midnight Green */
+      --kb-primary-light: #184232;  /* Forest Jade */
+      --kb-gold: #c9a45c;           /* Antique Royal Gold */
+      --kb-gold-light: #e6c88b;     /* Champagne Glow */
+      --kb-gold-dark: #9c7b39;      /* Burnished Bronze */
+      --kb-cream: #faf8f5;          /* Soft Linen / Ivory */
+      --kb-surface: #ffffff;
+      --kb-text-muted: #6e7570;
+      --kb-border-gold: rgba(201, 164, 92, 0.28);
     }
 
     html {
@@ -37,6 +47,10 @@
   100% {
     transform: scale(1);
   }
+}
+
+.hero{
+
 }
 
 .craft-banner-img {
@@ -94,7 +108,30 @@
   opacity: 1;
 }
 
-
+ /* Preloader elements also start hidden for the intro GSAP timeline */
+    .preloader-content img,
+    .preloader-content p,
+    .preloader-line {
+      opacity: 0;
+    }
+    body {
+  overflow-x: hidden;
+}
+ /* Custom Luxury Scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--kb-primary-dark);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--kb-gold);
+      border-radius: 4px;
+    }
+    .kb-preloader.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    } 
 .kb-newsletter-input:focus {
   background: transparent;
   color: #fff;

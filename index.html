@@ -29,21 +29,6 @@
       will-change: transform, opacity;
     }
 
-    /* Preloader elements also start hidden for the intro GSAP timeline */
-    .preloader-content img,
-    .preloader-content p,
-    .preloader-line {
-      opacity: 0;
-    }
-    body {
-  overflow-x: hidden;
-}
-
-    .kb-preloader.fade-out {
-      opacity: 0;
-      pointer-events: none;
-    }
-
     /* Auto-scrolling testimonial carousel */
     .testimonial-carousel-wrap,
     .luxury-testimonial-wrap {
@@ -253,7 +238,7 @@ body {
 
   <!-- Announcement Bar -->
   <aside class="bg-kb-primary-dark text-center py-2 text-white border-bottom border-secondary border-opacity-25"
-    style="font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase;">
+    style="font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase;background-color: green;">
     <i class="bi bi-gem text-kb-gold me-2"></i> Complimentary insured worldwide delivery on festive weaves over ₹15,000
   </aside>
 
@@ -285,17 +270,11 @@ body {
             </div>
 
             <div class="offcanvas-body p-4 p-lg-0">
-              <ul class="navbar-nav gap-lg-1 text-uppercase fw-semibold"
-                style="font-size: 0.75rem; letter-spacing: 0.14em;">
-
-                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="#collections">Collections</a>
-                </li>
-                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="#bestsellers">Bestsellers</a>
-                </li>
-                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="#featured">Handlooms</a></li>
-                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="#new-arrivals">New
-                    Arrivals</a></li>
-
+              <ul class="navbar-nav gap-lg-1 text-uppercase fw-semibold" style="font-size: 0.75rem; letter-spacing: 0.14em;">
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="index.html">Home</a></li>
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="category.html">Catregory</a></li>
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="about.html">About Us</a></li>
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="contact.html">Contact Us</a></li>
               </ul>
 
               <div class="d-lg-none mt-auto pt-4 border-top">
