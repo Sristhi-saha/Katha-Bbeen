@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katha Bbeen | Wishlist </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- preloader -->
+    <section id="kbPreloader" class="kb-preloader">
+        <div class="preloader-content text-center">
+
+            <a class="d-flex align-items-center justify-content-center" href="index.html">
+                <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="katha Bbeen logo"
+                    style="height:198px;max-width:460px;object-fit:contain;">
+            </a>
+
+            <p class="text-kb-gold-light text-uppercase small" style="letter-spacing:0.35em;font-size:0.65rem">
+                Your Choice Our Promise
+            </p>
+
+            <div class="preloader-line mt-3">
+                <div class="preloader-progress"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Announcement bar -->
+    <aside class="bg-kb-primary-dark text-center py-2 text-white border-bottom border-secondary border-opacity-25"
+        style="font-size:0.52rem;letter-spacing:0.22em;text-transform:uppercase;background-color:green">
+        <i class="bi bi-gem text-kb-gold me-2"></i>Complimentary insured worldwide delivery on festive weaves over
+        ₹15,000
+    </aside>
+
+    <!--navbar  -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-glass sticky-top py-4">
+            <div class="container-fluid px-lg-5 position-relative">
+
+                <!-- left:hamburger(mobile) & nav-menu (desktop) -->
+                <div class="d-flex align-items-center">
+                    <button class="navbar-toggler border-0 shadow-none p-0 d-lg-none" type="button"
+                        data-bs-toggle="offcanvas" data-bs-target="#navMenu" araia-controls="navMenu"
+                        aria-label="Toggle navigation">
+                        <i class="bi bi-list fs-1 text-dark"></i>
+                    </button>
+
+                    <!-- navigation drawer -->
+                    <div class="offcanvas offcanvas-start" tabindex="-1" id="navMenu" aria-labelledby="navMenuLabel">
+                        <div class="offcanvas-header border-botton py-3 d-lg-none"
+                            style="background-color: var(--kb-cream);">
+                            <div class="d-flex align-items-center gap-2">
+                                <div>
+                                    <a class="d-flex align-items-center justify-content-center" href="#"
+                                        style="z-index: 1020;">
+                                        <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png"
+                                            alt="Katha Bbeen"
+                                            style="height: 70px; max-width: 460px; object-fit: contain;">
+                                    </a>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas"
+                                aria-label="Close">
+                            </button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <ul class="navbar-nav gap-lg-1 text-uppercase fw-semibold"
+                                style="font-size: 0.75rem; letter-spacing: 0.14em;">
+                                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2"
+                                        href="index.html">Home</a></li>
+                                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2"
+                                        href="category.html">Catregory</a></li>
+                                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2"
+                                        href="about.html">About Us</a></li>
+                                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2"
+                                        href="contact.html">Contact Us</a></li>
+                            </ul>
+
+                            <div class="d-lg-none mt-auto pt-4 border-top">
+                                <p class="text-uppercase text-muted fw-bold mb-2"
+                                    style="font-size: 0.65rem; letter-spacing: 0.2em;">
+                                    Atelier Assistance</p>
+                                <p class="small text-muted mb-2"><i class="bi bi-whatsapp text-success me-2"></i>+91
+                                    000000000</p>
+                                <p class="small text-muted mb-0"><i class="bi bi-envelope me-2"></i>email@kathabbeen.com
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- logo center -->
+                <a class="navbar-brand position-absolute start-50 translate-middle-x d-flex align-items-center justify-content-center"
+                    href="index.html" style="z-index:1020">
+                    <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+                        style="height: 98px; max-width: 160px; object-fit: contain;">
+                </a>
+
+                <!-- Right: Actions -->
+                <div class="d-flex align-items-center gap-3 ms-auto" style="z-index: 1021;">
+                    <button class="btn btn-link text-dark p-0 border-0" aria-label="Search"><i
+                            class="bi bi-search fs-5"></i></button>
+                    <button onclick="window.location.href='/sareeAnimated/wishlist.html'"
+                        class="btn btn-link text-dark p-0 border-0 d-none d-sm-block" aria-label="Wishlist"><i
+                            class="bi bi-suit-heart fs-5"></i></button>
+                    <button class="btn btn-link text-dark p-0 border-0 position-relative" data-bs-toggle="offcanvas"
+                        data-bs-target="#bagOffcanvas" aria-label="Shopping Bag">
+                        <i class="bi bi-bag fs-5"></i>
+                        <span id="bagCountBadge"
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+                            style="background-color: var(--kb-primary) !important; font-size: 0.65rem;">
+                            0
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- main -->
+    <main>
+        <!-- hero section -->
+        <section id="pageHero" class="hero-wrapper text-white px-3 px-lg-5 overflow-hidden d-flex align-items-center mb-5">
+
+            <img
+                src="https://varanchi.com/cdn/shop/files/Wedding_collectio_desktop_banner.jpg?v=1771579782&width=3200"
+                onerror="this.src='https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=80'"
+                alt="Katha Bheen Wishlist"
+                class="position-absolute top-0 start-0 w-100 h-100"
+                style="object-fit: cover; object-position: center 25%; z-index: 0;"
+            />
+
+            <div
+                class="position-absolute top-0 start-0 w-100 h-100"
+                style="z-index: 1;
+                background: linear-gradient(
+                    0deg,
+                    rgba(6, 20, 14, 0.96) 0%,
+                    rgba(6, 20, 14, 0.78) 45%,
+                    rgba(6, 20, 14, 0.45) 75%,
+                    rgba(6, 20, 14, 0.3) 100%
+                );">
+            </div>
+
+            <div class="container-fluid max-w-1480 position-relative" style="z-index: 20;">
+
+                <nav
+                    class="cat-breadcrumb mb-2 reveal-item"
+                    style="font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;"
+                >
+                    <a href="index.html">Home</a>
+                    <span class="sep">/</span>
+                    <span class="text-warning">Wishlist</span>
+                </nav>
+
+                <div class="reveal-item">
+
+                    <p
+                        class="text-uppercase fw-bold mb-1"
+                        style="font-size: 0.7rem; letter-spacing: 0.35em; color: #c9a45c;"
+                    >
+                        <i class="bi bi-heart-fill me-1"></i>
+                        Your Curated Collection
+                    </p>
+
+                    <h1 class="font-serif display-4 fw-normal mb-2">
+                        Pieces worth
+                        <em class="fw-light gold-gradient-text">remembering.</em>
+                    </h1>
+
+                    <p
+                        class="text-white-50 small pe-lg-5"
+                        style="max-width: 580px; line-height: 1.6;"
+                    >
+                        A personal collection of pieces you've fallen for.
+                        Keep your favourites close and return whenever you're ready
+                        to make them part of your story.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+        
+        <!-- wishlist grid -->
+    <section id="gridProduct" class="py-5">
+    <div class="container-fluid max-w-1480 px-3 px-lg-5">
+
+        <div id="wishlistProducts"></div>
+
+    </div>
+</section>
+
+
+    </main>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// Preloader (unchanged)
+window.addEventListener("load", () => {
+  const t1 = gsap.timeline({ defaults: { duration: 0.5, ease: "power3.out" } });
+  t1.fromTo(".preloader-content img", { opacity: 0, y: -20, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 1 })
+    .fromTo(".preloader-content p", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.8")
+    .fromTo(".preloader-line", { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.6, transformOrigin: "left" }, "-=0.6")
+    .fromTo(".preloader-progress", { width: "0%" }, { width: "100%", duration: 0.6, ease: "power2.inOut" })
+    .to(".kb-preloader", {
+      opacity: 0, duration: 0.8, delay: 0.2,
+      onComplete: () => {
+        document.getElementById("kbPreloader").style.display = "none";
+        ScrollTrigger.refresh();
+      }
+    });
+});
+
+document.querySelectorAll("#navMenu .nav-link").forEach(link => {
+  link.addEventListener("click", () => {
+    const navOffcanvas = bootstrap.Offcanvas.getInstance(document.getElementById("navMenu"));
+    if (navOffcanvas) navOffcanvas.hide();
+  });
+});
+
+// ==========================
+// WISHLIST RENDER
+// ==========================
+function formatINR(num) {
+  return '₹' + Number(num).toLocaleString('en-IN');
+}
+
+function getWishlist() {
+  return JSON.parse(localStorage.getItem("wishlist")) || [];
+}
+
+function renderWishlist() {
+  const wishlist = getWishlist();
+  const container = document.getElementById("wishlistProducts");
+  if (!container) return;
+
+  if (wishlist.length === 0) {
+    container.innerHTML = `
+      <div class="text-center py-5">
+        <div class="mx-auto mb-4 d-flex align-items-center justify-content-center rounded-circle"
+             style="width:80px; height:80px; background:#f7f3ea;">
+          <i class="bi bi-heart text-kb-gold" style="font-size:2rem;"></i>
+        </div>
+        <h3 class="font-serif fw-normal mb-2">Your wishlist is waiting.</h3>
+        <p class="text-muted small mb-4">Save pieces you love and return to them whenever you're ready.</p>
+        <a href="index.html" class="btn btn-dark rounded-0 px-4 py-2 text-uppercase" style="font-size:0.7rem; letter-spacing:0.15em;">
+          Explore Collection
+        </a>
+      </div>
+    `;
+    return;
+  }
+
+  const subtotal = wishlist.reduce((sum, p) => sum + Number(p.price), 0);
+
+  const headerHTML = `
+    <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
+      <p class="text-muted small mb-0">${wishlist.length} piece${wishlist.length > 1 ? 's' : ''} saved · ${formatINR(subtotal)} total</p>
+      <button class="btn btn-sm btn-outline-dark rounded-0 text-uppercase" style="font-size:0.65rem; letter-spacing:0.1em;" onclick="moveAllToBag()">
+        <i class="bi bi-bag-plus me-1"></i> Move All to Bag
+      </button>
+    </div>
+    <div class="wishlist-header d-none d-lg-flex align-items-center py-3 border-top border-bottom text-uppercase">
+      <div class="col-lg-5 fw-semibold" style="font-size:0.85rem; letter-spacing:0.15em;">Product</div>
+      <div class="col-lg-2 fw-semibold" style="font-size:0.85rem; letter-spacing:0.15em;">Unit Price</div>
+      <div class="col-lg-2 fw-semibold" style="font-size:0.85rem; letter-spacing:0.15em;">Stock Status</div>
+      <div class="col-lg-3 fw-semibold text-end" style="font-size:0.85rem; letter-spacing:0.15em;">Action</div>
+    </div>
+  `;
+
+  const itemsHTML = wishlist.map(product => `
+    <div class="wishlist-item py-4 border-bottom" data-id="${product.id}" style="transition:opacity 0.3s ease;">
+      <div class="row align-items-center g-3">
+
+        <!-- PRODUCT -->
+        <div class="col-12 col-lg-5">
+          <div class="d-flex align-items-center gap-3">
+            <div class="wishlist-image overflow-hidden position-relative" style="width:90px; height:110px; flex-shrink:0; background:#f5f3ef;">
+              <img src="${product.image}" onerror="this.src='${product.fallback || ''}'; this.onerror=null;"
+                   alt="${product.name}" class="w-100 h-100 object-fit-cover" style="transition:transform 0.5s ease;">
+            </div>
+            <div>
+              <p class="text-uppercase text-muted mb-1" style="font-size:0.6rem; letter-spacing:0.16em;">
+                ${product.collection || 'Heirloom Collection'}
+              </p>
+              <h4 class="font-serif mb-1" style="font-size:1.5rem;">${product.name}</h4>
+              ${product.weave ? `<p class="text-muted mb-2" style="font-size:0.72rem;">${product.weave}</p>` : ''}
+              <button class="btn btn-link text-muted p-0 text-decoration-none" style="font-size:0.88rem; letter-spacing:0.08em;"
+                      onclick="removeWishlistItem(${product.id})">
+                <i class="bi bi-trash3 me-1"></i> Remove
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRICE -->
+        <div class="col-6 col-lg-2">
+          <span class="d-lg-none text-uppercase text-muted d-block mb-1" style="font-size:0.6rem;">Unit Price</span>
+          <span class="font-serif fw-semibold d-block" style="font-size:1.5rem;">${formatINR(product.price)}</span>
+          <span class="text-muted text-decoration-line-through small">${formatINR(Math.round(product.price * 1.25))}</span>
+        </div>
+
+        <!-- STOCK -->
+        <div class="col-6 col-lg-2">
+          <span class="d-lg-none text-uppercase text-muted d-block mb-1" style="font-size:0.6rem;">Stock</span>
+          <span class="text-success" style="font-size:0.82rem; letter-spacing:0.04em;">
+            <i class="bi bi-check-circle-fill me-1"></i> In Stock
+          </span>
+        </div>
+
+        <!-- ACTION -->
+        <div class="col-12 col-lg-3">
+          <div class="d-flex justify-content-lg-end gap-2">
+            <button class="btn btn-dark rounded-0 px-3" style="font-size:0.68rem; letter-spacing:0.1em;"
+                    onclick="addToBagFromWishlist(${product.id})">
+              <i class="bi bi-bag-plus me-1"></i> Add to Bag
+            </button>
+            <button class="btn btn-outline-dark rounded-0" style="width:40px;"
+                    onclick="removeWishlistItem(${product.id})" aria-label="Remove from wishlist">
+              <i class="bi bi-heart-fill"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  `).join('');
+
+  container.innerHTML = headerHTML + itemsHTML;
+
+  // Entrance animation
+  gsap.fromTo(container.querySelectorAll('.wishlist-item'),
+    { opacity: 0, y: 20 },
+    { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: "power2.out" }
+  );
+}
+
+// ==========================
+// REMOVE / ADD ACTIONS (no page reload)
+// ==========================
+function removeWishlistItem(id) {
+  const row = document.querySelector(`.wishlist-item[data-id="${id}"]`);
+
+  const commit = () => {
+    let wishlist = getWishlist().filter(item => item.id !== id);
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    renderWishlist();
+  };
+
+  if (row) {
+    gsap.to(row, {
+      opacity: 0, x: -30, height: 0, paddingTop: 0, paddingBottom: 0,
+      marginBottom: 0, duration: 0.35, ease: "power2.in",
+      onComplete: commit
+    });
+  } else {
+    commit();
+  }
+}
+
+function addToBagFromWishlist(id) {
+  const wishlist = getWishlist();
+  const product = wishlist.find(p => p.id === id);
+  if (!product) return;
+
+  if (typeof addToBag === 'function') addToBag(product.id);
+  if (typeof showToast === 'function') {
+    showToast(`"${product.name}" added to your bag.`);
+  }
+}
+
+function moveAllToBag() {
+  const wishlist = getWishlist();
+  if (wishlist.length === 0) return;
+
+  wishlist.forEach(p => { if (typeof addToBag === 'function') addToBag(p.id); });
+
+  if (typeof showToast === 'function') {
+    showToast(`${wishlist.length} piece${wishlist.length > 1 ? 's' : ''} moved to your bag.`);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", renderWishlist);
+</script>
+</body>
+
+</html>
