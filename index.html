@@ -311,19 +311,21 @@
 
         <!-- Right: Actions -->
         <div class="d-flex align-items-center gap-3 ms-auto" style="z-index: 1021;">
-          <button class="btn btn-link text-dark p-0 border-0" aria-label="Search"><i
-              class="bi bi-search fs-5"></i></button>
-          <button class="btn btn-link text-dark p-0 border-0 d-none d-sm-block" aria-label="Wishlist"><i
-              class="bi bi-suit-heart fs-5"></i></button>
-          <button class="btn btn-link text-dark p-0 border-0 position-relative" data-bs-toggle="offcanvas"
-            data-bs-target="#bagOffcanvas" aria-label="Shopping Bag">
-            <i class="bi bi-bag fs-5"></i>
-            <span id="bagCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
-              style="background-color: var(--kb-primary) !important; font-size: 0.65rem;">
-              0
-            </span>
-          </button>
-        </div>
+                    <button class="btn btn-link text-dark p-0 border-0" aria-label="Search"><i
+                            class="bi bi-search fs-5"></i></button>
+                    <button onclick="window.location.href='/wishlist.html'"
+                        class="btn btn-link text-dark p-0 border-0 d-none d-sm-block" aria-label="Wishlist"><i
+                            class="bi bi-suit-heart fs-5"></i></button>
+                    <button class="btn btn-link text-dark p-0 border-0 position-relative" data-bs-toggle="offcanvas"
+                        data-bs-target="#bagOffcanvas" aria-label="Shopping Bag">
+                        <i class="bi bi-bag fs-5"></i>
+                        <span id="bagCountBadge"
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+                            style="background-color: var(--kb-primary) !important; font-size: 0.65rem;">
+                            0
+                        </span>
+                    </button>
+                </div>
 
       </div>
     </nav>
