@@ -20,6 +20,46 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+
+    <style>
+        /* ===== Custom Dot Cursor ===== */
+        .custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e1d392;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%) scale(1);
+            transition: width 0.3s ease, height 0.3s ease, background 0.3s ease, transform 0.15s ease;
+        }
+
+        .custom-cursor.active {
+            width: 60px;
+            height: 60px;
+            background: rgba(146, 212, 145, 0.15);
+            border: 1px solid #111;
+        }
+
+        .zoom-hover {
+            cursor: none;
+        }
+
+        .zoom-hover {
+            overflow: hidden;
+        }
+
+        .zoom-hover img {
+            transition: transform 0.6s ease;
+        }
+
+        .zoom-hover:hover img {
+            transform: scale(1.12);
+        }
+    </style>
 </head>
 
 <body>
@@ -58,7 +98,7 @@
                 <!-- left:hamburger(mobile) & nav-menu (desktop) -->
                 <div class="d-flex align-items-center">
                     <button class="navbar-toggler border-0 shadow-none p-0 d-lg-none" type="button"
-                        data-bs-toggle="offcanvas" data-bs-target="#navMenu" araia-controls="navMenu"
+                        data-bs-toggle="offcanvas" data-bs-target="#navMenu" aria-controls="navMenu"
                         aria-label="Toggle navigation">
                         <i class="bi bi-list fs-1 text-dark"></i>
                     </button>
@@ -139,19 +179,16 @@
     <!-- main -->
     <main>
         <!-- hero section -->
-        <section id="pageHero" class="hero-wrapper text-white px-3 px-lg-5 overflow-hidden d-flex align-items-center mb-5">
+        <section id="pageHero"
+            class="hero-wrapper product-thumb zoom-hover text-white px-3 px-lg-5 overflow-hidden d-flex align-items-center"
+            data-cursor-text="Explore">
 
-            <img
-                src="https://varanchi.com/cdn/shop/files/Wedding_collectio_desktop_banner.jpg?v=1771579782&width=3200"
+            <img src="https://varanchi.com/cdn/shop/files/Wedding_collectio_desktop_banner.jpg?v=1771579782&width=3200"
                 onerror="this.src='https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=80'"
-                alt="Katha Bheen Wishlist"
-                class="position-absolute top-0 start-0 w-100 h-100"
-                style="object-fit: cover; object-position: center 25%; z-index: 0;"
-            />
+                alt="Katha Bheen Wishlist" class="position-absolute top-0 start-0 w-100 h-100"
+                style="object-fit: cover; object-position: center 25%; z-index: 0;" />
 
-            <div
-                class="position-absolute top-0 start-0 w-100 h-100"
-                style="z-index: 1;
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="z-index: 1;
                 background: linear-gradient(
                     0deg,
                     rgba(6, 20, 14, 0.96) 0%,
@@ -163,10 +200,8 @@
 
             <div class="container-fluid max-w-1480 position-relative" style="z-index: 20;">
 
-                <nav
-                    class="cat-breadcrumb mb-2 reveal-item"
-                    style="font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;"
-                >
+                <nav class="cat-breadcrumb mb-2 reveal-item"
+                    style="font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;">
                     <a href="index.html">Home</a>
                     <span class="sep">/</span>
                     <span class="text-warning">Wishlist</span>
@@ -174,10 +209,8 @@
 
                 <div class="reveal-item">
 
-                    <p
-                        class="text-uppercase fw-bold mb-1"
-                        style="font-size: 0.7rem; letter-spacing: 0.35em; color: #c9a45c;"
-                    >
+                    <p class="text-uppercase fw-bold mb-1"
+                        style="font-size: 0.7rem; letter-spacing: 0.35em; color: #c9a45c;">
                         <i class="bi bi-heart-fill me-1"></i>
                         Your Curated Collection
                     </p>
@@ -187,10 +220,7 @@
                         <em class="fw-light gold-gradient-text">remembering.</em>
                     </h1>
 
-                    <p
-                        class="text-white-50 small pe-lg-5"
-                        style="max-width: 580px; line-height: 1.6;"
-                    >
+                    <p class="text-white-50 small pe-lg-5" style="max-width: 580px; line-height: 1.6;">
                         A personal collection of pieces you've fallen for.
                         Keep your favourites close and return whenever you're ready
                         to make them part of your story.
@@ -201,66 +231,69 @@
             </div>
 
         </section>
-        
+
         <!-- wishlist grid -->
-    <section id="gridProduct" class="py-5">
-    <div class="container-fluid max-w-1480 px-3 px-lg-5">
+        <section id="gridProduct" class="py-5 p-5">
+            <div class="container-fluid max-w-1480 px-3 px-lg-5">
 
-        <div id="wishlistProducts"></div>
+                <div id="wishlistProducts"></div>
 
-    </div>
-</section>
+            </div>
+        </section>
 
 
     </main>
 
+    <div class="custom-cursor" id="customCursor">
+
+    </div>
+
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-gsap.registerPlugin(ScrollTrigger);
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
 
-// Preloader (unchanged)
-window.addEventListener("load", () => {
-  const t1 = gsap.timeline({ defaults: { duration: 0.5, ease: "power3.out" } });
-  t1.fromTo(".preloader-content img", { opacity: 0, y: -20, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 1 })
-    .fromTo(".preloader-content p", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.8")
-    .fromTo(".preloader-line", { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.6, transformOrigin: "left" }, "-=0.6")
-    .fromTo(".preloader-progress", { width: "0%" }, { width: "100%", duration: 0.6, ease: "power2.inOut" })
-    .to(".kb-preloader", {
-      opacity: 0, duration: 0.8, delay: 0.2,
-      onComplete: () => {
-        document.getElementById("kbPreloader").style.display = "none";
-        ScrollTrigger.refresh();
-      }
-    });
-});
+        // Preloader
+        window.addEventListener("load", () => {
+            const t1 = gsap.timeline({ defaults: { duration: 0.5, ease: "power3.out" } });
+            t1.fromTo(".preloader-content img", { opacity: 0, y: -20, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 1 })
+                .fromTo(".preloader-content p", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.8")
+                .fromTo(".preloader-line", { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.6, transformOrigin: "left" }, "-=0.6")
+                .fromTo(".preloader-progress", { width: "0%" }, { width: "100%", duration: 0.6, ease: "power2.inOut" })
+                .to(".kb-preloader", {
+                    opacity: 0, duration: 0.8, delay: 0.2,
+                    onComplete: () => {
+                        document.getElementById("kbPreloader").style.display = "none";
+                        ScrollTrigger.refresh();
+                    }
+                });
+        });
 
-document.querySelectorAll("#navMenu .nav-link").forEach(link => {
-  link.addEventListener("click", () => {
-    const navOffcanvas = bootstrap.Offcanvas.getInstance(document.getElementById("navMenu"));
-    if (navOffcanvas) navOffcanvas.hide();
-  });
-});
+        document.querySelectorAll("#navMenu .nav-link").forEach(link => {
+            link.addEventListener("click", () => {
+                const navOffcanvas = bootstrap.Offcanvas.getInstance(document.getElementById("navMenu"));
+                if (navOffcanvas) navOffcanvas.hide();
+            });
+        });
 
-// ==========================
-// WISHLIST RENDER
-// ==========================
-function formatINR(num) {
-  return '₹' + Number(num).toLocaleString('en-IN');
-}
+        // ==========================
+        // WISHLIST RENDER
+        // ==========================
+        function formatINR(num) {
+            return '₹' + Number(num).toLocaleString('en-IN');
+        }
 
-function getWishlist() {
-  return JSON.parse(localStorage.getItem("wishlist")) || [];
-}
+        function getWishlist() {
+            return JSON.parse(localStorage.getItem("wishlist")) || [];
+        }
 
-function renderWishlist() {
-  const wishlist = getWishlist();
-  const container = document.getElementById("wishlistProducts");
-  if (!container) return;
+        function renderWishlist() {
+            const wishlist = getWishlist();
+            const container = document.getElementById("wishlistProducts");
+            if (!container) return;
 
-  if (wishlist.length === 0) {
-    container.innerHTML = `
+            if (wishlist.length === 0) {
+                container.innerHTML = `
       <div class="text-center py-5">
         <div class="mx-auto mb-4 d-flex align-items-center justify-content-center rounded-circle"
              style="width:80px; height:80px; background:#f7f3ea;">
@@ -273,12 +306,12 @@ function renderWishlist() {
         </a>
       </div>
     `;
-    return;
-  }
+                return;
+            }
 
-  const subtotal = wishlist.reduce((sum, p) => sum + Number(p.price), 0);
+            const subtotal = wishlist.reduce((sum, p) => sum + Number(p.price), 0);
 
-  const headerHTML = `
+            const headerHTML = `
     <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
       <p class="text-muted small mb-0">${wishlist.length} piece${wishlist.length > 1 ? 's' : ''} saved · ${formatINR(subtotal)} total</p>
       <button class="btn btn-sm btn-outline-dark rounded-0 text-uppercase" style="font-size:0.65rem; letter-spacing:0.1em;" onclick="moveAllToBag()">
@@ -293,14 +326,14 @@ function renderWishlist() {
     </div>
   `;
 
-  const itemsHTML = wishlist.map(product => `
+            const itemsHTML = wishlist.map(product => `
     <div class="wishlist-item py-4 border-bottom" data-id="${product.id}" style="transition:opacity 0.3s ease;">
       <div class="row align-items-center g-3">
 
         <!-- PRODUCT -->
         <div class="col-12 col-lg-5">
           <div class="d-flex align-items-center gap-3">
-            <div class="wishlist-image overflow-hidden position-relative" style="width:90px; height:110px; flex-shrink:0; background:#f5f3ef;">
+            <div class="wishlist-image overflow-hidden position-relative zoom-hover" style="width:90px; height:110px; flex-shrink:0; background:#f5f3ef;">
               <img src="${product.image}" onerror="this.src='${product.fallback || ''}'; this.onerror=null;"
                    alt="${product.name}" class="w-100 h-100 object-fit-cover" style="transition:transform 0.5s ease;">
             </div>
@@ -351,62 +384,84 @@ function renderWishlist() {
     </div>
   `).join('');
 
-  container.innerHTML = headerHTML + itemsHTML;
+            container.innerHTML = headerHTML + itemsHTML;
 
-  // Entrance animation
-  gsap.fromTo(container.querySelectorAll('.wishlist-item'),
-    { opacity: 0, y: 20 },
-    { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: "power2.out" }
-  );
-}
+            // Entrance animation
+            gsap.fromTo(container.querySelectorAll('.wishlist-item'),
+                { opacity: 0, y: 20 },
+                { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: "power2.out" }
+            );
+        }
 
-// ==========================
-// REMOVE / ADD ACTIONS (no page reload)
-// ==========================
-function removeWishlistItem(id) {
-  const row = document.querySelector(`.wishlist-item[data-id="${id}"]`);
+        // ==========================
+        // REMOVE / ADD ACTIONS (no page reload)
+        // ==========================
+        function removeWishlistItem(id) {
+            const row = document.querySelector(`.wishlist-item[data-id="${id}"]`);
 
-  const commit = () => {
-    let wishlist = getWishlist().filter(item => item.id !== id);
-    localStorage.setItem("wishlist", JSON.stringify(wishlist));
-    renderWishlist();
-  };
+            const commit = () => {
+                let wishlist = getWishlist().filter(item => item.id !== id);
+                localStorage.setItem("wishlist", JSON.stringify(wishlist));
+                renderWishlist();
+            };
 
-  if (row) {
-    gsap.to(row, {
-      opacity: 0, x: -30, height: 0, paddingTop: 0, paddingBottom: 0,
-      marginBottom: 0, duration: 0.35, ease: "power2.in",
-      onComplete: commit
-    });
-  } else {
-    commit();
-  }
-}
+            if (row) {
+                gsap.to(row, {
+                    opacity: 0, x: -30, height: 0, paddingTop: 0, paddingBottom: 0,
+                    marginBottom: 0, duration: 0.35, ease: "power2.in",
+                    onComplete: commit
+                });
+            } else {
+                commit();
+            }
+        }
 
-function addToBagFromWishlist(id) {
-  const wishlist = getWishlist();
-  const product = wishlist.find(p => p.id === id);
-  if (!product) return;
+        function addToBagFromWishlist(id) {
+            const wishlist = getWishlist();
+            const product = wishlist.find(p => p.id === id);
+            if (!product) return;
 
-  if (typeof addToBag === 'function') addToBag(product.id);
-  if (typeof showToast === 'function') {
-    showToast(`"${product.name}" added to your bag.`);
-  }
-}
+            if (typeof addToBag === 'function') addToBag(product.id);
+            if (typeof showToast === 'function') {
+                showToast(`"${product.name}" added to your bag.`);
+            }
+        }
 
-function moveAllToBag() {
-  const wishlist = getWishlist();
-  if (wishlist.length === 0) return;
+        function moveAllToBag() {
+            const wishlist = getWishlist();
+            if (wishlist.length === 0) return;
 
-  wishlist.forEach(p => { if (typeof addToBag === 'function') addToBag(p.id); });
+            wishlist.forEach(p => { if (typeof addToBag === 'function') addToBag(p.id); });
 
-  if (typeof showToast === 'function') {
-    showToast(`${wishlist.length} piece${wishlist.length > 1 ? 's' : ''} moved to your bag.`);
-  }
-}
+            if (typeof showToast === 'function') {
+                showToast(`${wishlist.length} piece${wishlist.length > 1 ? 's' : ''} moved to your bag.`);
+            }
+        }
 
-document.addEventListener("DOMContentLoaded", renderWishlist);
-</script>
+        document.addEventListener("DOMContentLoaded", renderWishlist);
+
+        // ==========================
+        // CUSTOM ZOOM CURSOR
+        // ==========================
+        const cursor = document.getElementById('customCursor');
+        const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+        if (canHover && cursor) {
+            window.addEventListener('mousemove', (e) => {
+                gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.15, ease: "power2.out" });
+            });
+
+            document.addEventListener('mouseenter', (e) => {
+                const target = e.target.closest && e.target.closest('.zoom-hover');
+                if (target) cursor.classList.add('active');
+            }, true);
+
+            document.addEventListener('mouseleave', (e) => {
+                const target = e.target.closest && e.target.closest('.zoom-hover');
+                if (target) cursor.classList.remove('active');
+            }, true);
+        }
+    </script>
 </body>
 
 </html>
