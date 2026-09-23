@@ -2003,34 +2003,39 @@ body {
   }
 }
 
-.custom-cursor{
+.custom-cursor {
   position: fixed;
-  top:0;
-  left:0;
-  width: 70px;
-  height: 70px;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.85);
-  color:#d4af37;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  background: #177476;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0;
-  transform: translate(-50%,-50%) scale(0.5);
-  transition: opacity 0.25 ease,transform 0.25s ease;
+  transform: translate(-50%, -50%) scale(1);
+  transition: width 0.3s ease, height 0.3s ease, background 0.3s ease, transform 0.15s ease;
 }
 
-.custom-cursor .active{
-  opacity: 1;
-  transform: translate(-50%,-50%) scale(1);
+.custom-cursor.active {
+  width: 60px;
+  height: 60px;
+  background: rgba(146, 212, 145, 0.15);
+  border: 1px solid #111;
 }
 
-/* Hide default cursor only over zoomable elements */
-.zoom-hover{
-  cursor:none
+.zoom-hover {
+  cursor: none;
+}
+
+.zoom-hover {
+  overflow: hidden;
+}
+
+.zoom-hover img {
+  transition: transform 0.6s ease;
+}
+
+.zoom-hover:hover img {
+  transform: scale(1.12);
 }

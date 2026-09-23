@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Katha Bbeen | Checkout</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    body {
+      overflow-x: hidden;
+    }
+    .co-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 1.75rem;
+  box-shadow: 0 4px 24px rgba(11, 34, 25, 0.06), 0 1px 3px rgba(201, 164, 92, 0.1);
+}
+    /* Step indicator */
+    .checkout-steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .checkout-step {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .checkout-step.active {
+      color: #dfbf75;
+    }
+
+    .checkout-step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid currentColor;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+    }
+
+    .checkout-step.active .checkout-step-num {
+      background: #c9a45c;
+      color: #0b2219;
+      border-color: #c9a45c;
+    }
+
+    .checkout-step-sep {
+      width: 28px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Form */
+    .co-card {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 1.75rem;
+    }
+
+    .co-input {
+      border: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+      border-radius: 0;
+      padding: 0.6rem 0.1rem;
+      font-size: 0.9rem;
+      background: transparent;
+    }
+
+    .co-input:focus {
+      box-shadow: none;
+      border-bottom-color: #c9a45c;
+      outline: none;
+    }
+
+    .co-radio-card {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .co-radio-card:hover {
+      border-color: rgba(201, 164, 92, 0.5);
+    }
+
+    .co-radio-card.selected {
+      border-color: #c9a45c;
+      background: rgba(201, 164, 92, 0.05);
+    }
+
+    .co-radio-card input {
+      accent-color: #c9a45c;
+    }
+
+    .co-item-row {
+      padding: 0.9rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .co-summary-line {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .co-summary-line:last-of-type {
+      border-bottom: none;
+    }
+
+    .co-promo-applied {
+      background: rgba(41, 121, 82, 0.08);
+      border: 1px dashed rgba(41, 121, 82, 0.4);
+      color: #297952;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR (minimal, distraction-free checkout) -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-glass sticky-top py-4">
+      <div class="container-fluid px-lg-5 position-relative">
+        <a href="wishlist.html" class="d-flex align-items-center text-dark text-decoration-none" style="z-index:1020;">
+          <i class="bi bi-arrow-left me-2"></i>
+          <span class="small text-uppercase" style="letter-spacing:0.1em; font-size:0.72rem;">Back to Bag</span>
+        </a>
+
+        <a class="navbar-brand position-absolute start-50 translate-middle-x m-0 p-0 d-flex align-items-center justify-content-center"
+          href="index.html" style="z-index: 1020;">
+          <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+            style="height: 84px; max-width: 140px; object-fit: contain;">
+        </a>
+
+        <div class="d-flex align-items-center gap-3 ms-auto" style="z-index: 1021;">
+           <button onclick="window.location.href='/account.html'"
+            class="btn btn-link text-dark p-0 border-0 d-none d-sm-block" aria-label="Account"><i
+              class="bi bi-person-fill fs-5"></i></button>
+          <button class="btn btn-link text-dark p-0 border-0 d-none d-sm-block" aria-label="Wishlist"><i
+              class="bi bi-suit-heart fs-5"></i></button>
+          <button class="btn btn-link text-dark p-0 border-0 position-relative" data-bs-toggle="offcanvas"
+            data-bs-target="#bagOffcanvas" aria-label="Shopping Bag">
+            <i class="bi bi-bag fs-5"></i>
+            <span id="bagCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+              style="background-color: var(--kb-primary) !important; font-size: 0.65rem;">
+              0
+            </span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- STEP INDICATOR -->
+  <section class="py-3" style="background: #0b2219;">
+    <div class="checkout-steps">
+      <div class="checkout-step">
+        <span class="checkout-step-num"><i class="bi bi-check-lg"></i></span> Bag
+      </div>
+      <div class="checkout-step-sep"></div>
+      <div class="checkout-step active">
+        <span class="checkout-step-num">2</span> Details &amp; Payment
+      </div>
+      <div class="checkout-step-sep"></div>
+      <div class="checkout-step">
+        <span class="checkout-step-num">3</span> Confirmation
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section class="py-5 bg-kb-cream px-3 px-lg-5">
+      <div class="container-fluid max-w-1480">
+        <form id="checkoutForm">
+          <div class="row g-5">
+
+            <!-- LEFT: Details -->
+            <div class="col-lg-7">
+
+              <!-- Contact -->
+              <h3 class="font-serif fw-normal mb-3">Contact Information</h3>
+              <div class="co-card mb-4">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="text-muted text-uppercase mb-1 d-block" style="font-size:1rem;letter-spacing:0.1em;">Full Name</label>
+                    <input type="text" class="form-control co-input" required value="Srii Saha">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="text-muted text-uppercase mb-1 d-block" style="font-size:1rem;letter-spacing:0.1em;">Phone Number</label>
+                    <input type="tel" class="form-control co-input" required value="+91 90000 00000">
+                  </div>
+                  <div class="col-12">
+                    <label class="text-muted text-uppercase mb-1 d-block" style="font-size:1rem;letter-spacing:0.1em;">Email Address</label>
+                    <input type="email" class="form-control co-input" required value="srii@example.com">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Shipping Address -->
+              <h3 class="font-serif fw-normal mb-3">Shipping Address</h3>
+              <div class="co-card mb-4">
+                <div class="row g-3">
+                  <div class="col-12">
+                    <label class="text-muted text-uppercase mb-1 d-block" style="font-size:0.95rem;letter-spacing:0.1em;">Address Line 1</label>
+                    <input type="text" class="form-control co-input" required value="14 Camac Street">
+                  </div>
+                  <div class="col-12">
+                    <label class="text-muted text-uppercase mb-1 d-block" style="font-size:0.95rem;letter-spacing:0.1em;">Address Line 2 (optional)</label>
+                    <input type="text" class="form-control co-input" value="Elgin">
+                  </div>
+                  <div class="col-md-4">
+                    <label class="text-muted text-uppercase mb-1 d-block" style="font-size:0.95rem;letter-spacing:0.1em;">City</label>
+                    <input type="text" class="form-control co-input" required value="Kolkata">
+                  </div>
+                  <div class="col-md-4">
+                    <label class="text-muted text-uppercase mb-1 d-block" style="font-size:0.95rem;letter-spacing:0.1em;">State</label>
+                    <input type="text" class="form-control co-input" required value="West Bengal">
+                  </div>
+                  <div class="col-md-4">
+                    <label class="text-muted text-uppercase mb-1 d-block" style="font-size:0.65rem;letter-spacing:0.1em;">PIN Code</label>
+                    <input type="text" class="form-control co-input" required value="700017">
+                  </div>
+                  <div class="col-12 pt-1">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="saveAddressCheck" style="accent-color:#c9a45c;">
+                      <label class="form-check-label small text-muted" for="saveAddressCheck">Save this address to my account</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Payment Method -->
+              <h3 class="font-serif fw-normal mb-3">Payment Method</h3>
+              <div class="co-card mb-4">
+                <div class="d-grid gap-2">
+                  <label class="co-radio-card selected d-flex align-items-center justify-content-between" data-pay="upi">
+                    <span><i class="bi bi-phone me-2 text-kb-gold"></i> UPI (GPay, PhonePe, Paytm)</span>
+                    <input type="radio" name="payMethod" value="upi" checked>
+                  </label>
+                  <label class="co-radio-card d-flex align-items-center justify-content-between" data-pay="card">
+                    <span><i class="bi bi-credit-card me-2 text-kb-gold"></i> Credit / Debit Card</span>
+                    <input type="radio" name="payMethod" value="card">
+                  </label>
+                  <label class="co-radio-card d-flex align-items-center justify-content-between" data-pay="netbanking">
+                    <span><i class="bi bi-bank me-2 text-kb-gold"></i> Net Banking</span>
+                    <input type="radio" name="payMethod" value="netbanking">
+                  </label>
+                  <label class="co-radio-card d-flex align-items-center justify-content-between" data-pay="cod">
+                    <span><i class="bi bi-cash-coin me-2 text-kb-gold"></i> Cash on Delivery</span>
+                    <input type="radio" name="payMethod" value="cod">
+                  </label>
+                </div>
+
+                <!-- Conditional fields -->
+                <div id="payFieldsUpi" class="mt-3 pt-3 border-top">
+                  <label class="text-muted text-uppercase mb-1 d-block" style="font-size:0.75rem;letter-spacing:0.1em;">UPI ID</label>
+                  <input type="text" class="form-control co-input" placeholder="yourname@upi" style="max-width:320px;">
+                </div>
+                <div id="payFieldsCard" class="mt-3 pt-3 border-top d-none">
+                  <div class="row g-3">
+                    <div class="col-12">
+                      <label class="text-muted text-uppercase mb-1 d-block" style="font-size:0.65rem;letter-spacing:0.1em;">Card Number</label>
+                      <input type="text" class="form-control co-input" placeholder="1234 5678 9012 3456">
+                    </div>
+                    <div class="col-6">
+                      <label class="text-muted text-uppercase mb-1 d-block" style="font-size:0.65rem;letter-spacing:0.1em;">Expiry</label>
+                      <input type="text" class="form-control co-input" placeholder="MM / YY">
+                    </div>
+                    <div class="col-6">
+                      <label class="text-muted text-uppercase mb-1 d-block" style="font-size:0.65rem;letter-spacing:0.1em;">CVV</label>
+                      <input type="text" class="form-control co-input" placeholder="•••">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- RIGHT: Order Summary -->
+            <div class="col-lg-5">
+              <div class="co-card position-sticky" style="top: 110px;">
+                <h4 class="font-serif fw-normal mb-3">Order Summary</h4>
+                <div id="checkoutItemsList"></div>
+
+                <!-- Promo -->
+                <div class="d-flex gap-2 my-3">
+                  <input type="text" id="promoInput" class="form-control co-input" placeholder="Promo code" value="ROYAL20">
+                  <button type="button" class="btn btn-outline-dark rounded-0 px-3" style="font-size:0.72rem;" onclick="applyPromo()">Apply</button>
+                </div>
+                <div id="promoAppliedNote" class="co-promo-applied rounded-1 px-3 py-2 mb-3 small d-none">
+                  <i class="bi bi-check-circle me-1"></i> <span id="promoAppliedText"></span>
+                </div>
+
+                <div class="co-summary-line d-flex justify-content-between">
+                  <span class="text-muted small">Subtotal</span>
+                  <span id="sumSubtotal">₹0</span>
+                </div>
+                <div class="co-summary-line d-flex justify-content-between">
+                  <span class="text-muted small">Discount</span>
+                  <span class="text-success" id="sumDiscount">-₹0</span>
+                </div>
+                <div class="co-summary-line d-flex justify-content-between">
+                  <span class="text-muted small">Delivery</span>
+                  <span class="text-success">Complimentary</span>
+                </div>
+                <div class="co-summary-line d-flex justify-content-between align-items-center pt-3">
+                  <span class="fw-semibold text-uppercase" style="font-size:0.8rem; letter-spacing:0.08em;">Total</span>
+                  <span class="font-serif fw-bold fs-3" id="sumTotal">₹0</span>
+                </div>
+
+                <button type="submit" class="btn btn-kb-gold w-100 py-3 mt-3 text-uppercase" style="font-size:0.75rem; letter-spacing:0.12em;" id="placeOrderBtn">
+                  <i class="bi bi-lock-fill me-1"></i> Place Secure Order
+                </button>
+                <p class="text-muted text-center mt-2 mb-0" style="font-size:0.10rem;">
+                  <i class="bi bi-shield-check text-kb-gold me-1"></i> 256-bit encrypted · PCI-DSS compliant
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+   <div class="custom-cursor" id="customCursor">
+
+    </div>
+
+  <!-- Minimal footer -->
+  <footer class="bg-kb-primary text-white-50 py-4 px-3 px-lg-5 text-center border-top border-secondary border-opacity-25">
+    <p class="small mb-0" style="font-size:0.72rem;">&copy; 2026 Katha Bbeen · Designed &amp; Developed by
+      <a href="https://www.orbitalwebworks.com/" class="text-kb-gold-light text-decoration-none fw-semibold">Orbital Webworks</a>
+    </p>
+  </footer>
+
+  <script>
+    // ==========================
+    // MOCK CART — swap with real cart/session data
+    // ==========================
+    const cartItems = [
+      { name: "Meher Imperial Emerald Katan", weave: "Pure Katan Silk · Kadhwa Weave", price: 21900, qty: 1, image: "asset/collection-silk-haKidXNd.jpg" },
+      { name: "Noor Liquid Ivory Silk", weave: "Undyed Mulberry · Antique Buti", price: 24500, qty: 1, image: "asset/katha-hero-Bf1Rq-sY.jpg" }
+    ];
+
+    let discountPercent = 0;
+    const validPromos = { "ROYAL20": 20 };
+
+    function formatINR(num) { return '₹' + Math.round(num).toLocaleString('en-IN'); }
+
+    function renderCheckoutItems() {
+      const list = document.getElementById("checkoutItemsList");
+      list.innerHTML = cartItems.map(item => `
+        <div class="co-item-row d-flex gap-3 align-items-center">
+          <img src="${item.image}" onerror="this.src='https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=200&q=80'"
+               class="object-fit-cover" width="56" height="70" alt="${item.name}" />
+          <div class="flex-grow-1">
+            <p class="mb-0 fw-semibold" style="font-size:0.82rem;">${item.name}</p>
+            <p class="text-muted mb-0" style="font-size:0.7rem;">${item.weave} · Qty ${item.qty}</p>
+          </div>
+          <span class="fw-semibold" style="font-size:0.82rem;">${formatINR(item.price * item.qty)}</span>
+        </div>
+      `).join('');
+      updateTotals();
+    }
+
+    function updateTotals() {
+      const subtotal = cartItems.reduce((sum, i) => sum + i.price * i.qty, 0);
+      const discount = subtotal * (discountPercent / 100);
+      const total = subtotal - discount;
+      document.getElementById("sumSubtotal").textContent = formatINR(subtotal);
+      document.getElementById("sumDiscount").textContent = "-" + formatINR(discount);
+      document.getElementById("sumTotal").textContent = formatINR(total);
+    }
+
+    function applyPromo() {
+      const code = document.getElementById("promoInput").value.trim().toUpperCase();
+      const note = document.getElementById("promoAppliedNote");
+      const noteText = document.getElementById("promoAppliedText");
+
+      if (validPromos[code]) {
+        discountPercent = validPromos[code];
+        note.classList.remove("d-none");
+        noteText.textContent = `"${code}" applied — ${discountPercent}% off your order.`;
+      } else {
+        discountPercent = 0;
+        note.classList.remove("d-none");
+        note.classList.remove("co-promo-applied");
+        note.style.background = "rgba(192,102,94,0.08)";
+        note.style.borderColor = "rgba(192,102,94,0.4)";
+        note.style.color = "#c0665e";
+        noteText.innerHTML = `<i class="bi bi-x-circle me-1"></i> Invalid or expired promo code.`;
+      }
+      updateTotals();
+    }
+
+    // Payment method switching
+    document.querySelectorAll('.co-radio-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.co-radio-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        card.querySelector('input[type="radio"]').checked = true;
+
+        document.getElementById('payFieldsUpi').classList.toggle('d-none', card.dataset.pay !== 'upi');
+        document.getElementById('payFieldsCard').classList.toggle('d-none', card.dataset.pay !== 'card');
+      });
+    });
+
+    // Submit → mock payment processing → redirect to success page
+    document.getElementById("checkoutForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const btn = document.getElementById("placeOrderBtn");
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Processing Payment...';
+
+      setTimeout(() => {
+        window.location.href = "success.html";
+      }, 1800);
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderCheckoutItems();
+      applyPromo(); 
+    });
+
+       const cursor = document.getElementById('customCursor');
+const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+if (canHover && cursor) {
+    window.addEventListener('mousemove', (e) => {
+        gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.15, ease: "power2.out" });
+    });
+
+    document.addEventListener('mouseenter', (e) => {
+        const target = e.target.closest && e.target.closest('.zoom-hover');
+        if (target) cursor.classList.add('active');
+    }, true);
+
+    document.addEventListener('mouseleave', (e) => {
+        const target = e.target.closest && e.target.closest('.zoom-hover');
+        if (target) cursor.classList.remove('active');
+    }, true);
+}
+  </script>
+</body>
+
+</html>

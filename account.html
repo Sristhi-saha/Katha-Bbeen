@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Katha Bbeen | My Account</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    .reveal-item {
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    .hero-wrapper {
+      height: auto;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    /* ===== Account Page — matches bestseller-card / kb color system ===== */
+    .acct-tab-nav {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border: 1px solid rgba(201, 164, 92, 0.25);
+      background: #0b2219;
+    }
+
+    .acct-tab-nav li {
+      border-bottom: 1px solid rgba(201, 164, 92, 0.15);
+    }
+
+    .acct-tab-nav li:last-child {
+      border-bottom: none;
+    }
+
+    .acct-tab-nav button {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      padding: 1rem 1.25rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: color 0.25s ease, background 0.25s ease;
+    }
+
+    .acct-tab-nav button:hover {
+      color: #dfbf75;
+      background: rgba(201, 164, 92, 0.06);
+    }
+
+    .acct-tab-nav button.active {
+      color: #dfbf75;
+      font-weight: 600;
+      background: rgba(201, 164, 92, 0.1);
+      border-left: 2px solid #c9a45c;
+    }
+
+    .acct-panel {
+      display: none;
+    }
+
+    .acct-panel.active {
+      display: block;
+    }
+
+    .acct-card {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 1.75rem;
+      box-shadow:  0 4px 24px rgba(11, 34, 25, 0.06), 0 1px 3px rgba(201, 164, 92, 0.1);;
+    }
+
+    .acct-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #0b2219;
+      color: #dfbf75;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      border: 1px solid rgba(201, 164, 92, 0.4);
+    }
+
+    .acct-input {
+      border: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+      border-radius: 0;
+      padding: 0.6rem 0.1rem;
+      font-size: 0.9rem;
+      background: transparent;
+    }
+
+    .acct-input:focus {
+      box-shadow: none;
+      border-bottom-color: #c9a45c;
+      outline: none;
+    }
+
+    .acct-order-row {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 1.25rem 0;
+    }
+
+    .acct-order-row:last-child {
+      border-bottom: none;
+    }
+
+    .acct-status-pill {
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 30px;
+      display: inline-block;
+    }
+
+    .acct-status-delivered {
+      background: rgba(41, 121, 82, 0.1);
+      color: #297952;
+    }
+
+    .acct-status-transit {
+      background: rgba(201, 164, 92, 0.14);
+      color: #a5813c;
+    }
+
+    .acct-status-processing {
+      background: rgba(107, 107, 107, 0.1);
+      color: #6b6b6b;
+    }
+
+    .acct-address-card {
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 1.25rem;
+      height: 100%;
+      position: relative;
+    }
+
+    .acct-address-card.default {
+      border-color: #c9a45c;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PRELOADER -->
+  <div id="kbPreloader" class="kb-preloader">
+    <div class="preloader-content text-center">
+      <a class="d-flex align-items-center justify-content-center" href="index.html">
+        <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+          style="height: 198px; max-width: 460px; object-fit: contain;">
+      </a>
+      <p class="text-kb-gold-light text-uppercase small" style="letter-spacing: 0.35em; font-size: 0.65rem;">
+        Your Choice Our Promise
+      </p>
+      <div class="preloader-line mt-3">
+        <div class="preloader-progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Announcement Bar -->
+  <aside class="bg-kb-primary-dark text-center py-2 text-white border-bottom border-secondary border-opacity-25"
+    style="font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase;background-color: green;">
+    <i class="bi bi-gem text-kb-gold me-2"></i> Complimentary insured worldwide delivery on festive weaves over ₹15,000
+  </aside>
+
+  <!-- NAVBAR -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-glass sticky-top py-4">
+      <div class="container-fluid px-lg-5 position-relative">
+        <div class="d-flex align-items-center">
+          <button class="navbar-toggler border-0 shadow-none p-0 d-lg-none" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#navMenu" aria-controls="navMenu" aria-label="Toggle navigation">
+            <i class="bi bi-list fs-1 text-dark"></i>
+          </button>
+
+          <div class="offcanvas offcanvas-start" tabindex="-1" id="navMenu" aria-labelledby="navMenuLabel">
+            <div class="offcanvas-header border-bottom py-3 d-lg-none" style="background-color: var(--kb-cream);">
+              <div class="d-flex align-items-center gap-2">
+                <a class="d-flex align-items-center justify-content-center" href="index.html" style="z-index: 1020;">
+                  <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+                    style="height: 70px; max-width: 460px; object-fit: contain;">
+                </a>
+              </div>
+              <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body p-4 p-lg-0">
+              <ul class="navbar-nav gap-lg-1 text-uppercase fw-semibold"
+                style="font-size: 0.75rem; letter-spacing: 0.14em;">
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="index.html">Home</a></li>
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="category.html">Catregory</a>
+                </li>
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="about.html">About Us</a></li>
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="contact.html">Contact Us</a>
+                </li>
+              </ul>
+              <div class="d-lg-none mt-auto pt-4 border-top">
+                <p class="text-uppercase text-muted fw-bold mb-2" style="font-size: 0.65rem; letter-spacing: 0.2em;">
+                  Atelier Assistance</p>
+                <p class="small text-muted mb-2"><i class="bi bi-whatsapp text-success me-2"></i>+91 000000000</p>
+                <p class="small text-muted mb-0"><i class="bi bi-envelope me-2"></i>email@kathabbeen.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a class="navbar-brand position-absolute start-50 translate-middle-x m-0 p-0 d-flex align-items-center justify-content-center"
+          href="index.html" style="z-index: 1020;">
+          <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+            style="height: 98px; max-width: 160px; object-fit: contain;">
+        </a>
+
+        <div class="d-flex align-items-center gap-3 ms-auto" style="z-index: 1021;">
+          <button onclick="window.location.href='/account.html'"
+            class="btn btn-link text-dark p-0 border-0 d-none d-sm-block" aria-label="Account"><i
+              class="bi bi-person-fill fs-5"></i></button>
+          <button onclick="window.location.href='/wishlist.html'"
+            class="btn btn-link text-dark p-0 border-0 d-none d-sm-block" aria-label="Wishlist"><i
+              class="bi bi-suit-heart fs-5"></i></button>
+          <button class="btn btn-link text-dark p-0 border-0 position-relative" data-bs-toggle="offcanvas"
+            data-bs-target="#bagOffcanvas" aria-label="Shopping Bag">
+            <i class="bi bi-bag fs-5"></i>
+            <span id="bagCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+              style="background-color: var(--kb-primary) !important; font-size: 0.65rem;">0</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="hero" class="hero-wrapper text-white py-5 px-3 px-lg-5">
+      <div class="hero-ambient-glow"></div>
+      <div class="container-fluid max-w-1480">
+        <div class="row align-items-end mb-4 reveal-item">
+          <div class="col-lg-8">
+            <p class="text-kb-gold-light text-uppercase fw-bold mb-2" style="font-size: 0.7rem; letter-spacing: 0.35em;">
+              <i class="bi bi-stars me-1 text-kb-gold"></i> Atelier Membership
+            </p>
+            <h1 class="font-serif display-3 fw-normal mb-0">
+              Welcome back,
+              <em class="fw-light gold-gradient-text" id="heroFirstName">weaver of stories.</em>
+            </h1>
+          </div>
+          <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+            <p class="text-white-50 small mb-0">
+              Manage your profile, track orders, and revisit the addresses closest to your heart.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACCOUNT SECTION -->
+    <section id="accountSection" class="py-5 bg-kb-cream px-3 px-lg-5 border-top border-bottom">
+      <div class="container-fluid">
+        <div class="row g-5">
+
+          <!-- Sidebar -->
+          <div class="col-lg-3 reveal-item delay-1">
+            <div class="d-flex align-items-center gap-3 mb-4">
+              <div class="acct-avatar" id="avatarInitial">S</div>
+              <div>
+                <p class="font-serif mb-0 text-dark" style="font-size: 1.15rem;font-weight: 600;" id="sidebarName">Srii Saha</p>
+                <p class="text-muted mb-0" style="font-size: 1rem;" id="sidebarEmail">srii@example.com</p>
+              </div>
+            </div>
+
+            <ul class="acct-tab-nav">
+              <li><button class="active" data-tab="profile">Profile Details <i class="bi bi-chevron-right"></i></button></li>
+              <li><button data-tab="orders">Order History <i class="bi bi-chevron-right"></i></button></li>
+              <li><button data-tab="addresses">Saved Addresses <i class="bi bi-chevron-right"></i></button></li>
+              <li><button data-tab="wishlist">My Wishlist <i class="bi bi-chevron-right"></i></button></li>
+              <li><button data-tab="security">Password &amp; Security <i class="bi bi-chevron-right"></i></button></li>
+              <li><button id="logoutBtn" style="color:#c0665e;">Logout <i class="bi bi-box-arrow-right"></i></button></li>
+            </ul>
+          </div>
+
+          <!-- Content -->
+          <div class="col-lg-9 reveal-item delay-2">
+
+            <!-- Profile -->
+            <div class="acct-panel active" id="panel-profile">
+              <h3 class="font-serif fw-normal mb-4">Profile Details</h3>
+              <div class="acct-card">
+                <form id="profileForm">
+                  <div class="row g-4">
+                    <div class="col-md-6">
+                      <label class="text-muted text-uppercase mb-1 d-block">First Name</label>
+                      <input type="text" class="form-control acct-input" id="firstName" value="Srii">
+                    </div>
+                    <div class="col-md-6">
+                      <label class="text-muted text-uppercase mb-1 d-block" >Last Name</label>
+                      <input type="text" class="form-control acct-input" id="lastName" value="Saha">
+                    </div>
+                    <div class="col-md-6">
+                      <label class="text-muted text-uppercase mb-1 d-block" >Email Address</label>
+                      <input type="email" class="form-control acct-input" id="emailInput" value="srii@example.com">
+                    </div>
+                    <div class="col-md-6">
+                      <label class="text-muted text-uppercase mb-1 d-block">Phone Number</label>
+                      <input type="tel" class="form-control acct-input" id="phoneInput" value="+91 90000 00000">
+                    </div>
+                    <div class="col-12 pt-2">
+                      <button type="submit" class="btn btn-kb-gold rounded-0 px-4 py-2 text-uppercase" style="font-size:0.7rem;letter-spacing:0.12em;">
+                        Save Changes
+                      </button>
+                      <span class="text-success ms-3 small d-none" id="profileSavedMsg"><i class="bi bi-check-circle me-1"></i>Saved</span>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- Orders -->
+            <div class="acct-panel" id="panel-orders">
+              <h3 class="font-serif fw-normal mb-4">Order History</h3>
+              <div class="acct-card"><div id="ordersList"></div></div>
+            </div>
+
+            <!-- Addresses -->
+            <div class="acct-panel" id="panel-addresses">
+              <div class="d-flex align-items-center justify-content-between mb-4">
+                <h3 class="font-serif fw-normal mb-0">Saved Addresses</h3>
+                <button class="btn btn-sm btn-kb-outline rounded-0 text-uppercase" style="font-size:0.65rem;letter-spacing:0.1em;">
+                  <i class="bi bi-plus-lg me-1"></i> Add New
+                </button>
+              </div>
+              <div class="row g-3" id="addressList"></div>
+            </div>
+
+            <!-- Wishlist -->
+            <div class="acct-panel" id="panel-wishlist">
+              <h3 class="font-serif fw-normal mb-4">My Wishlist</h3>
+              <div class="acct-card text-center py-5">
+                <i class="bi bi-suit-heart text-kb-gold mb-3 d-block" style="font-size:2rem;"></i>
+                <p class="text-muted mb-4">Your saved pieces live on a dedicated page.</p>
+                <a href="wishlist.html" class="btn btn-kb-gold rounded-0 px-4 py-2 text-uppercase" style="font-size:0.7rem;letter-spacing:0.12em;">
+                  View Wishlist
+                </a>
+              </div>
+            </div>
+
+            <!-- Security -->
+            <div class="acct-panel" id="panel-security">
+              <h3 class="font-serif fw-normal mb-4">Password &amp; Security</h3>
+              <div class="acct-card">
+                <form id="securityForm">
+                  <div class="row g-4">
+                    <div class="col-md-6">
+                      <label class="text-muted text-uppercase mb-1 d-block" style="font-size:0.65rem;letter-spacing:0.1em;">Current Password</label>
+                      <input type="password" class="form-control acct-input">
+                    </div>
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                      <label class="text-muted text-uppercase mb-1 d-block" style="font-size:0.65rem;letter-spacing:0.1em;">New Password</label>
+                      <input type="password" class="form-control acct-input">
+                    </div>
+                    <div class="col-md-6">
+                      <label class="text-muted text-uppercase mb-1 d-block" style="font-size:0.65rem;letter-spacing:0.1em;">Confirm New Password</label>
+                      <input type="password" class="form-control acct-input">
+                    </div>
+                    <div class="col-12 pt-2">
+                      <button type="submit" class="btn btn-kb-gold rounded-0 px-4 py-2 text-uppercase" style="font-size:0.7rem;letter-spacing:0.12em;">
+                        Update Password
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-kb-primary text-white-50 py-5 px-3 px-lg-5 border-top border-secondary border-opacity-25">
+    <div class="container-fluid">
+      <div class="row g-5">
+        <div class="col-lg-4">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <div class="bg-white rounded-2">
+              <a class="d-flex align-items-center justify-content-center" href="index.html" style="z-index: 1020;">
+                <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+                  style="height: 50px; max-width: 60px; object-fit: contain;">
+              </a>
+            </div>
+          </div>
+          <p class="text-kb-gold-light text-uppercase mb-3" style="font-size: 0.65rem; letter-spacing: 0.28em;">Your Choice Our Promise</p>
+          <p class="small text-white-50 pe-lg-4">
+            Curated handwoven sarees created for weddings, festivities, and heirlooms passed through generations.
+          </p>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h6 class="text-uppercase text-white small mb-3" style="letter-spacing: 0.18em;">Weaves</h6>
+          <ul class="list-unstyled small d-grid gap-2">
+            <li><a href="#" class="text-white-50 text-decoration-none">Banarasi Katan</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Chanderi Silks</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Tussar Handloom</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Organza Zari</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h6 class="text-uppercase text-white small mb-3" style="letter-spacing: 0.18em;">Assistance</h6>
+          <ul class="list-unstyled small d-grid gap-2">
+            <li><a href="#" class="text-white-50 text-decoration-none">Shipping & Duties</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Care & Storage</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Saree Authenticity</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Contact Atelier</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h6 class="text-uppercase text-white small mb-3" style="letter-spacing: 0.18em;">The Katha Gazette</h6>
+          <p class="small text-white-50">Subscribe for early access to private trunk shows and festive weaver release dates.</p>
+        </div>
+      </div>
+      <div class="border-top border-secondary border-opacity-25 mt-5 pt-4 d-flex flex-column flex-md-row justify-content-between small text-white-50">
+        <div>&copy; 2026 Katha Bbeen. Handcrafted with reverence in India.</div>
+        <div class="text-white-50 mt-2 mt-md-0" style="font-size: 0.72rem;">
+          Designed &amp; Developed by <a href="https://www.orbitalwebworks.com/" class="text-kb-gold-light text-decoration-none fw-semibold">Orbital Webworks</a>
+        </div>
+        <div class="d-flex gap-3 mt-3 mt-md-0">
+          <a href="#" class="text-white-50 text-decoration-none">Terms</a>
+          <a href="#" class="text-white-50 text-decoration-none">Privacy</a>
+          <a href="#" class="text-white-50 text-decoration-none">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Toast (matches homepage's kb-toast) -->
+  <div id="kbToast" class="kb-toast">
+    <i class="bi bi-patch-check-fill text-kb-gold fs-5"></i>
+    <span id="kbToastMsg">Saved.</span>
+  </div>
+
+  <!-- Offcanvas Shopping Bag -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="bagOffcanvas" aria-labelledby="bagOffcanvasLabel">
+    <div class="offcanvas-header border-bottom py-3">
+      <h5 class="offcanvas-title font-serif fs-3" id="bagOffcanvasLabel">Your Shopping Bag</h5>
+      <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column justify-content-between p-4">
+      <div id="bagItemsList" class="d-grid gap-3">
+        <div class="text-center py-5 text-muted">
+          <i class="bi bi-bag display-4 mb-3 d-block text-kb-gold"></i>
+          <p class="font-serif fs-4 text-dark mb-1">Your bag is empty</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Preloader
+    window.addEventListener("load", () => {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      tl.fromTo(".preloader-content img", { opacity: 0, y: -20, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 1 })
+        .fromTo(".preloader-content p", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.8")
+        .fromTo(".preloader-line", { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.6, transformOrigin: "center" }, "-=0.3")
+        .fromTo(".preloader-progress", { width: "0%" }, { width: "100%", duration: 1.2, ease: "power2.inOut" })
+        .to(".kb-preloader", {
+          opacity: 0, duration: 0.8, delay: 0.2,
+          onComplete: () => {
+            document.getElementById("kbPreloader").style.display = "none";
+            ScrollTrigger.refresh();
+            initScrollReveals();
+          }
+        });
+    });
+
+    function initScrollReveals() {
+      document.querySelectorAll('.row').forEach((row, rowIndex) => {
+        const items = row.querySelectorAll(':scope > [class*="col-"] > .reveal-item, :scope > .reveal-item');
+        if (items.length === 0) return;
+        gsap.fromTo(items, { opacity: 0, y: 40 }, {
+          opacity: 1, y: 0, duration: 0.8, ease: "power3.out", stagger: 0.12,
+          scrollTrigger: { id: 'reveal-row-' + rowIndex, trigger: row, start: "top 85%", end: "bottom 15%", toggleActions: "play reverse play reverse" }
+        });
+      });
+    }
+
+    document.querySelectorAll('#navMenu .nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        const navOffcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('navMenu'));
+        if (navOffcanvas) navOffcanvas.hide();
+      });
+    });
+
+    // ==========================
+    // MOCK ACCOUNT DATA
+    // ==========================
+    function formatINR(num) { return '₹' + Number(num).toLocaleString('en-IN'); }
+
+    const accountData = { firstName: "Srii", lastName: "Saha", email: "srii@example.com" };
+
+    const orders = [
+      { id: "KB10241", date: "12 Sep 2026", items: "Sindoor Royal Bridal Brocade", total: 28900, status: "delivered" },
+      { id: "KB10198", date: "02 Sep 2026", items: "Meher Imperial Emerald Katan", total: 21900, status: "transit" },
+      { id: "KB10142", date: "20 Aug 2026", items: "Aaranya Botanical Forest Katan", total: 18900, status: "processing" }
+    ];
+
+    const addresses = [
+      { label: "Home", isDefault: true, line: "14 Camac Street, Elgin, Kolkata, West Bengal 700017" },
+      { label: "Work", isDefault: false, line: "Abc, Sector V, Salt Lake, Kolkata 700091" }
+    ];
+
+    function initProfileDisplay() {
+      document.getElementById("sidebarName").textContent = `${accountData.firstName} ${accountData.lastName}`;
+      document.getElementById("sidebarEmail").textContent = accountData.email;
+      document.getElementById("avatarInitial").textContent = accountData.firstName.charAt(0).toUpperCase();
+      document.getElementById("heroFirstName").textContent = `${accountData.firstName}.`;
+    }
+
+    const statusMap = {
+      delivered: { label: "Delivered", cls: "acct-status-delivered" },
+      transit: { label: "In Transit", cls: "acct-status-transit" },
+      processing: { label: "Processing", cls: "acct-status-processing" }
+    };
+
+    function renderOrders() {
+      const list = document.getElementById("ordersList");
+      if (orders.length === 0) { list.innerHTML = `<p class="text-muted text-center py-4 mb-0">No orders placed yet.</p>`; return; }
+      list.innerHTML = orders.map(order => `
+        <div class="acct-order-row d-flex flex-wrap align-items-center justify-content-between gap-2">
+          <div>
+            <p class="mb-1 fw-semibold" style="font-size:0.85rem;">${order.id}</p>
+            <p class="text-muted mb-0" style="font-size:0.78rem;">${order.items}</p>
+            <p class="text-muted mb-0" style="font-size:0.7rem;">${order.date}</p>
+          </div>
+          <div class="text-end">
+            <span class="acct-status-pill ${statusMap[order.status].cls} d-block mb-2">${statusMap[order.status].label}</span>
+            <span class="font-serif fw-semibold" style="font-size:1.1rem;">${formatINR(order.total)}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderAddresses() {
+      const list = document.getElementById("addressList");
+      list.innerHTML = addresses.map(addr => `
+        <div class="col-md-6">
+          <div class="acct-address-card ${addr.isDefault ? 'default' : ''}">
+            ${addr.isDefault ? `<span class="acct-status-pill acct-status-transit position-absolute" style="top:12px;right:12px;">Default</span>` : ''}
+            <p class="text-uppercase fw-semibold mb-2" style="font-size:0.72rem;letter-spacing:0.1em;">${addr.label}</p>
+            <p class="text-muted mb-3" style="font-size:0.82rem;line-height:1.5;">${addr.line}</p>
+            <button class="btn btn-link p-0 text-decoration-none" style="font-size:0.75rem;"><i class="bi bi-pencil me-1"></i> Edit</button>
+            <button class="btn btn-link p-0 text-decoration-none text-danger ms-3" style="font-size:0.75rem;"><i class="bi bi-trash3 me-1"></i> Remove</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    document.querySelectorAll(".acct-tab-nav button[data-tab]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".acct-tab-nav button[data-tab]").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const tab = btn.dataset.tab;
+        document.querySelectorAll(".acct-panel").forEach(panel => panel.classList.remove("active"));
+        const target = document.getElementById(`panel-${tab}`);
+        target.classList.add("active");
+        gsap.fromTo(target, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" });
+      });
+    });
+
+    function showToast(msg) {
+      const toast = document.getElementById('kbToast');
+      const toastMsg = document.getElementById('kbToastMsg');
+      if (!toast || !toastMsg) return;
+      toastMsg.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2800);
+    }
+
+    document.getElementById("profileForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      accountData.firstName = document.getElementById("firstName").value || accountData.firstName;
+      accountData.lastName = document.getElementById("lastName").value || accountData.lastName;
+      accountData.email = document.getElementById("emailInput").value || accountData.email;
+      initProfileDisplay();
+      const msg = document.getElementById("profileSavedMsg");
+      msg.classList.remove("d-none");
+      gsap.fromTo(msg, { opacity: 0 }, { opacity: 1, duration: 0.3 });
+      setTimeout(() => gsap.to(msg, { opacity: 0, duration: 0.4, onComplete: () => msg.classList.add("d-none") }), 2000);
+      showToast("Profile updated.");
+    });
+
+    document.getElementById("securityForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      showToast("Password updated.");
+      e.target.reset();
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      window.location.href = "index.html";
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      initProfileDisplay();
+      renderOrders();
+      renderAddresses();
+    });
+  </script>
+</body>
+
+</html>

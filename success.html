@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Katha Bbeen | Order Confirmed</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    body {
+      overflow-x: hidden;
+    }
+
+    .success-wrap {
+      background: linear-gradient(180deg, #071912 0%, #0b2219 100%);
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .success-check-ring {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: rgba(201, 164, 92, 0.1);
+      border: 1.5px solid rgba(201, 164, 92, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+    }
+
+    .success-check-circle {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: #c9a45c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: #0b2219;
+    }
+
+    .order-summary-card {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .order-summary-row {
+      padding: 1.1rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .order-summary-row:last-child {
+      border-bottom: none;
+    }
+
+    .order-meta-pill {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      border-radius: 30px;
+      background: rgba(41, 121, 82, 0.1);
+      color: #297952;
+      display: inline-block;
+    }
+
+    .tracking-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      position: relative;
+      padding-bottom: 1.8rem;
+    }
+
+    .tracking-step:last-child {
+      padding-bottom: 0;
+    }
+
+    .tracking-step::before {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 26px;
+      bottom: 0;
+      width: 1px;
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .tracking-step:last-child::before {
+      display: none;
+    }
+
+    .tracking-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      z-index: 1;
+    }
+
+    .tracking-dot.done {
+      background: #c9a45c;
+      color: #0b2219;
+    }
+
+    .tracking-dot.pending {
+      background: #f0f0f0;
+      color: #aaa;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .confetti-particle {
+      position: absolute;
+      top: -10%;
+      border-radius: 2px;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Announcement Bar -->
+  <aside class="bg-kb-primary-dark text-center py-2 text-white border-bottom border-secondary border-opacity-25"
+    style="font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase;background-color: green;">
+    <i class="bi bi-gem text-kb-gold me-2"></i> Complimentary insured worldwide delivery on festive weaves over ₹15,000
+  </aside>
+
+  <!-- NAVBAR -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-glass sticky-top py-4">
+      <div class="container-fluid px-lg-5 position-relative">
+
+        <!-- Left: Hamburger (Mobile) & Nav Menu (Desktop) -->
+        <div class="d-flex align-items-center">
+          <button class="navbar-toggler border-0 shadow-none p-0 d-lg-none" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#navMenu" aria-controls="navMenu" aria-label="Toggle navigation">
+            <i class="bi bi-list fs-1 text-dark"></i>
+          </button>
+
+          <!-- Navigation Drawer -->
+          <div class="offcanvas offcanvas-start" tabindex="-1" id="navMenu" aria-labelledby="navMenuLabel">
+            <div class="offcanvas-header border-bottom py-3 d-lg-none" style="background-color: var(--kb-cream);">
+              <div class="d-flex align-items-center gap-2">
+                <div>
+                  <a class="d-flex align-items-center justify-content-center" href="#" style="z-index: 1020;">
+                    <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+                      style="height: 70px; max-width: 460px; object-fit: contain;">
+                  </a>
+                </div>
+              </div>
+              <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+            </div>
+
+            <div class="offcanvas-body p-4 p-lg-0">
+              <ul class="navbar-nav gap-lg-1 text-uppercase fw-semibold"
+                style="font-size: 0.75rem; letter-spacing: 0.14em;">
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="index.html">Home</a></li>
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="category.html">Catregory</a>
+                </li>
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="about.html">About Us</a></li>
+                <li class="nav-item py-2 py-lg-0"><a class="nav-link text-dark px-2" href="contact.html">Contact Us</a>
+                </li>
+              </ul>
+
+              <div class="d-lg-none mt-auto pt-4 border-top">
+                <p class="text-uppercase text-muted fw-bold mb-2" style="font-size: 0.65rem; letter-spacing: 0.2em;">
+                  Atelier Assistance</p>
+                <p class="small text-muted mb-2"><i class="bi bi-whatsapp text-success me-2"></i>+91 000000000</p>
+                <p class="small text-muted mb-0"><i class="bi bi-envelope me-2"></i>email@kathabbeen.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center: Mathematically Centered Logo -->
+        <a class="navbar-brand position-absolute start-50 translate-middle-x m-0 p-0 d-flex align-items-center justify-content-center"
+          href="index.html" style="z-index: 1020;">
+          <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+            style="height: 98px; max-width: 160px; object-fit: contain;">
+        </a>
+
+        <!-- Right: Actions -->
+        <div class="d-flex align-items-center gap-3 ms-auto" style="z-index: 1021;">
+                     <button onclick="window.location.href='/account.html'"
+            class="btn btn-link text-dark p-0 border-0 d-none d-sm-block" aria-label="Account"><i
+              class="bi bi-person-fill fs-5"></i></button>
+                    <button onclick="window.location.href='/wishlist.html'"
+                        class="btn btn-link text-dark p-0 border-0 d-none d-sm-block" aria-label="Wishlist"><i
+                            class="bi bi-suit-heart fs-5"></i></button>
+                    <button class="btn btn-link text-dark p-0 border-0 position-relative" data-bs-toggle="offcanvas"
+                        data-bs-target="#bagOffcanvas" aria-label="Shopping Bag">
+                        <i class="bi bi-bag fs-5"></i>
+                        <span id="bagCountBadge"
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+                            style="background-color: var(--kb-primary) !important; font-size: 0.65rem;">
+                            0
+                        </span>
+                    </button>
+                </div>
+
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- SUCCESS HERO -->
+    <section class="success-wrap py-5 px-3 px-lg-5">
+      <div id="confettiLayer" class="position-absolute top-0 start-0 w-100 h-100" style="pointer-events:none; z-index:1;"></div>
+      <div class="container-fluid max-w-1480 text-center position-relative" style="z-index:2;">
+        <div class="reveal-item" id="checkWrap">
+          <div class="success-check-ring">
+            <div class="success-check-circle">
+              <i class="bi bi-check-lg"></i>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-kb-gold-light text-uppercase fw-bold mt-4 mb-2 reveal-item"
+          style="font-size: 0.7rem; letter-spacing: 0.35em;">
+          <i class="bi bi-stars me-1 text-kb-gold"></i> Order Confirmed
+        </p>
+
+        <h1 class="font-serif display-4 fw-normal text-white mb-3 reveal-item">
+          Your heirloom is
+          <em class="fw-light gold-gradient-text">on its way.</em>
+        </h1>
+
+        <p class="text-white-50 mx-auto reveal-item" style="max-width: 520px; font-size: 0.95rem; line-height: 1.7;">
+          Thank you for choosing Katha Bbeen. A confirmation has been sent to your email,
+          and our atelier is preparing your weave for its journey.
+        </p>
+
+        <div class="d-flex align-items-center justify-content-center gap-3 mt-4 reveal-item">
+          <span class="order-meta-pill"><i class="bi bi-patch-check-fill me-1"></i> Payment Successful</span>
+          <span class="text-white-50 small">Order <strong class="text-white" id="orderIdText">#KB10287</strong></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ORDER DETAILS -->
+    <section class="py-5 bg-kb-cream px-3 px-lg-5 border-top border-bottom">
+      <div class="container-fluid max-w-1480">
+        <div class="row g-5">
+
+          <!-- Order summary + items -->
+          <div class="col-lg-7">
+            <h3 class="font-serif fw-normal mb-4">Order Summary</h3>
+            <div class="order-summary-card p-4">
+              <div id="orderItemsList"></div>
+
+              <div class="order-summary-row d-flex justify-content-between">
+                <span class="text-muted small">Subtotal</span>
+                <span id="sumSubtotal">₹0</span>
+              </div>
+              <div class="order-summary-row d-flex justify-content-between">
+                <span class="text-muted small">Festive Concession (ROYAL20)</span>
+                <span class="text-success" id="sumDiscount">-₹0</span>
+              </div>
+              <div class="order-summary-row d-flex justify-content-between">
+                <span class="text-muted small">Insured Worldwide Delivery</span>
+                <span class="text-success">Complimentary</span>
+              </div>
+              <div class="order-summary-row d-flex justify-content-between align-items-center pt-3">
+                <span class="fw-semibold text-uppercase" style="font-size:0.8rem; letter-spacing:0.08em;">Total Paid</span>
+                <span class="font-serif fw-bold fs-3" id="sumTotal">₹0</span>
+              </div>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2 mt-4">
+              <button class="btn btn-kb-gold rounded-0 px-4 py-2 text-uppercase" style="font-size:0.7rem;letter-spacing:0.12em;" onclick="window.location.href='account.html'">
+                <i class="bi bi-box-seam me-1"></i> Track Order
+              </button>
+              <button class="btn btn-outline-dark rounded-0 px-4 py-2 text-uppercase" style="font-size:0.7rem;letter-spacing:0.12em;" onclick="window.print()">
+                <i class="bi bi-download me-1"></i> Download Receipt
+              </button>
+              <button class="btn btn-outline-dark rounded-0 px-4 py-2 text-uppercase" style="font-size:0.7rem;letter-spacing:0.12em;" onclick="window.location.href='index.html'">
+                Continue Shopping
+              </button>
+            </div>
+          </div>
+
+          <!-- Delivery tracker + address -->
+          <div class="col-lg-5">
+            <h3 class="font-serif fw-normal mb-4">Delivery Journey</h3>
+            <div class="order-summary-card p-4 mb-4">
+              <div class="tracking-step">
+                <div class="tracking-dot done"><i class="bi bi-check-lg"></i></div>
+                <div>
+                  <p class="mb-0 fw-semibold" style="font-size:0.85rem;">Order Confirmed</p>
+                  <p class="text-muted mb-0" style="font-size:0.72rem;" id="trackConfirmedTime">Just now</p>
+                </div>
+              </div>
+              <div class="tracking-step">
+                <div class="tracking-dot pending"><i class="bi bi-scissors"></i></div>
+                <div>
+                  <p class="mb-0 fw-semibold text-muted" style="font-size:0.85rem;">Atelier Finishing</p>
+                  <p class="text-muted mb-0" style="font-size:0.72rem;">Fall-pico & packaging</p>
+                </div>
+              </div>
+              <div class="tracking-step">
+                <div class="tracking-dot pending"><i class="bi bi-truck"></i></div>
+                <div>
+                  <p class="mb-0 fw-semibold text-muted" style="font-size:0.85rem;">Dispatched</p>
+                  <p class="text-muted mb-0" style="font-size:0.72rem;">Insured express courier</p>
+                </div>
+              </div>
+              <div class="tracking-step">
+                <div class="tracking-dot pending"><i class="bi bi-house-heart"></i></div>
+                <div>
+                  <p class="mb-0 fw-semibold text-muted" style="font-size:0.85rem;">Delivered</p>
+                  <p class="text-muted mb-0" style="font-size:0.72rem;" id="trackEta">Estimated arrival</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="order-summary-card p-4">
+              <p class="text-uppercase fw-semibold mb-2" style="font-size:0.7rem;letter-spacing:0.12em;">
+                <i class="bi bi-geo-alt text-kb-gold me-1"></i> Shipping To
+              </p>
+              <p class="text-muted mb-0" style="font-size:0.85rem; line-height:1.6;" id="shipToAddress">
+                14 Camac Street, Elgin, Kolkata, West Bengal 700017
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-kb-primary text-white-50 py-5 px-3 px-lg-5 border-top border-secondary border-opacity-25">
+    <div class="container-fluid">
+      <div class="row g-5">
+        <div class="col-lg-4">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <div class="bg-white rounded-2">
+              <a class="d-flex align-items-center justify-content-center" href="index.html">
+                <img src="asset/ChatGPT_Image_Sep_7__2026__12_41_00_PM__1_-removebg-preview.png" alt="Katha Bbeen"
+                  style="height: 50px; max-width: 60px; object-fit: contain;">
+              </a>
+            </div>
+          </div>
+          <p class="text-kb-gold-light text-uppercase mb-3" style="font-size: 0.65rem; letter-spacing: 0.28em;">Your Choice Our Promise</p>
+          <p class="small text-white-50 pe-lg-4">
+            Curated handwoven sarees created for weddings, festivities, and heirlooms passed through generations.
+          </p>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h6 class="text-uppercase text-white small mb-3" style="letter-spacing: 0.18em;">Weaves</h6>
+          <ul class="list-unstyled small d-grid gap-2">
+            <li><a href="#" class="text-white-50 text-decoration-none">Banarasi Katan</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Chanderi Silks</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h6 class="text-uppercase text-white small mb-3" style="letter-spacing: 0.18em;">Assistance</h6>
+          <ul class="list-unstyled small d-grid gap-2">
+            <li><a href="#" class="text-white-50 text-decoration-none">Shipping & Duties</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Contact Atelier</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h6 class="text-uppercase text-white small mb-3" style="letter-spacing: 0.18em;">The Katha Gazette</h6>
+          <p class="small text-white-50">Subscribe for early access to private trunk shows and festive weaver release dates.</p>
+        </div>
+      </div>
+      <div class="border-top border-secondary border-opacity-25 mt-5 pt-4 d-flex flex-column flex-md-row justify-content-between small text-white-50">
+        <div>&copy; 2026 Katha Bbeen. Handcrafted with reverence in India.</div>
+        <div class="text-white-50 mt-2 mt-md-0" style="font-size: 0.72rem;">
+          Designed &amp; Developed by <a href="https://www.orbitalwebworks.com/" class="text-kb-gold-light text-decoration-none fw-semibold">Orbital Webworks</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ==========================
+    // MOCK ORDER DATA — swap with real order/payment-gateway response
+    // ==========================
+    const order = {
+      id: "KB10287",
+      items: [
+        { name: "Meher Imperial Emerald Katan", weave: "Pure Katan Silk · Kadhwa Weave", price: 21900, qty: 1, image: "asset/collection-silk-haKidXNd.jpg" },
+        { name: "Noor Liquid Ivory Silk", weave: "Undyed Mulberry · Antique Buti", price: 24500, qty: 1, image: "asset/katha-hero-Bf1Rq-sY.jpg" }
+      ],
+      discountPercent: 20,
+      address: "14 Camac Street, Elgin, Kolkata, West Bengal 700017",
+      etaDays: 7
+    };
+
+    function formatINR(num) { return '₹' + Math.round(num).toLocaleString('en-IN'); }
+
+    function renderOrder() {
+      document.getElementById("orderIdText").textContent = `#${order.id}`;
+      document.getElementById("shipToAddress").textContent = order.address;
+
+      const list = document.getElementById("orderItemsList");
+      list.innerHTML = order.items.map(item => `
+        <div class="order-summary-row d-flex gap-3 align-items-center">
+          <img src="${item.image}" onerror="this.src='https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=200&q=80'"
+               class="object-fit-cover" width="64" height="80" alt="${item.name}" />
+          <div class="flex-grow-1">
+            <p class="mb-0 fw-semibold" style="font-size:0.85rem;">${item.name}</p>
+            <p class="text-muted mb-0" style="font-size:0.72rem;">${item.weave}</p>
+          </div>
+          <span class="fw-semibold" style="font-size:0.85rem;">${formatINR(item.price * item.qty)}</span>
+        </div>
+      `).join('');
+
+      const subtotal = order.items.reduce((sum, i) => sum + i.price * i.qty, 0);
+      const discount = subtotal * (order.discountPercent / 100);
+      const total = subtotal - discount;
+
+      document.getElementById("sumSubtotal").textContent = formatINR(subtotal);
+      document.getElementById("sumDiscount").textContent = "-" + formatINR(discount);
+      document.getElementById("sumTotal").textContent = formatINR(total);
+
+      const eta = new Date();
+      eta.setDate(eta.getDate() + order.etaDays);
+      document.getElementById("trackEta").textContent = `Estimated by ${eta.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}`;
+      document.getElementById("trackConfirmedTime").textContent = new Date().toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+    }
+
+    // ==========================
+    // ENTRANCE + CONFETTI
+    // ==========================
+    function playSuccessAnimation() {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      tl.fromTo("#checkWrap", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.6 })
+        .fromTo(".success-check-circle", { scale: 0 }, { scale: 1, duration: 0.4, ease: "back.out(2)" }, "-=0.3")
+        .fromTo("section.success-wrap .reveal-item", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1 }, "-=0.2");
+
+      spawnConfetti();
+    }
+
+    function spawnConfetti() {
+      const layer = document.getElementById("confettiLayer");
+      const colors = ["#c9a45c", "#dfbf75", "#e1d392", "#ffffff"];
+      for (let i = 0; i < 40; i++) {
+        const piece = document.createElement("div");
+        piece.className = "confetti-particle";
+        const size = 4 + Math.random() * 5;
+        piece.style.width = size + "px";
+        piece.style.height = (size * 2.2) + "px";
+        piece.style.left = Math.random() * 100 + "%";
+        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+        layer.appendChild(piece);
+
+        gsap.to(piece, {
+          y: window.innerHeight * 0.75,
+          x: (Math.random() - 0.5) * 120,
+          rotation: Math.random() * 360,
+          opacity: 0,
+          duration: 2 + Math.random() * 1.5,
+          delay: Math.random() * 0.4,
+          ease: "power1.in",
+          onComplete: () => piece.remove()
+        });
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderOrder();
+      playSuccessAnimation();
+    });
+  </script>
+</body>
+
+</html>

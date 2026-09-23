@@ -759,9 +759,9 @@
 
         <!-- Right: Actions -->
         <div class="d-flex align-items-center gap-3 ms-auto" style="z-index: 1021;">
-          <button class="btn btn-link text-dark p-0 border-0" aria-label="Search" onclick="showToast('Direct search is ready on the Shop & Category pages.')">
-            <i class="bi bi-search fs-5"></i>
-          </button>
+          <button onclick="window.location.href='/account.html'"
+            class="btn btn-link text-dark p-0 border-0 d-none d-sm-block" aria-label="Account"><i
+              class="bi bi-person-fill fs-5"></i></button>
           <button class="btn btn-link text-dark p-0 border-0 d-none d-sm-block position-relative" aria-label="Wishlist" onclick="toggleWishlistMain()">
             <i class="bi bi-suit-heart fs-5" id="mainWishlistIcon"></i>
             <span id="wishlistBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem; display:none;">0</span>

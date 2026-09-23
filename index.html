@@ -311,8 +311,9 @@
 
         <!-- Right: Actions -->
         <div class="d-flex align-items-center gap-3 ms-auto" style="z-index: 1021;">
-                    <button class="btn btn-link text-dark p-0 border-0" aria-label="Search"><i
-                            class="bi bi-search fs-5"></i></button>
+                     <button onclick="window.location.href='/account.html'"
+            class="btn btn-link text-dark p-0 border-0 d-none d-sm-block" aria-label="Account"><i
+              class="bi bi-person-fill fs-5"></i></button>
                     <button onclick="window.location.href='/wishlist.html'"
                         class="btn btn-link text-dark p-0 border-0 d-none d-sm-block" aria-label="Wishlist"><i
                             class="bi bi-suit-heart fs-5"></i></button>
@@ -1789,10 +1790,14 @@
         </div>
         <p class="text-muted" style="font-size: 0.75rem;">Worldwide delivery & heirloom keepsake box complimentary.</p>
         <button class="btn btn-kb-gold w-100 py-3"
-          onclick="alert('Proceeding to encrypted luxury checkout...');">Proceed to Checkout</button>
+          onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
       </div>
     </div>
   </div>
+
+   <div class="custom-cursor" id="customCursor">
+
+    </div>
 
   <!-- Bootstrap 5 JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -2862,7 +2867,24 @@
       }
     }
 
+    const cursor = document.getElementById('customCursor');
+const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
+if (canHover && cursor) {
+    window.addEventListener('mousemove', (e) => {
+        gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.15, ease: "power2.out" });
+    });
+
+    document.addEventListener('mouseenter', (e) => {
+        const target = e.target.closest && e.target.closest('.zoom-hover');
+        if (target) cursor.classList.add('active');
+    }, true);
+
+    document.addEventListener('mouseleave', (e) => {
+        const target = e.target.closest && e.target.closest('.zoom-hover');
+        if (target) cursor.classList.remove('active');
+    }, true);
+}
   </script>
 </body>
 
